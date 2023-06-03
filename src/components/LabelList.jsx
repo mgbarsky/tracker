@@ -9,18 +9,15 @@ import Alert from 'react-bootstrap/Alert';
     ]
 */
 
-export default function LabelList() {
-    const [captions, setCaptions] = useState([]);
+export default function LabelList({ task, setTask }) {
     const [currentCaption, setCurrentCaption] = useState('');
 
     const addCaption = async () => {
-        setCaptions((prev) => {
+        setTask((prev) => {
             if (currentCaption && currentCaption !=''){
                 const newCaption = {id: window.crypto.randomUUID(), caption: currentCaption}
-                console.log("prev", prev)
-                console.log("current", currentCaption)
                 setCurrentCaption('')
-                return [...prev, newCaption]
+                return {...prev, tags: [...prev.tags, newCaption] }
             }
             else{
                 return prev
@@ -29,15 +26,15 @@ export default function LabelList() {
     }
 
     const removeCaption = (id) => {
-        setCaptions((prev) => {
-            return prev.filter((captionObj) => captionObj.id !== id)
+        setTask((prev) => {
+            return {...prev, tags:  prev.tags.filter((captionObj) => captionObj.id !== id)}
         })
     }
 
     return (
         <>
             {
-                captions.map((captionObj) => (
+                task.tags.map((captionObj) => (
                     <div size="sm" className="mb-3" key={captionObj.id}>
                         <InputGroup size="sm" className="mb-3">
                         <label className="caption-label">&nbsp;</label>    
