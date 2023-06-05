@@ -27,6 +27,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  align-items: center; justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -71,4 +72,49 @@ button:focus-visible {
 .caption-label{
   width:6em;
   padding-right:1ex;
+}
+
+.input-form {
+  background-color:antiquewhite;
+  padding:2ex;
+  display: flex;
+  flex-direction: column;  
+  
+}
+
+.input-row{
+  display: flex;
+  padding-bottom:1ex;
+}
+
+.input-row label {   
+  padding-left:1em;
+}
+
+.input-row label:first-child {
+  width:6em;
+  flex: 0 0 auto;
+}
+
+.input-row textarea {
+  min-height:12em !important; 
+  overflow:hidden overlay;
+  padding-right:1.5em;    
+}
+
+.input-row > input {
+  flex-grow: 0;
+}
+
+.input-row.submit {
+  flex-direction:row-reverse;
+}
+
+.input-row.submit button{   
+  margin-left:1em;
+  width:6em;
+}
+
+.badge {
+  margin-right: 1em;
 }
