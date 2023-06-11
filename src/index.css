@@ -118,3 +118,18 @@ button:focus-visible {
 .badge {
   margin-right: 1em;
 }
+
+.tagbadge{
+  font-size:small;
+  border-radius:20%;
+  background-color:coral;
+
+}
+
+.closebutton{
+  font-size:small;
+  border-radius:50%;
+  background-color:ligtgrey;
+  margin-right:2ex;
+
+}

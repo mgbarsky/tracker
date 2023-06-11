@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 
-
-
 /*
     [
         {id: 1, caption: book},
@@ -33,21 +31,21 @@ export default function TagList({ task, setTask }) {
 
     return (
         <>
-            {
-                task.tags.map((tagObj) => (
-                    <div size="sm" className="mb-3" key={tagObj.id}>
-                        <div size="sm" className="input-group mb-3">
-                        <label className="caption-label">&nbsp;</label>    
-                        <input type="text" size="sm" className="form-control bg-info" value={tagObj.caption} disabled readOnly/>
-                        <button 
-                            type="button" 
-                            className="btn btn-secondary"
-                            onClick={() => removeCaption(tagObj.id)}>x
-                        </button>
-                        </div>                      
-                    </div>
-                ))
-            }          
+            <div size="sm" className="input-group mb-3">
+            <label className="caption-label">&nbsp;</label>  
+                {
+                    task.tags.map((tagObj) => (
+                        <div key={tagObj.id}>                            
+                              
+                            <span size="sm" className="tagbadge">{tagObj.caption} </span>                            
+                            <button                                 
+                                className="closebutton"                                
+                                onClick={() => removeTag(tagObj.id)}>x
+                            </button>                                               
+                        </div>
+                    ))
+                }  
+            </div>        
             <div size="sm" className="input-group mb-3">
                 <label className="caption-label">Tags:</label>
                 <input
