@@ -1,11 +1,13 @@
-import { useState } from 'react'
-import Form from 'react-bootstrap/Form';
+import React, { useState } from 'react'
+
 import Switch from '../components/Switch'
 import InputLine from '../components/InputLine';
 import TagList from '../components/TagList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Button from 'react-bootstrap/Button';
+
+import { Task } from "../objects/task.js"
 
 /*
   {
@@ -14,15 +16,20 @@ import Button from 'react-bootstrap/Button';
   }
 */
 
-function NewTask() {
+function NewTask({ tasks, setTasks, toggleModal}) {
 
-  const [task, setTask] = useState({
-    title: "",
-    tags: []
-  })
+  const [task, setTask] = useState(new Task())
 
   const handleSave = () => {
     console.log(task)
+
+    setTasks((prev) => {      
+      return [...prev, task]
+    })
+
+    setTask(new Task())
+
+    toggleModal()
   }
 
   return (
