@@ -9,9 +9,7 @@ import { Modal } from 'react-bootstrap';
 function App() {
   const [tasks, setTasks] = useState([])
   const [metrics, setMetrics] = useState([])
-  const [currentTask, setCurrentTask] = useState({});
-  const [currentMetric, setCurrentMetric] = useState({});
-
+  
   const [showModal, setShowModal] = useState(false);
 
   console.log(tasks)  
@@ -22,17 +20,16 @@ function App() {
 
   return (
     <>
-   <div className="container">   
+    <div className="container">   
       <Tasks tasks={tasks} setTasks={setTasks} toggleModal={toggleModal}/> 
     </div>   
     {
       showModal && (
-        <Modal show={showModal} fullscreen={true}>
+        <Modal show={showModal} fullscreen={false}>
           <div className="container">   
             <NewTask setTasks={setTasks} toggleModal={toggleModal}/> 
           </div>
-        </Modal>
-          
+        </Modal>          
       )
     }
          

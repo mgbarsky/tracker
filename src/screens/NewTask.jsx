@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Switch from '../components/Switch'
 import InputLine from '../components/InputLine';
+import DetailsLine from '../components/DetailsLine';
 import TagList from '../components/TagList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,9 +17,9 @@ import { Task } from "../objects/task.js"
   }
 */
 
-function NewTask({ tasks, setTasks, toggleModal}) {
-
-  const [task, setTask] = useState(new Task())
+function NewTask({ currentTask, setTasks, toggleModal}) {
+  const t = currentTask ||  new Task()
+  const [task, setTask] = useState(t)
 
   const handleSave = () => {
     console.log(task)
@@ -35,12 +36,14 @@ function NewTask({ tasks, setTasks, toggleModal}) {
   return (
     <> 
     <form className="input-form">
-      <InputLine  task={task} setTask={setTask} taskAttribute="title" labelText="Title"/>
+      <InputLine  task={task} setTask={setTask} taskAttribute="title" labelText="Title"/>      
       <TagList task={task} setTask={setTask}/> 
+      <DetailsLine  task={task} setTask={setTask} taskAttribute="details" labelText="Details"/>
       <div className="input-row submit">
           <button type="button" className="btn btn-outline-secondary" >Cancel</button>
           <button type="button" className="btn btn-primary" onClick={handleSave}>Done</button>
-      </div>      
+      </div>
+            
     </form>  
     </>
   )

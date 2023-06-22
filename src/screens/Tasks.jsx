@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Tasks({ tasks, setTasks, toggleModal }) {
+    
     function deleteTask(taskID){
         setTasks((prev) => {
             return prev.filter((taskObj) => taskObj.id !== taskID)
