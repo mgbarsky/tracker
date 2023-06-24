@@ -2,7 +2,7 @@ Task functionality
 
 Task 1
 Logic for all the parts of new task:
-    time component (input-select)
+    time component (input-select) - or default input type time?
     date component
     switch
     weekdays

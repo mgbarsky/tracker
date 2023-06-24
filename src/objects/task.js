@@ -5,8 +5,10 @@ export class Task {
       this.tags=[];
       this.title="";
       this.details = "";
-      this.start = {date:new Date(), time: new Time()};
-      this.end = {date:new Date(), time: new Time()};
+      this.startDate = new Date();
+      this.startTime = new Time();
+      this.endDate = new Date();
+      this.endTime =  new Time();
       this.targetDuration = 0;
       this.targetIntensity = 0;
       this.trackIntensity = false;
