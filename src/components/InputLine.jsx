@@ -1,14 +1,5 @@
 import React, { useState } from 'react'
 
-
-
-/*
-    [
-        {id: 1, caption: book},
-
-    ]
-*/
-
 export default function InputLine({ task, setTask , taskAttribute, labelText}) {
     const [currentInput, setCurrentInput] = useState('');
 

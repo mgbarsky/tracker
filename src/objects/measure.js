@@ -1,6 +1,7 @@
 class Measure {
     constructor() {
         this.title="";
+        this.description = "";
         this.tags=[];
         this.min = -10;
         this.max = 10;

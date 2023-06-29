@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import TimePicker from './TimePicker';
+import DatePicker from './DatePicker';
 
 /*
     [
@@ -13,11 +14,15 @@ export default function DateTimeLine({ task, setTask , dateAttribute, timeAttrib
    
     return (
         <>          
-            <div size="sm" className="input-group mb-3">
-                <label className="caption-label">{dateLabel}::&nbsp;</label>
-                <TimePicker task={task} setTask={setTask} taskAttribute={timeAttribute}/>
-                <label>{timeLabel}:&nbsp;</label>
-                <TimePicker task={task} setTask={setTask} taskAttribute={timeAttribute}/>              
+            <div size="sm" className="form-row">
+                <div className="form-group col-md-4">
+                    <label className="caption-label">{dateLabel}:&nbsp;</label>
+                    <DatePicker task={task} setTask={setTask} taskAttribute={dateAttribute}/>
+                </div>
+                <div className="form-group col-md-4">
+                    <label>{timeLabel}:&nbsp;</label>
+                    <TimePicker task={task} setTask={setTask} taskAttribute={timeAttribute}/>
+                </div>              
             </div>  
         </>
     )

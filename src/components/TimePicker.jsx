@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Time } from "../objects/utils.js"
+import { CTime } from "../objects/utils.js"
 
 
 /*
@@ -19,7 +19,7 @@ export default function TimePicker({ task, setTask , taskAttribute}) {
         console.log("updated hour", val)
         setTask((prev) => {
             var prevTime = prev[taskAttribute]
-            var newTime = new Time(val, prevTime.minute)
+            var newTime = new CTime(val, prevTime.minute)
             console.log("updated hour in time object", newTime)
             return {...prev, [taskAttribute]: newTime }
         })
@@ -29,27 +29,26 @@ export default function TimePicker({ task, setTask , taskAttribute}) {
         setCurrentMinute(val)
         setTask((prev) => {
             var prevTime = prev[taskAttribute]
-            var newTime = new Time(prevTime.hour, val)
+            var newTime = new CTime(prevTime.hour, val)
             return {...prev, [taskAttribute]: newTime }
         })
     }      
 
     return (
-        <>         
+        <>       
             <input
-                onChange={(e) => updateHour(e.target.value)}
-                type="text" 
-                className="form-control"
-                value={currentHour}
-            /> 
+                    onChange={(e) => updateHour(e.target.value)}
+                    type="text" 
+                    className="form-control"               
+                    value={currentHour}
+                />            
             :
             <input
                 onChange={(e) => updateMinute(e.target.value)}
                 type="text" 
-                className="form-control"
+                className="form-control"               
                 value={currentMinute}
-            />                  
-             
+            />    
         </>
     )
 }

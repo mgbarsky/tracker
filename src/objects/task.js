@@ -1,14 +1,15 @@
-import { Date, Time, TimeInterval } from "./utils.js";
+import { CDate, CTime, CTimeInterval } from "./utils.js";
 
 export class Task {
+    
     constructor() {
       this.tags=[];
       this.title="";
       this.details = "";
-      this.startDate = new Date();
-      this.startTime = new Time();
-      this.endDate = new Date();
-      this.endTime =  new Time();
+      this.startDate = new CDate();
+      this.startTime = new CTime();
+      this.endDate = new CDate();
+      this.endTime =  new CTime();
       this.targetDuration = 0;
       this.targetIntensity = 0;
       this.trackIntensity = false;

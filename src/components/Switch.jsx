@@ -1,22 +1,27 @@
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import React, { useState } from 'react'
+import { Form } from "react-bootstrap";
 
-function Switch({text, details}) {
-  return (    
-    <><div className='d-flex my-5'>
-        <Form.Check
-            type="switch"
-            id="custom-switch"
-            label={text}
-        />
-        <Button className='ms-3'>...</Button>
-        
-    </div>
-    <div>{details}
-    </div>
+export default function Switch({task, setTask , taskAttribute, labelText}) {
+  const [isChecked, setIsChecked] = useState(false);
 
+  const handleToggle = async () => {
+      setIsChecked(!isChecked);
+      setTask((prev) => {
+          return {...prev, [taskAttribute]: isChecked }
+      })
+  }  
+
+  return (
+    <>          
+        <div size="sm" className="input-group mb-3">
+            <label className="caption-label">{labelText}:</label>
+            <Form.Check
+              type="switch"  
+              checked={isChecked}
+              onChange={handleToggle}
+            />                           
+        </div>  
     </>
-  );
+  )
 }
 
-export default Switch;
