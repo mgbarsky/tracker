@@ -10,7 +10,7 @@ export class Task {
       this.startTime = new CTime();
       this.endDate = new CDate();
       this.endTime =  new CTime();
-      this.targetDuration = 0;
+      this.targetDuration = new CTimeInterval();
       this.targetIntensity = 0;
       this.trackIntensity = false;
       this.trackMeasures = []; //array of measure objects with the track after a specific time interval

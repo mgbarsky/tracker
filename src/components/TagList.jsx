@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 */
 
 export default function TagList({ task, setTask }) {
-    const [inputTag, setInputTag] = useState('');
+    const [inputTag, setInputTag] = useState("");
 
     const addTag = async () => {
         setTask((prev) => {

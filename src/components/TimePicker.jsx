@@ -11,8 +11,8 @@ import { CTime } from "../objects/utils.js"
 */
 
 export default function TimePicker({ task, setTask , taskAttribute}) {
-    const [currentHour, setCurrentHour] = useState(0);  //change to pass the task's time
-    const [currentMinute, setCurrentMinute] = useState(0);
+    const [currentHour, setCurrentHour] = useState(task[taskAttribute].hour);  //change to pass the task's time
+    const [currentMinute, setCurrentMinute] = useState(task[taskAttribute].minute);
     
     const updateHour = async (val) => {
         setCurrentHour(val)

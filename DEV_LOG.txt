@@ -2,10 +2,10 @@ Task functionality
 
 Task 1
 Logic for all the parts of new task:
-    V time component (input-select) - or default input type time?  ask Aung
+    V time component (input-select) - or default input type time? 
     V date component - css problems
-    TimeInterval - select in react with selection as Aung
-    switch
+    TimeInterval - select in react with selection ask Aung
+    V switch
     weekdays
     array of reminders
     array of metrics with time delay

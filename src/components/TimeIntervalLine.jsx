@@ -6,8 +6,8 @@ This line contains units of duration, which are the static field of CTimeInterva
 */
 
 export default function TimeIntervalLine({ task, setTask , taskAttribute, labelText}) {
-    const [currentValue, setCurrentValue] = useState('');
-    const [currentUnit, setCurrentUnit] = useState(0);
+    const [currentValue, setCurrentValue] = useState(task[taskAttribute].value);
+    const [currentUnit, setCurrentUnit] = useState(task[taskAttribute].unitID);
 
     var units = CTimeInterval.units
 
@@ -15,7 +15,7 @@ export default function TimeIntervalLine({ task, setTask , taskAttribute, labelT
         setCurrentValue(val)        
         setTask((prev) => {
             var prevObj = prev[taskAttribute]
-            var newInterval = new CTimeInterval(val, prevObj.units)           
+            var newInterval = new CTimeInterval(val, prevObj.unitID)           
             return {...prev, [taskAttribute]: newInterval }
         })      
     }
@@ -40,7 +40,7 @@ export default function TimeIntervalLine({ task, setTask , taskAttribute, labelT
                     className="form-control"
                     value={currentValue}
                 />
-                <select onChange={updateUnit}>      
+                <select onChange={updateUnit} value={currentUnit}>      
                     {units.map((unit) => <option key={unit.id} value={unit.id}>{unit.label}</option>)}
                 </select>                
             </div>  

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form } from "react-bootstrap";
 
 export default function Switch({task, setTask , taskAttribute, labelText}) {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(task[taskAttribute]);
 
   const handleToggle = async () => {
       setIsChecked(!isChecked);

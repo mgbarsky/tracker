@@ -11,9 +11,8 @@ import { CDate } from "../objects/utils.js"
 */
 
 export default function DatePicker({ task, setTask , taskAttribute}) {
-    var today = new Date() 
-    var m =  (today.getMonth()+1)+""  
-    const [currentDate, setCurrentDate] = useState(today.getFullYear()+"-"+m.padStart(2, '0')+"-"+today.getDate())  //change to pass the task's date
+    let date = task[taskAttribute]
+    const [currentDate, setCurrentDate] = useState(task[taskAttribute].date)  //change to pass the task's date
    
     const updateDate = async (val) => {
         setCurrentDate(val)

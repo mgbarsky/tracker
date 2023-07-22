@@ -19,18 +19,31 @@ import { Task } from "../objects/task.js"
   }
 */
 
-function NewTask({ currentTask, setTasks, toggleModal}) {
-  const t = currentTask ||  new Task()
-  const [task, setTask] = useState(t)
+function NewTask({ currentTask, tasks, setTasks, toggleModal, editMode}) {  
+
+  const [task, setTask] = useState(currentTask)
 
   const handleSave = () => {
     console.log(task)
 
-    setTasks((prev) => {      
-      return [...prev, task]
-    })
-
-    setTask(new Task())
+    if (!editMode) {
+      setTasks((prev) => {      
+        return [...prev, task]
+      }) 
+    } 
+    else {       
+      const nextTasks = tasks.map((c, i) => {
+        if (c.id === currentTask.id) {
+          // update to a new updated task
+          return task;
+        } else {
+          // The rest haven't changed
+          return c;
+        }
+      });
+       
+      setTasks(nextTasks) 
+    }  
 
     toggleModal()
   }
