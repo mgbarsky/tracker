@@ -133,3 +133,12 @@ button:focus-visible {
   margin-right:2ex;
 
 }
+
+.horizontalBar{
+  overflow-x: auto;
+  background-color:bisque;
+}
+
+.slidecontainer{
+  width:100%;
+}

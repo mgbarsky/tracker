@@ -1,51 +1,35 @@
 Task functionality
 
 Task 1
-Logic for all the parts of new task:
-    V time component (input-select) - or default input type time? 
-    V date component - css problems
-    TimeInterval - select in react with selection ask Aung
-    V switch
-    weekdays
-    array of reminders
-    array of metrics with time delay
-
+Simple new task form
 
 Task 2
-visual components for all the fields of a new task
+Add enable -disable
 
 Task 3
-js obects to collect all data about a new task
+finish tasks: CSS
 
-Task 4 (Aung?)
-task: new and edit in the same screen and same logic
+AUNG:
+Change all to react components?
+multi-screen App and navigation
+organize imports
 
-Task 5
-List of tasks: enable - disable, delete, edit
+why cannot add a form?
 
-Task 6
-Try fluent css - https://fluent2.microsoft.design/components/web/react
+extend react.component? more possibilities for conditional rendering
 
-Task 7
-CSS design of new task form
-
-Task 8
-CSS design of task list
+save and load from local storage
 
 ========================================================
-repeat the same with metrics - new metric
+repeat the same with metrics - new metric V
 
 create default metrics and default tasks
 
-schedule screen: design 
-
-schedule: css
+schedule screen
 
 schedule: functionality - done, disable, enable, record start time - end time, selection - in progress - and corresponding metrics
 
-time reminders
-
 save to local storage as one json object
 
-visualization of tracking
+visualization of results
 

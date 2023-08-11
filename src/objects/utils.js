@@ -14,18 +14,18 @@ export class CDate {
 
 export class CTime{
     constructor(h, m) {
-        this.hour = h || 0;
-        this.minute = m || 0;
+        this._hour = h || 0;
+        this._minute = m || 0;
     }   
 
     get hourLabel() {
-        var hLabel = this.hour?"00":""+this.hour;
+        var hLabel = this._hour?"00":""+this._hour;
         hLabel = hLabel.length<2? "0"+hLabel: hLabel;
         return hLabel;
     }
 
     get minuteLabel() {
-        var mLabel = this.minute?"00":""+this.minute;
+        var mLabel = this._minute?"00":""+this._minute;
         mLabel = mLabel.length<2? "0"+mLabel: hLabel;
         return mLabel;
     }

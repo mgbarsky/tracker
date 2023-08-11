@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 
-import Switch from '../components/Switch'
+
 import InputLine from '../components/InputLine';
-import TimeIntervalLine from '../components/TimeIntervalLine';
 import DetailsLine from '../components/DetailsLine';
-import DateTimeLine from '../components/DateTimeLine';
 import TagList from '../components/TagList';
+import NumberLine from '../components/NumberLine';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Button from 'react-bootstrap/Button';
 
-import { Task } from "../objects/task.js"
+import { Metric } from "../objects/metric.js"
 
 /*
   {
@@ -19,30 +18,30 @@ import { Task } from "../objects/task.js"
   }
 */
 
-function NewTask({ currentTask, tasks, setTasks, toggleModal, editMode}) {  
+function NewMetric({ currentMetric, metrics, setMetrics, toggleModal, editMode}) {  
 
-  const [task, setTask] = useState(currentTask)
+  const [metric, setMetric] = useState(currentMetric)
 
   const handleSave = () => {
-    console.log(task)
+    console.log(metric)
 
     if (!editMode) {
-      setTasks((prev) => {      
-        return [...prev, task]
-      }) 
+        setMetrics((prev) => {      
+          return [...prev, metric]
+        }) 
     } 
     else {       
-      const nextTasks = tasks.map((c, i) => {
-        if (c.id === currentTask.id) {
+      const nextMetrics = metrics.map((c, i) => {
+        if (c.id === currentMetric.id) {
           // update to a new updated task
-          return task;
+          return metric;
         } else {
           // The rest haven't changed
           return c;
         }
       });
        
-      setTasks(nextTasks) 
+      setMetrics(nextMetrics) 
     }  
 
     toggleModal()
@@ -50,11 +49,14 @@ function NewTask({ currentTask, tasks, setTasks, toggleModal, editMode}) {
 
   return (
     <> 
-    <h1>Task</h1>
+    <h1>Metric</h1>
     <form className="input-form">
-      <InputLine  task={task} setTask={setTask} taskAttribute="title" labelText="Title"/>      
-      <TagList task={task} setTask={setTask}/> 
-      <DetailsLine  task={task} setTask={setTask} taskAttribute="details" labelText="Details"/>
+      <InputLine  task={metric} setTask={setMetric} taskAttribute="title" labelText="Title"/>      
+      <TagList task={metric} setTask={setMetric}/> 
+      <DetailsLine  task={setMetric} setTask={setMetric} taskAttribute="details" labelText="Details"/>
+      <NumberLine  task={metric} setTask={setMetric} taskAttribute="min" labelText="Min value"/> 
+      <NumberLine  task={metric} setTask={setMetric} taskAttribute="max" labelText="Max value"/> 
+      <NumberLine  task={metric} setTask={setMetric} taskAttribute="step" labelText="Increments"/> 
       {/* <DateTimeLine  task={task} setTask={setTask} dateAttribute="startDate" timeAttribute="startTime" dateLabel="Starts on" timeLabel="at"/> 
       <DateTimeLine  task={task} setTask={setTask} dateAttribute="endDate" timeAttribute="endTime" dateLabel="Ends by" timeLabel="at"/> 
       <InputLine  task={task} setTask={setTask} taskAttribute="targetIntensity" labelText="Target intensity"/>  
@@ -70,4 +72,4 @@ function NewTask({ currentTask, tasks, setTasks, toggleModal, editMode}) {
   )
 }
 
-export default NewTask
+export default NewMetric

@@ -5,7 +5,11 @@ export class Task {
     constructor() {
       this.tags=[];
       this.title="";
-      this.details = "";
+      this.details = "";      
+      this.enabled = true;
+      this.id = window.crypto.randomUUID();
+      
+      //reserved for future version
       this.startDate = new CDate();
       this.startTime = new CTime();
       this.endDate = new CDate();
@@ -18,8 +22,23 @@ export class Task {
       this.reminders = []; //array of Reminder objects
       this.monthly = {};
       this.yearly = {};
-      this.enabled = true;
-      this.id = window.crypto.randomUUID();
+    }
+
+    static get defaultTasks(){  
+      const exID =  window.crypto.randomUUID(); 
+      const medID =  window.crypto.randomUUID();     
+      const a = new Task();
+      a.title = "Aerobics";
+      a.tags = [{id:exID, caption:"exercise"}];
+      
+
+      const y = new Task();
+      y.title = "Yoga";
+      y.tags = [{id:exID, caption:"exercise"}, {id:medID, caption:"meditation"}];
+      y.min = 0;
+      
+
+      return [a, y];
     }
   }
 

@@ -4,3 +4,5 @@ git push -u origin main
 npm create vite@latest
 
 npm install react-bootstrap bootstrap
+
+npm i react-router-dom
