@@ -48,7 +48,7 @@ export default function Tasks({ tasks, setTasks }) {
             }
           });
            
-          setTasks(nextTasks)        
+          setTasks(nextTasks)       
      
     }
 

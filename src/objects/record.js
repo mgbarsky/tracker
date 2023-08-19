@@ -26,20 +26,12 @@ export class TaskRecord {
 }
 
 export class MetricRecord {
-    constructor(metricID) {
+    constructor(metricID, level) {
         this.id = window.crypto.randomUUID();
         this.metricID = metricID;
         this.timeStamp = new Date();
-        this.metricLevel = 0;
-    }  
-
-    set time(date){
-        this.timeStamp = date;
-    }
-
-    set level(value){
-        this.metricLevel = value;
-    }
+        this.metricLevel = level;
+    }    
 
     get time() {
         return this.timeStamp;

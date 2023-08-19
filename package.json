@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": ".",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -24,3 +25,4 @@
     "vite": "^4.3.2"
   }
 }
+

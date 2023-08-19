@@ -134,10 +134,32 @@ button:focus-visible {
 
 }
 
+#root
+{   width: 320px;}
+
 .horizontalBar{
-  overflow-x: auto;
-  background-color:bisque;
+  width: 100%;
+
+  display: flex;
+
+  overflow: overlay;
+  background-color:bisque;  
 }
+
+.horizontalBar > button
+{   width: 96px; height: 64px;
+    flex: 0 0 auto;
+    
+    margin-right: 8px;}
+.horizontalBar > button:last-child
+{   margin: 0;}
+
+.horizontalBar::-webkit-scrollbar
+{   height: 8px;
+    background: rgb(0 0 0 / .19);}
+
+.horizontalBar::-webkit-scrollbar-thumb
+{   background: rgb(0 0 0 / .19);}
 
 .slidecontainer{
   width:100%;

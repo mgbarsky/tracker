@@ -30,6 +30,12 @@ export class Metric {
         t.min = 50;
         t.max = 150;
         t.step = 5;
-        return [m, a, t];
+
+        const t1 = new Metric();
+        t1.title = "Love";
+        t1.min = 50;
+        t1.max = 150;
+        t1.step = 5;
+        return [m, a, t, t1];
     }
   }

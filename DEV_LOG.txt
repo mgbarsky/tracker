@@ -14,20 +14,28 @@ Change all to react components?
 multi-screen App and navigation
 organize imports
 
-why cannot add a form?
-
 extend react.component? more possibilities for conditional rendering
-
-save and load from local storage
-
-========================================================
-repeat the same with metrics - new metric V
-
-create default metrics and default tasks
 
 schedule screen
 
 schedule: functionality - done, disable, enable, record start time - end time, selection - in progress - and corresponding metrics
+
+recording metrics
+
+******************************************
+
+ask Aung: why range does not reset?
+ 
+deployment
+
+save and load from local storage
+
+css
+
+========================================================
+create default metrics and default tasks
+
+
 
 save to local storage as one json object
 
