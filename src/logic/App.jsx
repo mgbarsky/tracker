@@ -16,7 +16,7 @@ function App() {
 
     return (
         <>
-            <Routes basename="/myapp">
+            <Routes>
                 <Route
                     path="/"
                     element={
