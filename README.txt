@@ -15,6 +15,6 @@ npm i
 to start 
 npm run dev
 
-
+current 
 to build:
 npm run build

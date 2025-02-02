@@ -17,11 +17,12 @@ function App() {
   
   return (
     <>   
-      <Routes>
-        <Route path="/" element={<Schedule tasks={tasks} metrics={metrics} records={records} setRecords={setRecords}/> }></Route>
-        <Route path="/tasks" element={<Tasks tasks={tasks} setTasks={setTasks}/>}></Route>
-        <Route path="/metrics" element={<Metrics metrics={metrics} setMetrics={setMetrics}/>}></Route>
-      </Routes>        
+    <Schedule tasks={tasks} metrics={metrics} records={records} setRecords={setRecords}/>
+     {/* <Routes>
+        <Route path="./" element={<Schedule tasks={tasks} metrics={metrics} records={records} setRecords={setRecords}/> }></Route>
+        <Route path="./tasks" element={<Tasks tasks={tasks} setTasks={setTasks}/>}></Route>
+        <Route path="./metrics" element={<Metrics metrics={metrics} setMetrics={setMetrics}/>}></Route>
+      </Routes> */}
     </>
   )
 }

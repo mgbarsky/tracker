@@ -118,12 +118,12 @@ export default function Schedule({ tasks, metrics, records, setRecords, metricRe
     <>
       <ul className="nav bg-primary">
         <li className="nav-item">
-        <Link className="nav-link text-white" to="/tasks">
+        <Link className="nav-link text-white" to="./tasks">
           Tasks
         </Link>
         </li>
         <li className="nav-item">
-        <Link className="nav-link text-white" to="/metrics">
+        <Link className="nav-link text-white" to="./metrics">
           Metrics
         </Link>
         </li>
