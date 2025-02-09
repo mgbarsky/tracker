@@ -6,10 +6,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import { BrowserRouter, HashRouter } from "react-router-dom";
 
+const PRODUCTION_SUB_DIRECTORY = "/dist6";
+const basename = import.meta.env.PROD ? PRODUCTION_SUB_DIRECTORY : "/";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <HashRouter>
+        <BrowserRouter basename={basename}>
             <App />
-        </HashRouter>
+        </BrowserRouter>
     </React.StrictMode>
 );
