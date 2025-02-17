@@ -1,5 +1,7 @@
 import { CDate, CTime, CTimeInterval } from "./utils.js";
 
+var i=1;
+
 export class Task {
     
     constructor() {

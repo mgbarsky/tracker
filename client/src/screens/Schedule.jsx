@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState , useEffect } from 'react'
 import { TaskRecord, MetricRecord } from '../objects/record.js';
 import { CurrentTime } from '../components/CurrentTime';
+import { db } from '../data/db.js'
 
 export default function Schedule({ tasks, metrics, records, setRecords, metricRecords, setMetricRecords  }) {
   const [currentMetric, setCurrentMetric] = useState(null)
@@ -47,7 +48,7 @@ export default function Schedule({ tasks, metrics, records, setRecords, metricRe
   }
 
   //adds a task to records: either task started or task finished
-  function recordTask(taskID){
+  async function recordTask(taskID){
     //console.log("Clicked", taskID)
     var tr = records.find((element) => (element.taskID === taskID && element.inProgress == true))
     //console.log("found?", tr) 
@@ -74,6 +75,17 @@ export default function Schedule({ tasks, metrics, records, setRecords, metricRe
       });       
       setRecords(nextRecords)               
       console.log("RECORDS", records)
+      
+      try {
+        await db.tasks.add({
+          id: window.crypto.randomUUID(),
+          name: 'test'
+        })
+      }
+      catch(err) {
+        console.error(`Adding Task failed: ${err}`)
+      }
+    
     }   
     
   }

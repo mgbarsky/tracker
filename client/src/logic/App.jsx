@@ -9,7 +9,11 @@ import { Task } from "../objects/task.js";
 
 import { Routes, Route } from "react-router-dom";
 
+import { db, initializeDB } from "../data/db.js";
+
 function App() {
+    initializeDB()
+
     const [tasks, setTasks] = useState(Task.defaultTasks);
     const [metrics, setMetrics] = useState(Metric.defaultMetrics);
     const [records, setRecords] = useState([]);
