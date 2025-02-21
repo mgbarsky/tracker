@@ -22,20 +22,15 @@ export class Metric {
 
         const a = new Metric();
         a.title = "Anxiety";
-        a.tags = [{id:emID, caption:"emotions"}, {id:window.crypto.randomUUID(), caption:"serenity"}];
+        a.tags = [{id:emID, caption:"emotions"}, {id:window.crypto.randomUUID(), caption:"mind"}];
         a.min = 0;
         
         const t = new Metric();
         t.title = "Weight";
         t.min = 50;
         t.max = 150;
-        t.step = 5;
-
-        const t1 = new Metric();
-        t1.title = "Love";
-        t1.min = 50;
-        t1.max = 150;
-        t1.step = 5;
-        return [m, a, t, t1];
+        t.step = 1;        
+        
+        return [m, a, t];
     }
   }

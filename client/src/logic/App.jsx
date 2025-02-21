@@ -9,9 +9,10 @@ import { Task } from "../objects/task.js";
 
 import { Routes, Route } from "react-router-dom";
 
-import { db, initializeDB } from "../data/db.js";
+import { db,  initializeDB } from "../data/db.js";
 
 function App() {
+  
     initializeDB()
 
     const [tasks, setTasks] = useState(Task.defaultTasks);

@@ -37,9 +37,9 @@ export class Task {
       const y = new Task();
       y.title = "Yoga";
       y.tags = [{id:exID, caption:"exercise"}, {id:medID, caption:"meditation"}];
-      y.min = 0;
+      //y.min = 0;
       
-
+      //console.log([a, y]);
       return [a, y];
     }
   }
