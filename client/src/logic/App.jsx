@@ -17,7 +17,7 @@ function App() {
   
     initializeDB()
     console.log(db.tasks.toArray())
-    const tasks = useLiveQuery(() => db.tasks.toArray())
+    const tasks = useLiveQuery(() => db.tasks.toArray(), [], [])
     console.log(tasks)
 
    
