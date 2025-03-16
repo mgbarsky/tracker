@@ -37,12 +37,10 @@ async function initializeDB() {
 }
 
 db.version(1).stores({
-    tasks: "id, title",
+    tasks: "id, title, *tags",
     taskTypes: "id,caption",
     metrics: "id,title",
-    metricTypes: "id,caption",
-    taskTags: "[taskID+tagID]",
-    metricTags: "[metricID+tagID]"
+    metricTypes: "id,caption"
 });
 
 // Schema declaration:

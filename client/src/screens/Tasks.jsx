@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export default function Tasks({ tasks, setTasks }) {
+    
     const [task, setTask] = useState(new Task())
     const [editMode, setEditMode] = useState(false);
     const [showModal, setShowModal] = useState(false);

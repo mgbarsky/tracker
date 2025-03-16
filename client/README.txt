@@ -18,3 +18,7 @@ npm run dev
 
 to build:
 npm run build
+
+Explore:
+https://tailwindcss.com/
+https://web.dev/explore/progressive-web-apps
