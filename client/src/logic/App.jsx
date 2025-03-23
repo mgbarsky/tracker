@@ -9,18 +9,13 @@ import { Task } from "../objects/task.js";
 
 import { Routes, Route } from "react-router-dom";
 
-import { db,  initializeDB } from "../data/db.js";
+import { db, initializeDB } from "../data/db.js";
 
-import { useLiveQuery } from 'dexie-react-hooks'
+import { useLiveQuery } from "dexie-react-hooks";
 
 function App() {
-  
-    initializeDB()
-    console.log(db.tasks.toArray())
-    const tasks = useLiveQuery(() => db.tasks.toArray(), [], [])
-    console.log(tasks)
-
-   
+    initializeDB();
+    const tasks = useLiveQuery(() => db.tasks.toArray(), [], []);
 
     //const [tasks, setTasks] = useState(Task.defaultTasks);
     const [metrics, setMetrics] = useState(Metric.defaultMetrics);
@@ -40,10 +35,7 @@ function App() {
                         />
                     }
                 ></Route>
-                <Route
-                    path="/tasks"
-                    element={<Tasks tasks={tasks}  />}
-                ></Route>
+                <Route path="/tasks" element={<Tasks tasks={tasks} />}></Route>
                 <Route
                     path="/metrics"
                     element={
