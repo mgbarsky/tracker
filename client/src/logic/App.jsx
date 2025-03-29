@@ -16,9 +16,10 @@ import { useLiveQuery } from "dexie-react-hooks";
 function App() {
     initializeDB();
     const tasks = useLiveQuery(() => db.tasks.toArray(), [], []);
+    const metrics = useLiveQuery(() => db.metrics.toArray(), [], []);
 
     //const [tasks, setTasks] = useState(Task.defaultTasks);
-    const [metrics, setMetrics] = useState(Metric.defaultMetrics);
+    // const [metrics, setMetrics] = useState(Metric.defaultMetrics);
     const [records, setRecords] = useState([]);
 
     return (
@@ -38,9 +39,7 @@ function App() {
                 <Route path="/tasks" element={<Tasks tasks={tasks} />}></Route>
                 <Route
                     path="/metrics"
-                    element={
-                        <Metrics metrics={metrics} setMetrics={setMetrics} />
-                    }
+                    element={<Metrics metrics={metrics} />}
                 ></Route>
             </Routes>
         </>

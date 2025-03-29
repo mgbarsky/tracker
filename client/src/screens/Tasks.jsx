@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 import { db } from "../data/db";
 
 export default function Tasks({ tasks }) {
-    console.log(tasks);
-
     const [task, setTask] = useState(new Task());
     const [editMode, setEditMode] = useState(false);
     const [showModal, setShowModal] = useState(false);

@@ -34,7 +34,7 @@ function NewTask({ currentTask, tasks, toggleModal, editMode }) {
             // We still need mapping for tag id and tag title
             // TODO: add tags
             const taskToBeSaved = {
-                description: task.details,
+                description: task.description,
                 enabled: task.enabled,
                 id: task.id,
                 tags: [],
@@ -50,7 +50,7 @@ function NewTask({ currentTask, tasks, toggleModal, editMode }) {
             }
         } else {
             const taskToBeSaved = {
-                description: task.details,
+                description: task.description,
                 enabled: task.enabled,
                 id: task.id,
                 tags: [],
@@ -60,7 +60,7 @@ function NewTask({ currentTask, tasks, toggleModal, editMode }) {
 
             try {
                 await db.tasks.put(taskToBeSaved);
-                console.log(`updated task in indexed db: ${taskToBeSaved}`);
+                console.log(`updated task in indexed db:`, taskToBeSaved);
             } catch (error) {
                 console.error(error);
             }
@@ -83,7 +83,7 @@ function NewTask({ currentTask, tasks, toggleModal, editMode }) {
                 <DetailsLine
                     task={task}
                     setTask={setTask}
-                    taskAttribute="details"
+                    taskAttribute="description"
                     labelText="Details"
                 />
                 {/* <DateTimeLine  task={task} setTask={setTask} dateAttribute="startDate" timeAttribute="startTime" dateLabel="Starts on" timeLabel="at"/> 
