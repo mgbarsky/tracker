@@ -1,7 +1,6 @@
 import Dexie from "dexie";
-import { tasks, getDefaults } from "./defaults.js";
-const db = new Dexie("trackerDB")
-
+import { tasks, metrics, getDefaults } from "./defaults.js";
+const db = new Dexie("trackerDB");
 
 // https://dexie.org/docs/Dexie/Dexie.on.populate
 /* db.on('ready', function (db) {
@@ -26,10 +25,11 @@ const db = new Dexie("trackerDB")
 
 db.on("populate", function () {
     db.tasks.bulkAdd(tasks);
-}); 
+    db.metrics.bulkAdd(metrics);
+});
 
 async function initializeDB() {
-    try {        
+    try {
         await db.open();
     } catch (error) {
         console.error("Error opening database:", error);
@@ -38,9 +38,9 @@ async function initializeDB() {
 
 db.version(1).stores({
     tasks: "id, title, *tags",
-    taskTypes: "id,caption",
-    metrics: "id,title",
-    metricTypes: "id,caption"
+    taskTypes: "id, caption",
+    metrics: "id, title, *tags",
+    metricTypes: "id, caption",
 });
 
 // Schema declaration:
