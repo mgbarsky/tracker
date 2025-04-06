@@ -14,12 +14,11 @@ export default function NumberLine({ task, setTask , taskAttribute, labelText}) 
 
     return (
         <>          
-            <div size="sm" className="input-group mb-3">
-                <label className="caption-label">{labelText}:</label>
+            <div className="row">
+                <label>{labelText}:</label>
                 <input
                     onChange={(e) => updateAttribute(e.target.value)}
-                    type="number"                    
-                    className="form-control"
+                    type="number"     
                     value={currentInput}
                 />                
             </div>  

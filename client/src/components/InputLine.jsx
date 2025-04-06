@@ -13,12 +13,11 @@ export default function InputLine({ task, setTask , taskAttribute, labelText}) {
 
     return (
         <>          
-            <div size="sm" className="input-group mb-3">
-                <label className="caption-label">{labelText}:</label>
+            <div className="row">
+                <label>{labelText}:</label>
                 <input
                     onChange={(e) => updateAttribute(e.target.value)}
-                    type="text" 
-                    className="form-control"
+                    type="text"                     
                     value={currentInput}
                 />                
             </div>  

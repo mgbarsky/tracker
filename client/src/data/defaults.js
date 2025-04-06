@@ -34,11 +34,11 @@ const metrics = [
     },
 ];
 
-const metricTypes = [
-    { id: "fe32edc9-20c1-4b12-b938-345b464bf841", caption: "emotions" },
-    { id: "ab150a75-ef16-46d4-8fdc-36a32e032ed2", caption: "mind" },
-    { id: "a4576238-4ac5-45d6-a10f-5ec915df10e7", caption: "body" },
-    { id: "83800840-c170-46ef-b79c-120b4c717b32", caption: "beauty" },
+const metricTags = [
+    { id: "fe32edc9-20c1-4b12-b938-345b464bf841", title: "Emotions", enabled: true },
+    { id: "ab150a75-ef16-46d4-8fdc-36a32e032ed2", title: "Mind", enabled: true },
+    { id: "a4576238-4ac5-45d6-a10f-5ec915df10e7", title: "Body", enabled: true },
+    { id: "83800840-c170-46ef-b79c-120b4c717b32", title: "Beauty", enabled: false },
 ];
 
 const tasks = [
@@ -58,20 +58,17 @@ const tasks = [
     },
 ];
 
-const taskTypes = [
+const taskTags = [
     {
         id: "2d7cf458-cbf6-4c25-b8b0-22d60c0f3315",
-        caption: "physical exercise",
+        title: "Physical exercise",
+        enabled: true
     },
-    { id: "2963e30e-bbcd-4f64-86d6-335da29fff61", caption: "mindfulness" },
+    { 
+        id: "2963e30e-bbcd-4f64-86d6-335da29fff61", 
+        title: "Mindfulness",
+        enabled: true 
+    }
 ];
 
-function getDefaults() {
-    return {
-        defaultTasks: tasks,
-        defaultMetrics: metrics,
-        defaultTaskTypes: taskTypes,
-        defaultMetricTypes: metricTypes,
-    };
-}
-export { tasks, getDefaults, metrics };
+export { tasks, taskTags, metrics, metricTags };

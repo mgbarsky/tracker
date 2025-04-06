@@ -1,56 +1,54 @@
 import React, { useState } from "react";
-import NewTask from "../screens/NewTask";
+import NewTaskTag from "../screens/NewTaskTag";
 import { Modal } from "react-bootstrap";
-import { Task } from "../objects/task";
+import { Tag } from "../objects/tag";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { db } from "../data/db";
 
-export default function Tasks({ tasks, taskTags }) {
-    const [task, setTask] = useState(new Task());
+export default function TaskTags({ taskTags }) {
+    const [tag, setTag] = useState(new Tag("taskTag"));
     const [editMode, setEditMode] = useState(false);
-    const [showModal, setShowModal] = useState(false);
-
-    //const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);   
 
     const toggleModal = () => {
         setShowModal(!showModal);
     };
 
-    async function deleteTask(taskID) {
+    async function deleteTag(tagID) {
         try {
-            await db.tasks.delete(taskID);
-            console.log(`Deleted task in indexed db: ${taskID}`);
+            await db.taskTags.delete(tagID);
+            console.log(`Deleted task tag in indexed db: ${tagID}`);
         } catch (error) {
             console.error(error);
         }
-    }
-
-    function editTask(taskID) {
-        const task = tasks.find((taskObj) => taskObj.id === taskID);
-        setTask(task);
+    }   
+    
+    function editTag(tagID) {
+        const tag = taskTags.find((tagObj) => tagObj.id === tagID);
+        setTag(tag);
         setEditMode(true);
-        console.log("edit task", task);
+        console.log("edit task tag", tag);
         toggleModal();
     }
 
-    function newTask() {
+    function newTag() {
         setEditMode(false);
-        setTask(new Task());
+        setTag(new Tag("taskTag"));
         toggleModal();
     }
 
     async function toogleEnabled(id) {
-        const currentTask = tasks.find((task) => task.id === id);
+        const currentTag = taskTags.find((tag) => tag.id === id);
 
-        if (!currentTask) {
-            console.log("current task is not found");
+        if (!currentTag) {
+            console.log("current task tag is not found");
             return;
         }
 
         try {
-            await db.tasks.update(id, {
-                enabled: !currentTask.enabled,
+            await db.taskTags.update(id, {
+                enabled: !currentTag.enabled,
             });
             console.log(`toggle enabled: ${id}`);
         } catch (error) {
@@ -62,22 +60,21 @@ export default function Tasks({ tasks, taskTags }) {
         <>
             <header>
                 <h1><a href="/"><img src="assets/home.svg"/></a>Tracker</h1>
-                <h3>Activities</h3>
+                <h3>Activity tags</h3>
 	        </header>
             <main>		
 		        <ul className='menulist'>
                     <li>
                         <span className="col">&nbsp;</span>
                         <span className="maincol">&nbsp;</span>
-                        <span className="col"><a onClick={() => newTask()}>
+                        <span className="col"><a onClick={() => newTag()}>
                             <img src="assets/add.svg"/></a>
                         </span>
                     </li>            
-                    {tasks.map((obj) => (
+                    {taskTags.map((obj) => (
                         <li key={obj.id}>
                             <span className="col">
-                                <input
-                                    className="form-check-input"
+                                <input                                    
                                     type="range"
                                     min="0"
                                     max="1"
@@ -90,11 +87,11 @@ export default function Tasks({ tasks, taskTags }) {
                                 <input                           
                                     value={obj.title} 
                                     readOnly={true}
-                                    onClick={() => editTask(obj.id)}                          
+                                    onClick={() => editTag(obj.id)}                          
                                 />
                             </span>
                             <span className="col">
-                                <a onClick={() => deleteTask(obj.id)}>
+                                <a onClick={() => deleteTag(obj.id)}>
                                     <img src="assets/delete.svg"/>
                                 </a>
                             </span>
@@ -102,16 +99,15 @@ export default function Tasks({ tasks, taskTags }) {
                     ))}               
                 </ul>
             </main>
-            {/* <button onClick={() => navigate('/')}>Home</button> */}
+            
             {showModal && (
                 <Modal show={showModal} fullscreen={false}>
                     <div className="container">
-                        <NewTask
-                            tasks={tasks}
+                        <NewTaskTag
+                            taskTags={taskTags}
                             toggleModal={toggleModal}
-                            currentTask={task}
+                            currentTag={tag}
                             editMode={editMode}
-                            taskTags={taskTags}                            
                         />
                     </div>
                 </Modal>

@@ -21,7 +21,7 @@ import { db } from "../data/db.js";
   }
 */
 
-function NewTask({ currentTask, tasks, toggleModal, editMode }) {
+function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
     const [task, setTask] = useState(currentTask);
 
     const handleSave = async () => {
@@ -53,8 +53,7 @@ function NewTask({ currentTask, tasks, toggleModal, editMode }) {
                 description: task.description,
                 enabled: task.enabled,
                 id: task.id,
-                tags: [],
-                // tags: task.tags.map((tags) => tags.id),
+                tags: [],                
                 title: task.title,
             };
 
@@ -71,43 +70,45 @@ function NewTask({ currentTask, tasks, toggleModal, editMode }) {
 
     return (
         <>
-            <h1>Task</h1>
-            <form className="input-form">
+            <header>
+                {editMode ?   
+                (
+                    <h2><img src="assets/edit.svg"/><img src="assets/activity.svg"/>Edit activity</h2>
+                )
+                :
+                (
+                    <h2><img src="assets/add.svg"/><img src="assets/activity.svg"/>New activity</h2>
+                )
+                }		       		
+	        </header> 
+            <main>          
                 <InputLine
                     task={task}
                     setTask={setTask}
                     taskAttribute="title"
                     labelText="Title"
                 />
-                <TagList task={task} setTask={setTask} />
+                
                 <DetailsLine
                     task={task}
                     setTask={setTask}
                     taskAttribute="description"
                     labelText="Details"
                 />
-                {/* <DateTimeLine  task={task} setTask={setTask} dateAttribute="startDate" timeAttribute="startTime" dateLabel="Starts on" timeLabel="at"/> 
-      <DateTimeLine  task={task} setTask={setTask} dateAttribute="endDate" timeAttribute="endTime" dateLabel="Ends by" timeLabel="at"/> 
-      <InputLine  task={task} setTask={setTask} taskAttribute="targetIntensity" labelText="Target intensity"/>  
-      <Switch  task={task} setTask={setTask} taskAttribute="trackIntensity" labelText="Track intensity"/>
-      <TimeIntervalLine  task={task} setTask={setTask} taskAttribute="targetDuration" labelText="Target duration"/>   */}
-                <div className="input-row submit">
-                    <button
-                        type="button"
-                        className="btn btn-outline-secondary"
+                <TagList task={task} setTask={setTask} taskTags={taskTags} />
+                <div className="buttonpanel">
+                    <button       
+                        onClick={handleSave}
+                    >
+                        Save
+                    </button>
+                    <button 
                         onClick={toggleModal}
                     >
                         Cancel
-                    </button>
-                    <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={handleSave}
-                    >
-                        Done
-                    </button>
-                </div>
-            </form>
+                    </button>                    
+                </div> 
+            </main>           
         </>
     );
 }

@@ -1,3 +1,16 @@
+@font-face
+{	font-family: Roboto;
+	src: url(assets/Roboto.ttf)}
+
+*
+{	background:	rgb(0 0 0 / .087);}
+
+body
+{	
+	width: 100dvw; height: 100dvh;
+
+	font-family: Roboto, sans-serif;}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -163,4 +176,61 @@ button:focus-visible {
 
 .slidecontainer{
   width:100%;
+}
+
+/* CUSTOM CSS
+*/
+/* regular list of menu buttons*/
+.menulist {
+	
+}
+
+/* Panel with two types of tracking buttons */
+.buttonpanel {
+
+}
+
+/* regular list of texts used for selection*/
+.selectionlist {
+
+}
+
+/* list of activities to play*/
+.playlist {
+
+}
+
+/* list of spans to mark mood*/
+.moodlist{
+
+}
+
+.moodspan{
+	with:100%;
+	height:100%;
+	background-color: grey;
+}
+
+.moodfill{
+	display: inline-block;
+	height:100%;
+}
+
+.callout{
+	
+
+}
+
+.col{
+	display: inline-block;
+	width:40px;
+}
+
+.col input{
+	width:100%;
+}
+
+.maincol{
+	display: inline-block;
+	width:200px;
 }

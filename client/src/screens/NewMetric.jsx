@@ -62,15 +62,25 @@ function NewMetric({ currentMetric, metrics, toggleModal, editMode }) {
 
     return (
         <>
-            <h1>Metric</h1>
-            <form className="input-form">
+            <header>
+                {editMode ?   
+                (
+                    <h2><img src="assets/edit.svg"/><img src="assets/mood.svg"/>Edit metric</h2>
+                )
+                :
+                (
+                    <h2><img src="assets/add.svg"/><img src="assets/mood.svg"/>New metric</h2>
+                )
+                }		       		
+	        </header>
+            <main>
                 <InputLine
                     task={metric}
                     setTask={setMetric}
                     taskAttribute="title"
                     labelText="Title"
                 />
-                <TagList task={metric} setTask={setMetric} />
+                
                 <DetailsLine
                     task={metric}
                     setTask={setMetric}
@@ -95,28 +105,20 @@ function NewMetric({ currentMetric, metrics, toggleModal, editMode }) {
                     taskAttribute="step"
                     labelText="Increments"
                 />
-                {/* <DateTimeLine  task={task} setTask={setTask} dateAttribute="startDate" timeAttribute="startTime" dateLabel="Starts on" timeLabel="at"/> 
-      <DateTimeLine  task={task} setTask={setTask} dateAttribute="endDate" timeAttribute="endTime" dateLabel="Ends by" timeLabel="at"/> 
-      <InputLine  task={task} setTask={setTask} taskAttribute="targetIntensity" labelText="Target intensity"/>  
-      <Switch  task={task} setTask={setTask} taskAttribute="trackIntensity" labelText="Track intensity"/>
-      <TimeIntervalLine  task={task} setTask={setTask} taskAttribute="targetDuration" labelText="Target duration"/>   */}
-                <div className="input-row submit">
-                    <button
-                        type="button"
-                        className="btn btn-outline-secondary"
+                <TagList task={metric} setTask={setMetric} />
+                <div className="buttonpanel">
+                    <button                       
+                        onClick={handleSave}
+                    >
+                        Save
+                    </button>
+                    <button                       
                         onClick={toggleModal}
                     >
                         Cancel
-                    </button>
-                    <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={handleSave}
-                    >
-                        Done
-                    </button>
+                    </button>                    
                 </div>
-            </form>
+            </main>
         </>
     );
 }

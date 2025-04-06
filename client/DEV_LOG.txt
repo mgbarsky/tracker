@@ -1,43 +1,33 @@
-Task functionality
+ask Aung: deployment folder
 
-Task 1
-Simple new task form
-
-Task 2
-Add enable -disable
-
-Task 3
-finish tasks: CSS
-
-AUNG:
-Change all to react components?
-multi-screen App and navigation
-organize imports
-
-extend react.component? more possibilities for conditional rendering
-
-schedule screen
-
-schedule: functionality - done, disable, enable, record start time - end time, selection - in progress - and corresponding metrics
-
-recording metrics
-
-******************************************
-
-ask Aung: why range does not reset?
- 
-deployment
-
-save and load from local storage
 
 css
 
 ========================================================
-create default metrics and default tasks
 
+Apr 4
+    tasks
+    metrics
 
+    layout only
+        new task
+        new metric
 
-save to local storage as one json object
+Apr 5:
+    new
+    object called Tag
+    Database for taskTags
+    tasktags screen
+    new tasktag screen
 
-visualization of results
+    Database for metricTags
+    metrictags
+    new metrictag
+
+tags selection for tasks (bug: do not show)
+tags selection for metrics
+
+schedule: tranform into activitytracker
+show playing now panel
+new: metric tracker
 

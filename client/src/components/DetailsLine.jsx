@@ -10,15 +10,14 @@ export default function DetailsLine({ task, setTask , taskAttribute, labelText})
             return {...prev, [taskAttribute]: val }
         })
     }
-    <textarea class="form-control"></textarea>
+    <textarea className="form-control"></textarea>
 
     return (
         <>          
-            <div size="sm" className="input-group mb-3">
-                <label className="caption-label">{labelText}:</label>
+            <div className="row">
+                <label>{labelText}:</label>
                 <textarea
-                    onChange={(e) => updateAttribute(e.target.value)}                    
-                    className="form-control"
+                    onChange={(e) => updateAttribute(e.target.value)} 
                     value={currentInput}
                 > 
                 </textarea>               

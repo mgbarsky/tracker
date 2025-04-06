@@ -105,55 +105,60 @@ export default function Metrics({ metrics }) {
 
     return (
         <>
-            <ul className="nav bg-primary">
-                <li className="nav-item">
-                    <Link className="nav-link text-white" to="/">
-                        &larr;
-                    </Link>
-                </li>
-            </ul>
-            <div className="container">
-                <h1>Metrics</h1>
-                {metrics.map((obj) => (
-                    <div className="input-group" key={obj.id}>
-                        <div className="form-check form-switch">
-                            <input
-                                className="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                checked={obj.enabled}
-                                onChange={() => toogleEnabled(obj.id)}
-                            />
-                            {obj.enabled}
-                        </div>
+            <header>
+                <h1><a href="/"><img src="assets/home.svg"/></a>Tracker</h1>
+                <h3>Metrics</h3>
+	        </header>
+            <main>		
+		        <ul className='menulist'>
+                    <li>
+                        <span className="col">&nbsp;</span>
+                        <span className="maincol">&nbsp;</span>
+                        <span className="col"><a onClick={() => newMetric()}>
+                            <img src="assets/add.svg"/></a>
+                        </span>
+                    </li>     
+            
+                    {metrics.map((obj) => (
+                        <li key={obj.id}>
+                            <span className="col">
+                                <input                                    
+                                    type="range"
+                                    min="0"
+                                    max="1"
+                                    value={obj.enabled?"1":"0"}
+                                    onChange={() => toogleEnabled(obj.id)}
+                                />
+                                {obj.enabled}
+                            </span>
+                            <span className="maincol">
+                                <input                           
+                                    value={obj.title} 
+                                    readOnly
+                                    onClick={() => editMetric(obj.id)}                          
+                                />
+                            </span>
+                            <span className="col">
+                                <a onClick={() => deleteMetric(obj.id)}>
+                                    <img src="assets/delete.svg"/>
+                                </a>
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            </main>                
 
-                        <MetricRow obj={obj} />
-                    </div>
-                ))}
-                <div className="input-row submit">
-                    <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => newMetric()}
-                    >
-                        +
-                    </button>
-                </div>
-                {/* <button onClick={() => navigate('/')}>Home</button> */}
-
-                {showMetricModal && (
-                    <Modal show={showMetricModal} fullscreen={false}>
-                        <div className="container">
-                            <NewMetric
-                                metrics={metrics}
-                                toggleModal={toggleMetricModal}
-                                currentMetric={metric}
-                                editMode={editMode}
-                            />
-                        </div>
-                    </Modal>
-                )}
-            </div>
+            {showMetricModal && (
+                <Modal show={showMetricModal} fullscreen={false}>                    
+                    <NewMetric
+                        metrics={metrics}
+                        toggleModal={toggleMetricModal}
+                        currentMetric={metric}
+                        editMode={editMode}
+                    />                    
+                </Modal>
+            )}
+            
         </>
     );
 }
