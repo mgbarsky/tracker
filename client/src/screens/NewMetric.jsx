@@ -19,7 +19,13 @@ import { db } from "../data/db";
   }
 */
 
-function NewMetric({ currentMetric, metrics, toggleModal, editMode }) {
+function NewMetric({
+    currentMetric,
+    metrics,
+    toggleModal,
+    editMode,
+    metricTags,
+}) {
     const [metric, setMetric] = useState(currentMetric);
 
     const handleSave = async () => {
@@ -33,15 +39,10 @@ function NewMetric({ currentMetric, metrics, toggleModal, editMode }) {
             max: metric.max,
             min: metric.min,
             step: metric.step,
-            tags: [],
+            tags: metric.tags,
         };
 
         if (!editMode) {
-            // TODO (later): handle what properties we want to save in indexed db
-
-            // We still need mapping for tag id and tag title
-            // TODO: add tags
-
             try {
                 await db.metrics.add(metricToBeSaved);
                 console.log(`added metric in indexed db:`, metricToBeSaved);
@@ -63,16 +64,20 @@ function NewMetric({ currentMetric, metrics, toggleModal, editMode }) {
     return (
         <>
             <header>
-                {editMode ?   
-                (
-                    <h2><img src="assets/edit.svg"/><img src="assets/mood.svg"/>Edit metric</h2>
-                )
-                :
-                (
-                    <h2><img src="assets/add.svg"/><img src="assets/mood.svg"/>New metric</h2>
-                )
-                }		       		
-	        </header>
+                {editMode ? (
+                    <h2>
+                        <img src="assets/edit.svg" />
+                        <img src="assets/mood.svg" />
+                        Edit metric
+                    </h2>
+                ) : (
+                    <h2>
+                        <img src="assets/add.svg" />
+                        <img src="assets/mood.svg" />
+                        New metric
+                    </h2>
+                )}
+            </header>
             <main>
                 <InputLine
                     task={metric}
@@ -80,7 +85,7 @@ function NewMetric({ currentMetric, metrics, toggleModal, editMode }) {
                     taskAttribute="title"
                     labelText="Title"
                 />
-                
+
                 <DetailsLine
                     task={metric}
                     setTask={setMetric}
@@ -105,18 +110,14 @@ function NewMetric({ currentMetric, metrics, toggleModal, editMode }) {
                     taskAttribute="step"
                     labelText="Increments"
                 />
-                <TagList task={metric} setTask={setMetric} />
+                <TagList
+                    task={metric}
+                    setTask={setMetric}
+                    taskTags={metricTags}
+                />
                 <div className="buttonpanel">
-                    <button                       
-                        onClick={handleSave}
-                    >
-                        Save
-                    </button>
-                    <button                       
-                        onClick={toggleModal}
-                    >
-                        Cancel
-                    </button>                    
+                    <button onClick={handleSave}>Save</button>
+                    <button onClick={toggleModal}>Cancel</button>
                 </div>
             </main>
         </>

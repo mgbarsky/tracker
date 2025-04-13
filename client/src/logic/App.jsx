@@ -30,26 +30,25 @@ function App() {
     return (
         <>
             <Routes basename="/myapp">
+                <Route path="/" element={<Home />}></Route>
                 <Route
-                    path="/"
-                    element={<Home />}
-                ></Route>
-                <Route 
-                    path="/tasks" 
+                    path="/tasks"
                     element={<Tasks tasks={tasks} taskTags={taskTags} />}
                 ></Route>
-                <Route 
-                    path="/tasktags" 
+                <Route
+                    path="/tasktags"
                     element={<TaskTags taskTags={taskTags} />}
-                ></Route> 
-                <Route 
-                    path="/metrics"
-                    element={<Metrics metrics={metrics} />}
                 ></Route>
-                <Route 
+                <Route
+                    path="/metrics"
+                    element={
+                        <Metrics metrics={metrics} metricTags={metricTags} />
+                    }
+                ></Route>
+                <Route
                     path="/metrictags"
                     element={<MetricTags metricTags={metricTags} />}
-                ></Route> 
+                ></Route>
             </Routes>
         </>
     );

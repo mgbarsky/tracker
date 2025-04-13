@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 import { db } from "../data/db";
 
-export default function Metrics({ metrics }) {
+export default function Metrics({ metrics, metricTags }) {
     const [metric, setMetric] = useState(new Metric());
     const [editMode, setEditMode] = useState(false);
     const [showMetricModal, setShowMetricModal] = useState(false);
@@ -106,59 +106,66 @@ export default function Metrics({ metrics }) {
     return (
         <>
             <header>
-                <h1><a href="/"><img src="assets/home.svg"/></a>Tracker</h1>
+                <h1>
+                    <a href="/">
+                        <img src="assets/home.svg" />
+                    </a>
+                    Tracker
+                </h1>
                 <h3>Metrics</h3>
-	        </header>
-            <main>		
-		        <ul className='menulist'>
+            </header>
+            <main>
+                <ul className="menulist">
                     <li>
                         <span className="col">&nbsp;</span>
                         <span className="maincol">&nbsp;</span>
-                        <span className="col"><a onClick={() => newMetric()}>
-                            <img src="assets/add.svg"/></a>
+                        <span className="col">
+                            <a onClick={() => newMetric()}>
+                                <img src="assets/add.svg" />
+                            </a>
                         </span>
-                    </li>     
-            
+                    </li>
+
                     {metrics.map((obj) => (
                         <li key={obj.id}>
                             <span className="col">
-                                <input                                    
+                                <input
                                     type="range"
                                     min="0"
                                     max="1"
-                                    value={obj.enabled?"1":"0"}
+                                    value={obj.enabled ? "1" : "0"}
                                     onChange={() => toogleEnabled(obj.id)}
                                 />
                                 {obj.enabled}
                             </span>
                             <span className="maincol">
-                                <input                           
-                                    value={obj.title} 
+                                <input
+                                    value={obj.title}
                                     readOnly
-                                    onClick={() => editMetric(obj.id)}                          
+                                    onClick={() => editMetric(obj.id)}
                                 />
                             </span>
                             <span className="col">
                                 <a onClick={() => deleteMetric(obj.id)}>
-                                    <img src="assets/delete.svg"/>
+                                    <img src="assets/delete.svg" />
                                 </a>
                             </span>
                         </li>
                     ))}
                 </ul>
-            </main>                
+            </main>
 
             {showMetricModal && (
-                <Modal show={showMetricModal} fullscreen={false}>                    
+                <Modal show={showMetricModal} fullscreen={false}>
                     <NewMetric
                         metrics={metrics}
                         toggleModal={toggleMetricModal}
                         currentMetric={metric}
                         editMode={editMode}
-                    />                    
+                        metricTags={metricTags}
+                    />
                 </Modal>
             )}
-            
         </>
     );
 }
