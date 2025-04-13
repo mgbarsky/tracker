@@ -1,236 +1,244 @@
-@font-face
-{	font-family: Roboto;
-	src: url(assets/Roboto.ttf)}
-
-*
-{	background:	rgb(0 0 0 / .087);}
-
-body
-{	
-	width: 100dvw; height: 100dvh;
-
-	font-family: Roboto, sans-serif;}
-
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+@font-face {
+    font-family: Roboto;
+    src: url(assets/Roboto.ttf);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+    background: rgb(0 0 0 / 0.087);
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  align-items: center; justify-content: center;
-  min-width: 320px;
-  min-height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
+
+    font-family: Roboto, sans-serif;
+}
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+
+a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+}
+a:hover {
+    color: #535bf2;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    align-items: center;
+    justify-content: center;
+    min-width: 320px;
+    min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-size: 3.2em;
+    line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+    border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+    }
+    a:hover {
+        color: #747bff;
+    }
+    button {
+        background-color: #f9f9f9;
+    }
 }
 
-.caption-label{
-  width:6em;
-  padding-right:1ex;
+.caption-label {
+    width: 6em;
+    padding-right: 1ex;
 }
 
 .input-form {
-  background-color:antiquewhite;
-  padding:2ex;
-  display: flex;
-  flex-direction: column;  
-  
+    background-color: antiquewhite;
+    padding: 2ex;
+    display: flex;
+    flex-direction: column;
 }
 
-.input-row{
-  display: flex;
-  padding-bottom:1ex;
+.input-row {
+    display: flex;
+    padding-bottom: 1ex;
 }
 
-.input-row label {   
-  padding-left:1em;
+.input-row label {
+    padding-left: 1em;
 }
 
 .input-row label:first-child {
-  width:6em;
-  flex: 0 0 auto;
+    width: 6em;
+    flex: 0 0 auto;
 }
 
 .input-row textarea {
-  min-height:12em !important; 
-  overflow:hidden overlay;
-  padding-right:1.5em;    
+    min-height: 12em !important;
+    overflow: hidden overlay;
+    padding-right: 1.5em;
 }
 
 .input-row > input {
-  flex-grow: 0;
+    flex-grow: 0;
 }
 
 .input-row.submit {
-  flex-direction:row-reverse;
+    flex-direction: row-reverse;
 }
 
-.input-row.submit button{   
-  margin-left:1em;
-  width:6em;
+.input-row.submit button {
+    margin-left: 1em;
+    width: 6em;
 }
 
 .badge {
-  margin-right: 1em;
+    margin-right: 1em;
 }
 
-.tagbadge{
-  font-size:small;
-  border-radius:20%;
-  background-color:coral;
-
+.tagbadge {
+    font-size: small;
+    border-radius: 20%;
+    background-color: coral;
 }
 
-.closebutton{
-  font-size:small;
-  border-radius:50%;
-  background-color:ligtgrey;
-  margin-right:2ex;
-
+.closebutton {
+    font-size: small;
+    border-radius: 50%;
+    background-color: ligtgrey;
+    margin-right: 2ex;
 }
 
-#root
-{   width: 320px;}
-
-.horizontalBar{
-  width: 100%;
-
-  display: flex;
-
-  overflow: overlay;
-  background-color:bisque;  
+#root {
+    width: 320px;
 }
 
-.horizontalBar > button
-{   width: 96px; height: 64px;
+.horizontalBar {
+    width: 100%;
+
+    display: flex;
+
+    overflow: overlay;
+    background-color: bisque;
+}
+
+.horizontalBar > button {
+    width: 96px;
+    height: 64px;
     flex: 0 0 auto;
-    
-    margin-right: 8px;}
-.horizontalBar > button:last-child
-{   margin: 0;}
 
-.horizontalBar::-webkit-scrollbar
-{   height: 8px;
-    background: rgb(0 0 0 / .19);}
+    margin-right: 8px;
+}
+.horizontalBar > button:last-child {
+    margin: 0;
+}
 
-.horizontalBar::-webkit-scrollbar-thumb
-{   background: rgb(0 0 0 / .19);}
+.horizontalBar::-webkit-scrollbar {
+    height: 8px;
+    background: rgb(0 0 0 / 0.19);
+}
 
-.slidecontainer{
-  width:100%;
+.horizontalBar::-webkit-scrollbar-thumb {
+    background: rgb(0 0 0 / 0.19);
+}
+
+.slidecontainer {
+    width: 100%;
 }
 
 /* CUSTOM CSS
 */
 /* regular list of menu buttons*/
 .menulist {
-	
 }
 
 /* Panel with two types of tracking buttons */
 .buttonpanel {
-
 }
 
 /* regular list of texts used for selection*/
 .selectionlist {
-
 }
 
 /* list of activities to play*/
 .playlist {
-
 }
 
 /* list of spans to mark mood*/
-.moodlist{
-
+.moodlist {
 }
 
-.moodspan{
-	with:100%;
-	height:100%;
-	background-color: grey;
+.moodspan {
+    with: 100%;
+    height: 100%;
+    background-color: grey;
 }
 
-.moodfill{
-	display: inline-block;
-	height:100%;
+.moodfill {
+    display: inline-block;
+    height: 100%;
 }
 
-.callout{
-	
-
+.callout {
 }
 
-.col{
-	display: inline-block;
-	width:40px;
+.col {
+    display: inline-block;
+    width: 40px;
 }
 
-.col input{
-	width:100%;
+.col input {
+    width: 100%;
 }
 
-.maincol{
-	display: inline-block;
-	width:200px;
+.maincol {
+    display: inline-block;
+    width: 200px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.selected-tag {
+    background-color: rgb(174, 216, 174);
 }

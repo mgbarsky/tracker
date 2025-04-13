@@ -28,23 +28,17 @@ function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
         console.log(task);
 
         if (!editMode) {
-            // TODO (later): handle what properties we want to save in indexed db
-
-            // currently, only saving similar to prepopulated data
-            // We still need mapping for tag id and tag title
-            // TODO: add tags
             const taskToBeSaved = {
                 description: task.description,
                 enabled: task.enabled,
                 id: task.id,
-                tags: [],
-                // tags: task.tags.map((tags) => tags.id),
+                tags: task.tags,
                 title: task.title,
             };
 
             try {
                 await db.tasks.add(taskToBeSaved);
-                console.log(`added task in indexed db: ${taskToBeSaved}`);
+                console.log(`added task in indexed db:`, taskToBeSaved);
             } catch (error) {
                 console.error(error);
             }
@@ -53,7 +47,7 @@ function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
                 description: task.description,
                 enabled: task.enabled,
                 id: task.id,
-                tags: [],                
+                tags: task.tags,
                 title: task.title,
             };
 
@@ -71,24 +65,28 @@ function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
     return (
         <>
             <header>
-                {editMode ?   
-                (
-                    <h2><img src="assets/edit.svg"/><img src="assets/activity.svg"/>Edit activity</h2>
-                )
-                :
-                (
-                    <h2><img src="assets/add.svg"/><img src="assets/activity.svg"/>New activity</h2>
-                )
-                }		       		
-	        </header> 
-            <main>          
+                {editMode ? (
+                    <h2>
+                        <img src="assets/edit.svg" />
+                        <img src="assets/activity.svg" />
+                        Edit activity
+                    </h2>
+                ) : (
+                    <h2>
+                        <img src="assets/add.svg" />
+                        <img src="assets/activity.svg" />
+                        New activity
+                    </h2>
+                )}
+            </header>
+            <main>
                 <InputLine
                     task={task}
                     setTask={setTask}
                     taskAttribute="title"
                     labelText="Title"
                 />
-                
+
                 <DetailsLine
                     task={task}
                     setTask={setTask}
@@ -97,18 +95,10 @@ function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
                 />
                 <TagList task={task} setTask={setTask} taskTags={taskTags} />
                 <div className="buttonpanel">
-                    <button       
-                        onClick={handleSave}
-                    >
-                        Save
-                    </button>
-                    <button 
-                        onClick={toggleModal}
-                    >
-                        Cancel
-                    </button>                    
-                </div> 
-            </main>           
+                    <button onClick={handleSave}>Save</button>
+                    <button onClick={toggleModal}>Cancel</button>
+                </div>
+            </main>
         </>
     );
 }
