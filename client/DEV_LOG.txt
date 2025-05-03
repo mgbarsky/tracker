@@ -31,9 +31,9 @@ Apr 5:
     new: metric tracker RecordMetrics
 
 Functionality:
-Design Record: review
+    Design Record: review
 
-Record task: bug on totalSecs (totalTime() is not defined - figure out classes in java script)
+    Record task: 
 Record metric: only the ones that changed
 
 GUI:
@@ -41,3 +41,5 @@ show playing now panel
 Set metric level: bar
 
 Database connection of Records 
+
+Build does not work again!!!
