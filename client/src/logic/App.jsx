@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 
-import Schedule from "../screens/Schedule";
+import RecordTasks from "../screens/RecordTasks";
+import RecordMetrics from "../screens/RecordMetrics";
 import Home from "./Home";
 import Tasks from "../screens/Tasks";
 import TaskTags from "../screens/TaskTags";
@@ -22,7 +23,7 @@ function App() {
     const taskTags = useLiveQuery(() => db.taskTags.toArray(), [], []);
     const metrics = useLiveQuery(() => db.metrics.toArray(), [], []);
     const metricTags = useLiveQuery(() => db.metricTags.toArray(), [], []);
-
+   
     //const [tasks, setTasks] = useState(Task.defaultTasks);
     // const [metrics, setMetrics] = useState(Metric.defaultMetrics);
     const [records, setRecords] = useState([]);
@@ -48,6 +49,14 @@ function App() {
                 <Route
                     path="/metrictags"
                     element={<MetricTags metricTags={metricTags} />}
+                ></Route>
+                <Route
+                    path="/recordtasks"
+                    element={<RecordTasks tasks={tasks} records={records} setRecords={setRecords}/>}
+                ></Route>
+                <Route
+                    path="/recordmetrics"
+                    element={<RecordMetrics metrics={metrics} records={records} setRecords={setRecords}/>}
                 ></Route>
             </Routes>
         </>

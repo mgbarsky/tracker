@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 
-import Schedule from "../screens/Schedule";
+import RecordTasks from "../screens/RecordTasks";
 import Tasks from "../screens/Tasks";
 import Metrics from "../screens/Metrics";
 import { Metric } from "../objects/metric.js";
@@ -33,9 +33,9 @@ function Home() {
                 </section>
                 <section>
                     <h2><img src="./assets/track.svg"/>Track</h2>	
-                    <div className="navbuttons">
-                        <button onClick={() => trackActivities()}><img src="assets/activity.svg"/></button>
-                        <button onClick={() => trackMetrics()}><img src="assets/mood.svg"/></button>
+                    <div className="buttonpanel">                        
+                        <button><a href="/recordtasks"><img src="assets/activity.svg"/></a></button>
+                        <button><a href="/recordmetrics"><img src="assets/mood.svg"/></a></button>
                     </div>
                 </section>
                 <section>

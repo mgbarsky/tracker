@@ -24,10 +24,20 @@ Apr 5:
     metrictags
     new metrictag
 
-tags selection for tasks (bug: do not show)
-tags selection for metrics
+    tags selection for tasks 
+    tags selection for metrics
 
-schedule: tranform into activitytracker
-show playing now panel
-new: metric tracker
+    schedule: tranform into RecordTasks
+    new: metric tracker RecordMetrics
 
+Functionality:
+Design Record: review
+
+Record task: bug on totalSecs (totalTime() is not defined - figure out classes in java script)
+Record metric: only the ones that changed
+
+GUI:
+show playing now panel 
+Set metric level: bar
+
+Database connection of Records 
