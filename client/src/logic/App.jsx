@@ -23,7 +23,7 @@ function App() {
     const taskTags = useLiveQuery(() => db.taskTags.toArray(), [], []);
     const metrics = useLiveQuery(() => db.metrics.toArray(), [], []);
     const metricTags = useLiveQuery(() => db.metricTags.toArray(), [], []);
-   
+
     //const [tasks, setTasks] = useState(Task.defaultTasks);
     // const [metrics, setMetrics] = useState(Metric.defaultMetrics);
     const [records, setRecords] = useState([]);
@@ -52,11 +52,23 @@ function App() {
                 ></Route>
                 <Route
                     path="/recordtasks"
-                    element={<RecordTasks tasks={tasks} records={records} setRecords={setRecords}/>}
+                    element={
+                        <RecordTasks
+                            tasks={tasks}
+                            records={records}
+                            setRecords={setRecords}
+                        />
+                    }
                 ></Route>
                 <Route
                     path="/recordmetrics"
-                    element={<RecordMetrics metrics={metrics} records={records} setRecords={setRecords}/>}
+                    element={
+                        <RecordMetrics
+                            metrics={metrics}
+                            records={records}
+                            setRecords={setRecords}
+                        />
+                    }
                 ></Route>
             </Routes>
         </>

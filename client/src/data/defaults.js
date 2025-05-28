@@ -7,6 +7,7 @@ const metrics = [
         max: 5,
         min: -5,
         step: 1,
+        value: 2.5,
         tags: ["fe32edc9-20c1-4b12-b938-345b464bf841"],
     },
     {
@@ -14,9 +15,10 @@ const metrics = [
         title: "Anxiety",
         description: "",
         enabled: true,
-        max: 0,
-        min: 10,
+        max: 10,
+        min: 0,
         step: 1,
+        value: 5,
         tags: [
             "fe32edc9-20c1-4b12-b938-345b464bf841",
             "ab150a75-ef16-46d4-8fdc-36a32e032ed2",
@@ -27,18 +29,35 @@ const metrics = [
         title: "Weight",
         description: "",
         enabled: true,
-        max: 40,
-        min: 200,
+        max: 200,
+        min: 40,
         step: 1,
+        value: 100,
         tags: ["a4576238-4ac5-45d6-a10f-5ec915df10e7"],
     },
 ];
 
 const metricTags = [
-    { id: "fe32edc9-20c1-4b12-b938-345b464bf841", title: "Emotions", enabled: true },
-    { id: "ab150a75-ef16-46d4-8fdc-36a32e032ed2", title: "Mind", enabled: true },
-    { id: "a4576238-4ac5-45d6-a10f-5ec915df10e7", title: "Body", enabled: true },
-    { id: "83800840-c170-46ef-b79c-120b4c717b32", title: "Beauty", enabled: false },
+    {
+        id: "fe32edc9-20c1-4b12-b938-345b464bf841",
+        title: "Emotions",
+        enabled: true,
+    },
+    {
+        id: "ab150a75-ef16-46d4-8fdc-36a32e032ed2",
+        title: "Mind",
+        enabled: true,
+    },
+    {
+        id: "a4576238-4ac5-45d6-a10f-5ec915df10e7",
+        title: "Body",
+        enabled: true,
+    },
+    {
+        id: "83800840-c170-46ef-b79c-120b4c717b32",
+        title: "Beauty",
+        enabled: false,
+    },
 ];
 
 const tasks = [
@@ -62,13 +81,13 @@ const taskTags = [
     {
         id: "2d7cf458-cbf6-4c25-b8b0-22d60c0f3315",
         title: "Physical exercise",
-        enabled: true
+        enabled: true,
     },
-    { 
-        id: "2963e30e-bbcd-4f64-86d6-335da29fff61", 
+    {
+        id: "2963e30e-bbcd-4f64-86d6-335da29fff61",
         title: "Mindfulness",
-        enabled: true 
-    }
+        enabled: true,
+    },
 ];
 
 export { tasks, taskTags, metrics, metricTags };

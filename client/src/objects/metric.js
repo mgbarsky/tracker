@@ -1,36 +1,40 @@
 export class Metric {
     constructor() {
-        this.title="";
+        this.title = "";
         this.description = "";
-        this.tags=[];
+        this.tags = [];
         this.min = -10;
         this.max = 10;
         this.step = 1;
+        this.value = 0;
 
         this.enabled = true;
 
         this.id = window.crypto.randomUUID();
-    }  
-    
-    static get defaultMetrics(){  
-        const emID =  window.crypto.randomUUID();     
+    }
+
+    static get defaultMetrics() {
+        const emID = window.crypto.randomUUID();
         const m = new Metric();
         m.title = "Mood";
-        m.tags = [{id:emID, caption:"emotions"}];
+        m.tags = [{ id: emID, caption: "emotions" }];
         m.min = -5;
         m.max = 5;
 
         const a = new Metric();
         a.title = "Anxiety";
-        a.tags = [{id:emID, caption:"emotions"}, {id:window.crypto.randomUUID(), caption:"mind"}];
+        a.tags = [
+            { id: emID, caption: "emotions" },
+            { id: window.crypto.randomUUID(), caption: "mind" },
+        ];
         a.min = 0;
-        
+
         const t = new Metric();
         t.title = "Weight";
         t.min = 50;
         t.max = 150;
-        t.step = 1;        
-        
+        t.step = 1;
+
         return [m, a, t];
     }
-  }
+}
