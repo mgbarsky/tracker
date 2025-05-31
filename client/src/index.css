@@ -30,6 +30,9 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
+button{
+    color:white;
+}
 a {
     font-weight: 500;
     color: #646cff;

@@ -79,12 +79,12 @@ export default function Metrics({ metrics, metricTags }) {
     }
 
     async function toogleEnabled(id) {
-        const currentMetric = metrics.find((metric) => metric.id === id);
+        /*const currentMetric = metrics.find((metric) => metric.id === id);
 
         if (!currentMetric) {
             console.log("current metric is not found");
             return;
-        }
+        }*/
 
         try {
             await db.metrics.update(id, {

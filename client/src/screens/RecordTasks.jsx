@@ -44,24 +44,13 @@ export default function RecordTasks({ tasks, records, setRecords  })
     setCurrentTime(new Date());
   }
 
-  function recordCurrentTask(){ 
-    // add new task record to records
-    
-    /*setCurrentRecord((prevRecord) => ({
-      ...prevRecord,
-      end: new Date(),
-      inProgress: false,
-      totalSecs: totalSecs + secondsDiff(new Date() , currentTime)
-    }))*/
-
+  function recordCurrentTask(){
     currentRecord.end = new Date();
     currentRecord.inProgress = false;
     currentRecord.totalSecs = totalSecs + secondsDiff(new Date() , currentTime);
     setRecords((prev) => {      
       return [...prev, currentRecord]
-    })  
-    //console.log("UPDATED RECORDS");
-    //console.log(records);
+    })     
     
     setTotalSecs(0);
     setCurrentRecord(null);
