@@ -34,7 +34,8 @@ Functionality:
     Design Record: review
 
     Record task: 
-Record metric: only the ones that changed
+    Record metric: saving all metrics for simplicity
+    BUG: records are empty when moving between tasks and metrics
 
 GUI:
 show playing now panel 

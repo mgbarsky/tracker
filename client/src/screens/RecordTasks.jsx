@@ -55,7 +55,7 @@ export default function RecordTasks({ tasks, records, setRecords  })
     setTotalSecs(0);
     setCurrentRecord(null);
     setCurrentTask(null);
-    
+    console.log(records);
   }
   
   function TaskRow({ task }) {  
