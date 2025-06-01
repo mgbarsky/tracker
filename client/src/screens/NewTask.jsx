@@ -14,6 +14,12 @@ import { Task } from "../objects/task.js";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db.js";
 
+import EditIcon from "../assets/edit.svg";
+import ActivityIcon from "../assets/activity.svg";
+import MoodIcon from "../assets/mood.svg";
+import AddIcon from "../assets/add.svg";
+import TagIcon from "../assets/tag.svg";
+
 /*
   {
     title: "",
@@ -23,9 +29,9 @@ import { db } from "../data/db.js";
 
 function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
     const [task, setTask] = useState(currentTask);
-    
+
     const navigate = useNavigate();
-    
+
     const handleSave = async () => {
         console.log(task);
 
@@ -69,14 +75,14 @@ function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
             <header>
                 {editMode ? (
                     <h2>
-                        <img src="assets/edit.svg" />
-                        <img src="assets/activity.svg" />
+                        <img src={EditIcon} />
+                        <img src={ActivityIcon} />
                         Edit activity
                     </h2>
                 ) : (
                     <h2>
-                        <img src="assets/add.svg" />
-                        <img src="assets/activity.svg" />
+                        <img src={AddIcon} />
+                        <img src={ActivityIcon} />
                         New activity
                     </h2>
                 )}

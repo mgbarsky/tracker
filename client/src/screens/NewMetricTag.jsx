@@ -9,6 +9,11 @@ import { Tag } from "../objects/tag.js";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db.js";
 
+import EditIcon from "../assets/edit.svg";
+import MoodIcon from "../assets/mood.svg";
+import AddIcon from "../assets/add.svg";
+import TagIcon from "../assets/tag.svg";
+
 function NewMetricTag({ currentTag, metricTags, toggleModal, editMode }) {
     const [tag, setTag] = useState(currentTag);
     const navigate = useNavigate();
@@ -19,9 +24,9 @@ function NewMetricTag({ currentTag, metricTags, toggleModal, editMode }) {
             const tagToBeSaved = {
                 description: tag.description,
                 enabled: tag.enabled,
-                id: tag.id,               
+                id: tag.id,
                 title: tag.title,
-                type:"metricTag"
+                type: "metricTag",
             };
 
             try {
@@ -34,9 +39,9 @@ function NewMetricTag({ currentTag, metricTags, toggleModal, editMode }) {
             const tagToBeSaved = {
                 description: tag.description,
                 enabled: tag.enabled,
-                id: tag.id,               
+                id: tag.id,
                 title: tag.title,
-                type:"taskTag"
+                type: "taskTag",
             };
 
             try {
@@ -53,24 +58,30 @@ function NewMetricTag({ currentTag, metricTags, toggleModal, editMode }) {
     return (
         <>
             <header>
-                {editMode ?   
-                (
-                    <h2><img src="assets/edit.svg"/><img src="assets/mood.svg"/><img src="assets/tag.svg"/>Edit Metric tag</h2>
-                )
-                :
-                (
-                    <h2><img src="assets/add.svg"/><img src="assets/mood.svg"/><img src="assets/tag.svg"/>New Metric tag</h2>
-                )
-                }		       		
-	        </header> 
-            <main>          
+                {editMode ? (
+                    <h2>
+                        <img src={EditIcon} />
+                        <img src={MoodIcon} />
+                        <img src={TagIcon} />
+                        Edit Metric tag
+                    </h2>
+                ) : (
+                    <h2>
+                        <img src={AddIcon} />
+                        <img src={MoodIcon} />
+                        <img src={TagIcon} />
+                        New Metric tag
+                    </h2>
+                )}
+            </header>
+            <main>
                 <InputLine
                     task={tag}
                     setTask={setTag}
                     taskAttribute="title"
                     labelText="Title"
                 />
-                
+
                 <DetailsLine
                     task={tag}
                     setTask={setTag}
@@ -79,18 +90,10 @@ function NewMetricTag({ currentTag, metricTags, toggleModal, editMode }) {
                 />
                 {/* TBD list of all involcved activities */}
                 <div className="buttonpanel">
-                    <button       
-                        onClick={handleSave}
-                    >
-                        Save
-                    </button>
-                    <button 
-                        onClick={toggleModal}
-                    >
-                        Cancel
-                    </button>                    
-                </div> 
-            </main>           
+                    <button onClick={handleSave}>Save</button>
+                    <button onClick={toggleModal}>Cancel</button>
+                </div>
+            </main>
         </>
     );
 }
