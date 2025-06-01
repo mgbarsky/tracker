@@ -8,6 +8,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { db } from "../data/db";
 
+import HomeIcon from "../assets/home.svg";
+import AddIcon from "../assets/add.svg";
+import DeleteIcon from "../assets/delete.svg";
+
 export default function Metrics({ metrics, metricTags }) {
     const [metric, setMetric] = useState(new Metric());
     const [editMode, setEditMode] = useState(false);
@@ -76,22 +80,22 @@ export default function Metrics({ metrics, metricTags }) {
         toggleMetricModal();
     }
 
-    async function toogleEnabled(id) {   
+    async function toogleEnabled(id) {
         const currentMetric = metrics.find((metric) => metric.id === id);
-        
-                if (!currentMetric) {
-                    console.log("current metric is not found");
-                    return;
-                }
-        
-                try {
-                    await db.metrics.update(id, {
-                        enabled: !currentMetric.enabled,
-                    });
-                    console.log(`toggle enabled: ${id}`);
-                } catch (error) {
-                    console.error(error);
-                }
+
+        if (!currentMetric) {
+            console.log("current metric is not found");
+            return;
+        }
+
+        try {
+            await db.metrics.update(id, {
+                enabled: !currentMetric.enabled,
+            });
+            console.log(`toggle enabled: ${id}`);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     function newMetric() {
@@ -105,7 +109,7 @@ export default function Metrics({ metrics, metricTags }) {
             <header>
                 <h1>
                     <Link to="/">
-                        <img src="assets/home.svg" />
+                        <img src={HomeIcon} />
                     </Link>
                     Tracker
                 </h1>
@@ -118,7 +122,7 @@ export default function Metrics({ metrics, metricTags }) {
                         <span className="maincol">&nbsp;</span>
                         <span className="col">
                             <a onClick={() => newMetric()}>
-                                <img src="assets/add.svg" />
+                                <img src={AddIcon} />
                             </a>
                         </span>
                     </li>
@@ -144,7 +148,7 @@ export default function Metrics({ metrics, metricTags }) {
                             </span>
                             <span className="col">
                                 <a onClick={() => deleteMetric(obj.id)}>
-                                    <img src="assets/delete.svg" />
+                                    <img src={DeleteIcon} />
                                 </a>
                             </span>
                         </li>

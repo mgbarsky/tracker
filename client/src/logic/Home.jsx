@@ -14,38 +14,74 @@ import { db, initializeDB } from "../data/db.js";
 import { useLiveQuery } from "dexie-react-hooks";
 import { Link, useNavigate } from "react-router-dom";
 
-function Home() {  
+import HomeIcon from "../assets/home.svg";
+import SetUpIcon from "../assets/setup.svg";
+import TrackIcon from "../assets/track.svg";
+import ReportIcon from "../assets/report.svg";
+import ExploreIcon from "../assets/explore.svg";
+import ActivityIcon from "../assets/activity.svg";
+import MoodIcon from "../assets/mood.svg";
+
+function Home() {
     const navigate = useNavigate();
     return (
-        <>          
+        <>
             <header>
-                <h1><Link><img src="assets/home.svg"/></Link>Tracker</h1>
+                <h1>
+                    <Link>
+                        <img src={HomeIcon} />
+                    </Link>
+                    Tracker
+                </h1>
                 <h3>Self-study exercise</h3>
             </header>
             <main>
                 <section>
-                    <h2><img src="assets/setup.svg"/>Setup</h2>
-                    <ul className='menulist'>
-                        <li><Link to="/tasks">Activities</Link></li>
-                        <li><Link to="/taskTags">Activity tags</Link></li>
-                        <li><Link to="/metrics">Metrics</Link></li>
-                        <li><Link to="/metricTags">Metric tags</Link></li>
+                    <h2>
+                        <img src={SetUpIcon} />
+                        Setup
+                    </h2>
+                    <ul className="menulist">
+                        <li>
+                            <Link to="/tasks">Activities</Link>
+                        </li>
+                        <li>
+                            <Link to="/taskTags">Activity tags</Link>
+                        </li>
+                        <li>
+                            <Link to="/metrics">Metrics</Link>
+                        </li>
+                        <li>
+                            <Link to="/metricTags">Metric tags</Link>
+                        </li>
                     </ul>
                 </section>
                 <section>
-                    <h2><img src="./assets/track.svg"/>Track</h2>	
-                    <div className="buttonpanel">                        
-                        <button onClick={() => navigate("/recordtasks")}><img src="assets/activity.svg"/></button>
-                        <button onClick={() => navigate("/recordmetrics")}><img src="assets/mood.svg"/></button>
+                    <h2>
+                        <img src={TrackIcon} />
+                        Track
+                    </h2>
+                    <div className="buttonpanel">
+                        <button onClick={() => navigate("/recordtasks")}>
+                            <img src={ActivityIcon} />
+                        </button>
+                        <button onClick={() => navigate("/recordmetrics")}>
+                            <img src={MoodIcon} />
+                        </button>
                     </div>
                 </section>
                 <section>
-                    <h2><img src="assets/report.svg"/>Explore</h2>	
+                    <h2>
+                        <img src={ReportIcon} />
+                        Explore
+                    </h2>
                     <div className="buttonpanel">
-                        <button><img src="assets/explore.svg"/></button>				
+                        <button>
+                            <img src={ExploreIcon} />
+                        </button>
                     </div>
-                </section>	
-            </main>    
+                </section>
+            </main>
         </>
     );
 }

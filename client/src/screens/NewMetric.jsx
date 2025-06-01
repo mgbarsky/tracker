@@ -12,6 +12,10 @@ import { Metric } from "../objects/metric.js";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db";
 
+import EditIcon from "../assets/edit.svg";
+import MoodIcon from "../assets/mood.svg";
+import AddIcon from "../assets/add.svg";
+
 /*
   {
     title: "",
@@ -67,14 +71,14 @@ function NewMetric({
             <header>
                 {editMode ? (
                     <h2>
-                        <img src="assets/edit.svg" />
-                        <img src="assets/mood.svg" />
+                        <img src={EditIcon} />
+                        <img src={MoodIcon} />
                         Edit metric
                     </h2>
                 ) : (
                     <h2>
-                        <img src="assets/add.svg" />
-                        <img src="assets/mood.svg" />
+                        <img src={AddIcon} />
+                        <img src={MoodIcon} />
                         New metric
                     </h2>
                 )}

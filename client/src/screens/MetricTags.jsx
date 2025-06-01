@@ -5,13 +5,17 @@ import { Tag } from "../objects/tag";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db";
 
+import HomeIcon from "../assets/home.svg";
+import AddIcon from "../assets/add.svg";
+import DeleteIcon from "../assets/delete.svg";
+
 export default function MetricTags({ metricTags }) {
     const [tag, setTag] = useState(new Tag("metricTag"));
     const [editMode, setEditMode] = useState(false);
-    const [showModal, setShowModal] = useState(false);   
-    
+    const [showModal, setShowModal] = useState(false);
+
     const navigate = useNavigate();
-   
+
     const toggleModal = () => {
         setShowModal(!showModal);
     };
@@ -23,8 +27,8 @@ export default function MetricTags({ metricTags }) {
         } catch (error) {
             console.error(error);
         }
-    }   
-    
+    }
+
     function editTag(tagID) {
         const tag = metricTags.find((tagObj) => tagObj.id === tagID);
         setTag(tag);
@@ -60,47 +64,54 @@ export default function MetricTags({ metricTags }) {
     return (
         <>
             <header>
-                <h1><Link to="/"><img src="assets/home.svg"/></Link>Tracker</h1>
+                <h1>
+                    <Link to="/">
+                        <img src={HomeIcon} />
+                    </Link>
+                    Tracker
+                </h1>
                 <h3>Metric tags</h3>
-	        </header>
-            <main>		
-		        <ul className='menulist'>
+            </header>
+            <main>
+                <ul className="menulist">
                     <li>
                         <span className="col">&nbsp;</span>
                         <span className="maincol">&nbsp;</span>
-                        <span className="col"><a onClick={() => newTag()}>
-                            <img src="assets/add.svg"/></a>
+                        <span className="col">
+                            <a onClick={() => newTag()}>
+                                <img src={AddIcon} />
+                            </a>
                         </span>
-                    </li>            
+                    </li>
                     {metricTags.map((obj) => (
                         <li key={obj.id}>
                             <span className="col">
-                                <input                                    
+                                <input
                                     type="range"
                                     min="0"
                                     max="1"
-                                    value={obj.enabled?"1":"0"}
+                                    value={obj.enabled ? "1" : "0"}
                                     onChange={() => toogleEnabled(obj.id)}
                                 />
                                 {obj.enabled}
                             </span>
                             <span className="maincol">
-                                <input                           
-                                    value={obj.title} 
+                                <input
+                                    value={obj.title}
                                     readOnly={true}
-                                    onClick={() => editTag(obj.id)}                          
+                                    onClick={() => editTag(obj.id)}
                                 />
                             </span>
                             <span className="col">
                                 <a onClick={() => deleteTag(obj.id)}>
-                                    <img src="assets/delete.svg"/>
+                                    <img src={DeleteIcon} />
                                 </a>
                             </span>
                         </li>
-                    ))}               
+                    ))}
                 </ul>
             </main>
-            
+
             {showModal && (
                 <Modal show={showModal} fullscreen={false}>
                     <div className="container">
