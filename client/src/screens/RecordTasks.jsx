@@ -111,7 +111,8 @@ export default function RecordTasks({ tasks, records, setRecords  })
       <section id="taskList">
       <ul className="playlist">        
       {
-            tasks.map((obj) => (
+            tasks.filter(obj =>
+              obj.enabled === true).map((obj) => (
                 <li key={obj.id}>
                    <TaskRow 
                       task={obj} 
