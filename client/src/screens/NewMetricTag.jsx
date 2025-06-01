@@ -6,12 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 
 import { Tag } from "../objects/tag.js";
-
+import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db.js";
 
 function NewMetricTag({ currentTag, metricTags, toggleModal, editMode }) {
     const [tag, setTag] = useState(currentTag);
-
+    const navigate = useNavigate();
     const handleSave = async () => {
         console.log(tag);
 

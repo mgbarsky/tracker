@@ -23,7 +23,7 @@ db.version(1).stores({
     tasks: "id, title, *tags",
     taskTags: "id, title",
     metrics: "id, title, *tags",
-    metricTags: "id, title",
+    metricTags: "id, title"
 });
 
 

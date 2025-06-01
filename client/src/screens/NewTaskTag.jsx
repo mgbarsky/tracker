@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import { Tag } from "../objects/tag.js";
 
 import { db } from "../data/db.js";
-
+import { Link, useNavigate } from "react-router-dom";
 /*
   {
     title: "",
@@ -18,6 +18,8 @@ import { db } from "../data/db.js";
 
 function NewTaskTag({ currentTag, taskTags, toggleModal, editMode }) {
     const [tag, setTag] = useState(currentTag);
+
+    const navigate = useNavigate(); 
 
     const handleSave = async () => {
         console.log(tag);

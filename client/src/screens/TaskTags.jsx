@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import NewTaskTag from "../screens/NewTaskTag";
 import { Modal } from "react-bootstrap";
 import { Tag } from "../objects/tag";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db";
 
 export default function TaskTags({ taskTags }) {
     const [tag, setTag] = useState(new Tag("taskTag"));
     const [editMode, setEditMode] = useState(false);
     const [showModal, setShowModal] = useState(false);   
+
+    const navigate = useNavigate();
 
     const toggleModal = () => {
         setShowModal(!showModal);
@@ -59,7 +60,7 @@ export default function TaskTags({ taskTags }) {
     return (
         <>
             <header>
-                <h1><a href="/"><img src="assets/home.svg"/></a>Tracker</h1>
+                <h1><Link to="/"><img src="assets/home.svg"/></Link>Tracker</h1>
                 <h3>Activity tags</h3>
 	        </header>
             <main>		

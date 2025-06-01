@@ -34,11 +34,11 @@ Functionality:
     Design Record: review
 
     Record task: 
-    Record metric: saving all metrics for simplicity
-    BUG: records are empty when moving between tasks and metrics
+    Record metric: saving all metrics instead of the ones that changed - for simplicity
+
 
 GUI:
-show playing now panel 
+    show playing now panel 
 Set metric level: bar
 
 Database connection of Records 

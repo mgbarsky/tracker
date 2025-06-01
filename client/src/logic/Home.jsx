@@ -12,30 +12,31 @@ import { Routes, Route } from "react-router-dom";
 import { db, initializeDB } from "../data/db.js";
 
 import { useLiveQuery } from "dexie-react-hooks";
+import { Link, useNavigate } from "react-router-dom";
 
 function Home() {  
-
+    const navigate = useNavigate();
     return (
         <>          
             <header>
-                <h1><a><img src="assets/home.svg"/></a>Tracker</h1>
+                <h1><Link><img src="assets/home.svg"/></Link>Tracker</h1>
                 <h3>Self-study exercise</h3>
             </header>
             <main>
                 <section>
                     <h2><img src="assets/setup.svg"/>Setup</h2>
                     <ul className='menulist'>
-                        <li><a href="/tasks">Activities</a></li>
-                        <li><a href="/taskTags">Activity tags</a></li>
-                        <li><a href="/metrics">Metrics</a></li>
-                        <li><a href="/metricTags">Metric tags</a></li>
+                        <li><Link to="/tasks">Activities</Link></li>
+                        <li><Link to="/taskTags">Activity tags</Link></li>
+                        <li><Link to="/metrics">Metrics</Link></li>
+                        <li><Link to="/metricTags">Metric tags</Link></li>
                     </ul>
                 </section>
                 <section>
                     <h2><img src="./assets/track.svg"/>Track</h2>	
                     <div className="buttonpanel">                        
-                        <button><a href="/recordtasks"><img src="assets/activity.svg"/></a></button>
-                        <button><a href="/recordmetrics"><img src="assets/mood.svg"/></a></button>
+                        <button onClick={() => navigate("/recordtasks")}><img src="assets/activity.svg"/></button>
+                        <button onClick={() => navigate("/recordmetrics")}><img src="assets/mood.svg"/></button>
                     </div>
                 </section>
                 <section>

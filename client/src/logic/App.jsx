@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 import RecordTasks from "../screens/RecordTasks";
@@ -24,13 +24,16 @@ function App() {
     const metrics = useLiveQuery(() => db.metrics.toArray(), [], []);
     const metricTags = useLiveQuery(() => db.metricTags.toArray(), [], []);
    
-    //const [tasks, setTasks] = useState(Task.defaultTasks);
-    // const [metrics, setMetrics] = useState(Metric.defaultMetrics);
     const [records, setRecords] = useState([]);
+    console.log(records)
+
+    useEffect(() => {
+        console.log(records)
+    }, [records])
 
     return (
         <>
-            <Routes basename="/myapp">
+            <Routes basename="/dist7">
                 <Route path="/" element={<Home />}></Route>
                 <Route
                     path="/tasks"

@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 
 import { Metric } from "../objects/metric.js";
-
+import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db";
 
 /*
@@ -27,6 +27,7 @@ function NewMetric({
     metricTags,
 }) {
     const [metric, setMetric] = useState(currentMetric);
+    const navigate = useNavigate();
 
     const handleSave = async () => {
         console.log(metric);

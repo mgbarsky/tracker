@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import NewTask from "../screens/NewTask";
 import { Modal } from "react-bootstrap";
 import { Task } from "../objects/task";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db";
 
 export default function Tasks({ tasks, taskTags }) {
@@ -11,7 +10,7 @@ export default function Tasks({ tasks, taskTags }) {
     const [editMode, setEditMode] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const toggleModal = () => {
         setShowModal(!showModal);
@@ -61,7 +60,7 @@ export default function Tasks({ tasks, taskTags }) {
     return (
         <>
             <header>
-                <h1><a href="/"><img src="assets/home.svg"/></a>Tracker</h1>
+                <h1><Link to="/"><img src="assets/home.svg"/></Link>Tracker</h1>
                 <h3>Activities</h3>
 	        </header>
             <main>		
@@ -101,8 +100,7 @@ export default function Tasks({ tasks, taskTags }) {
                         </li>
                     ))}               
                 </ul>
-            </main>
-            {/* <button onClick={() => navigate('/')}>Home</button> */}
+            </main>           
             {showModal && (
                 <Modal show={showModal} fullscreen={false}>
                     <div className="container">

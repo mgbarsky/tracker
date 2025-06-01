@@ -1,15 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import { useState , useEffect } from 'react'
 import {MetricRecord } from '../objects/record.js';
 import { CurrentTime } from '../components/CurrentTime';
 import { db } from '../data/db.js'
 
 export default function RecordMetrics({ metrics, records, setRecords  }) { 
-  useEffect(() => {
-      console.log(records)
-  }, [records])
-
+  
+  const navigate = useNavigate();
+  
   async function handleInputChange(id, newValue) {      
       try {
           await db.metrics.update(id, {
@@ -21,7 +20,7 @@ export default function RecordMetrics({ metrics, records, setRecords  }) {
   };
 
   function MetricRow({ metric }) {       
-      return (
+      return  (
         <div key={metric.id}>           
             <span>
                 <label>{metric.title}</label>
@@ -66,13 +65,14 @@ export default function RecordMetrics({ metrics, records, setRecords  }) {
   return (
     <>
       <header>
-        <h1><a href="/"><img src="assets/home.svg"/></a>Tracking</h1>
+        <h1><Link to="/"><img src="assets/home.svg"/></Link>Tracking</h1>
         <h3>Record metrics</h3>
 	    </header>
       <section id="metricList">
       <ul className="metriclist">        
       {
-            metrics.map((obj) => (
+            metrics.filter(obj =>
+              obj.enabled === true).map((obj) => (
                 <li key={obj.id}>
                    <MetricRow 
                       metric={obj} 
@@ -85,8 +85,8 @@ export default function RecordMetrics({ metrics, records, setRecords  }) {
       </section>
       <section>
         <div className="buttonpanel">                        
-          <button><a href="/recordtasks"><img src="assets/activity.svg"/></a></button>
-          <button><a><img src="assets/mood.svg"/></a></button>
+          <button onClick={() => navigate("/recordtasks")}><img src="assets/activity.svg"/></button>
+          <button onClick={() => navigate("/recordmetrics")}><img src="assets/mood.svg"/></button>
         </div>   
       </section>   
     </>

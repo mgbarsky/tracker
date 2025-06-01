@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState , useEffect } from 'react'
 import { TaskRecord } from '../objects/record.js';
 import { CurrentTime } from '../components/CurrentTime';
@@ -11,10 +11,9 @@ export default function RecordTasks({ tasks, records, setRecords  })
   const [currentRecord, setCurrentRecord] = useState(null);  
   const [totalSecs, setTotalSecs] = useState(0); 
   const [currentTime, setCurrentTime] = useState(new Date());
-
-  useEffect(() => {
-    console.log(records)
-  }, [records])
+  const [playing, setPlaying] = useState(false);
+  
+  const navigate = useNavigate();
 
   function secondsDiff(dateTimeValue2, dateTimeValue1) {
     var differenceValue =(dateTimeValue2.getTime() - dateTimeValue1.getTime()) / 1000;    
@@ -33,15 +32,18 @@ export default function RecordTasks({ tasks, records, setRecords  })
     setCurrentRecord(cr); 
     setCurrentTime(new Date());
     setTotalSecs(0);
+    setPlaying(true);
   }
 
   function pauseCurrentTask(){
     var nowTime = new Date();  
-    setTotalSecs((prev) => prev + secondsDiff(nowTime , currentTime))
+    setTotalSecs((prev) => prev + secondsDiff(nowTime , currentTime));
+    setPlaying(false);
   }
 
   function restartCurrentTask(){
     setCurrentTime(new Date());
+    setPlaying(true);
   }
 
   function recordCurrentTask(){
@@ -55,6 +57,7 @@ export default function RecordTasks({ tasks, records, setRecords  })
     setTotalSecs(0);
     setCurrentRecord(null);
     setCurrentTask(null);
+    setPlaying(false);
     console.log(records);
   }
   
@@ -82,12 +85,15 @@ export default function RecordTasks({ tasks, records, setRecords  })
             <div key={currentRecord.id}>
                 <h4>Sun, May 3, 3 pm</h4>
                 <h3>{currentTask.title}</h3>
-                <h4>Elapsed time: {currentRecord.totalTime} </h4>
+                <h4>Elapsed time: {totalSecs} </h4>
             </div>
             
               <div className="buttonpanel">
-               <button onClick={() => restartCurrentTask()}><img src="assets/play.svg"/></button>                        
-                <button onClick={() => pauseCurrentTask()}><img src="assets/pause.svg"/></button>
+                {playing?
+                  (<button onClick={() => pauseCurrentTask()}><img src="assets/pause.svg"/></button>)               
+                  :                        
+                  (<button onClick={() => restartCurrentTask()}><img src="assets/play.svg"/></button>)
+                }
                 <button onClick={() => recordCurrentTask()}><img src="assets/stop.svg"/></button>
               </div>   
           </section>  
@@ -95,10 +101,11 @@ export default function RecordTasks({ tasks, records, setRecords  })
     }  
   }
   
+  
   return (
     <>
       <header>
-        <h1><a href="/"><img src="assets/home.svg"/></a>Tracking</h1>
+        <h1><Link to="/"><img src="assets/home.svg"/></Link>Tracking</h1>
         <h3>Record activities</h3>
 	    </header>
       <section id="taskList">
@@ -117,8 +124,8 @@ export default function RecordTasks({ tasks, records, setRecords  })
       </section>
       <section>
         <div className="buttonpanel">                        
-          <button><a><img src="assets/activity.svg"/></a></button>
-          <button><a href="/recordmetrics"><img src="assets/mood.svg"/></a></button>
+          <button onClick={() => navigate("/recordtasks")}><img src="assets/activity.svg"/></button>
+          <button onClick={() => navigate("/recordmetrics")}><img src="assets/mood.svg"/></button>
         </div>   
       </section>   
     </>

@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 
 import { Task } from "../objects/task.js";
-
+import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db.js";
 
 /*
@@ -23,7 +23,9 @@ import { db } from "../data/db.js";
 
 function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
     const [task, setTask] = useState(currentTask);
-
+    
+    const navigate = useNavigate();
+    
     const handleSave = async () => {
         console.log(task);
 

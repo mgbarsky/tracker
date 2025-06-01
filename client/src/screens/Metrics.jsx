@@ -4,9 +4,7 @@ import { Modal } from "react-bootstrap";
 
 import { Metric } from "../objects/metric";
 
-import { useNavigate } from "react-router-dom";
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { db } from "../data/db";
 
@@ -78,23 +76,22 @@ export default function Metrics({ metrics, metricTags }) {
         toggleMetricModal();
     }
 
-    async function toogleEnabled(id) {
-        /*const currentMetric = metrics.find((metric) => metric.id === id);
-
-        if (!currentMetric) {
-            console.log("current metric is not found");
-            return;
-        }*/
-
-        try {
-            await db.metrics.update(id, {
-                enabled: !currentMetric.enabled,
-            });
-
-            console.log(`toggle enabled: ${id}`);
-        } catch (error) {
-            console.error(error);
-        }
+    async function toogleEnabled(id) {   
+        const currentMetric = metrics.find((metric) => metric.id === id);
+        
+                if (!currentMetric) {
+                    console.log("current metric is not found");
+                    return;
+                }
+        
+                try {
+                    await db.metrics.update(id, {
+                        enabled: !currentMetric.enabled,
+                    });
+                    console.log(`toggle enabled: ${id}`);
+                } catch (error) {
+                    console.error(error);
+                }
     }
 
     function newMetric() {
@@ -107,9 +104,9 @@ export default function Metrics({ metrics, metricTags }) {
         <>
             <header>
                 <h1>
-                    <a href="/">
+                    <Link to="/">
                         <img src="assets/home.svg" />
-                    </a>
+                    </Link>
                     Tracker
                 </h1>
                 <h3>Metrics</h3>

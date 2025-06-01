@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import NewMetricTag from "../screens/NewMetricTag";
 import { Modal } from "react-bootstrap";
 import { Tag } from "../objects/tag";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db";
 
 export default function MetricTags({ metricTags }) {
     const [tag, setTag] = useState(new Tag("metricTag"));
     const [editMode, setEditMode] = useState(false);
     const [showModal, setShowModal] = useState(false);   
-
+    
+    const navigate = useNavigate();
+   
     const toggleModal = () => {
         setShowModal(!showModal);
     };
@@ -59,7 +60,7 @@ export default function MetricTags({ metricTags }) {
     return (
         <>
             <header>
-                <h1><a href="/"><img src="assets/home.svg"/></a>Tracker</h1>
+                <h1><Link to="/"><img src="assets/home.svg"/></Link>Tracker</h1>
                 <h3>Metric tags</h3>
 	        </header>
             <main>		
