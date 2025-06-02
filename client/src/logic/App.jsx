@@ -23,9 +23,8 @@ function App() {
     const taskTags = useLiveQuery(() => db.taskTags.toArray(), [], []);
     const metrics = useLiveQuery(() => db.metrics.toArray(), [], []);
     const metricTags = useLiveQuery(() => db.metricTags.toArray(), [], []);
-   
-    const [records, setRecords] = useState([]);
-    console.log(records)
+    const records = useLiveQuery(() => db.records.toArray(), [], []);    
+    //console.log(records)
 
     useEffect(() => {
         console.log(records)
@@ -55,11 +54,11 @@ function App() {
                 ></Route>
                 <Route
                     path="/recordtasks"
-                    element={<RecordTasks tasks={tasks} records={records} setRecords={setRecords}/>}
+                    element={<RecordTasks tasks={tasks} records={records}/>}
                 ></Route>
                 <Route
                     path="/recordmetrics"
-                    element={<RecordMetrics metrics={metrics} records={records} setRecords={setRecords}/>}
+                    element={<RecordMetrics metrics={metrics} records={records}/>}
                 ></Route>
             </Routes>
         </>

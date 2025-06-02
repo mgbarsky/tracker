@@ -15,7 +15,7 @@ import MoodIcon from "../assets/mood.svg";
 import AddIcon from "../assets/add.svg";
 import TagIcon from "../assets/tag.svg";
 
-export default function RecordTasks({ tasks, records, setRecords }) {
+export default function RecordTasks({ tasks, records }) {
     const [currentTask, setCurrentTask] = useState(null);
     const [currentRecord, setCurrentRecord] = useState(null);
     const [totalSecs, setTotalSecs] = useState(0);
@@ -57,14 +57,21 @@ export default function RecordTasks({ tasks, records, setRecords }) {
         setPlaying(true);
     }
 
-    function recordCurrentTask() {
+    async function recordCurrentTask() {
         currentRecord.end = new Date();
         currentRecord.inProgress = false;
         currentRecord.totalSecs =
             totalSecs + secondsDiff(new Date(), currentTime);
-        setRecords((prev) => {
+        /*setRecords((prev) => {
             return [...prev, currentRecord];
-        });
+        });*/
+        // add this record to the database
+        try {
+          await db.records.add(currentRecord);
+          console.log(`added action record to indexed db:`, currentRecord);
+        } catch (error) {
+            console.error(error);
+        }
 
         setTotalSecs(0);
         setCurrentRecord(null);

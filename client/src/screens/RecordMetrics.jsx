@@ -53,14 +53,24 @@ export default function RecordMetrics({ metrics, records, setRecords }) {
         // build an array of all metric records
         const metricRecords = [];
         for (const metric of metrics) {
-            const metricRecord = new MetricRecord(metric.id, metric.lastValue);
-            metricRecords.push(metricRecord);
+            if(metric.enabled){
+              const metricRecord = new MetricRecord(metric.id, metric.lastValue);
+              metricRecords.push(metricRecord);
+            }
         }
 
-        // transfer this array into records array
+        /*// transfer this array into records array
         setRecords((prev) => {
             return [...prev, ...metricRecords];
-        });
+        });*/
+
+        // add all these records of mood to the database
+        try {
+          await db.records.bulkAdd(metricRecords);
+          console.log(`added mood record to indexed db:`, metricRecords);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
