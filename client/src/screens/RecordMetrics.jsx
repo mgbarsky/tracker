@@ -12,7 +12,7 @@ import MoodIcon from "../assets/mood.svg";
 import AddIcon from "../assets/add.svg";
 import TagIcon from "../assets/tag.svg";
 
-export default function RecordMetrics({ metrics, records, setRecords }) {
+export default function RecordMetrics({ metrics }) {
     const navigate = useNavigate();
 
     async function handleInputChange(id, newValue) {
@@ -58,11 +58,6 @@ export default function RecordMetrics({ metrics, records, setRecords }) {
               metricRecords.push(metricRecord);
             }
         }
-
-        /*// transfer this array into records array
-        setRecords((prev) => {
-            return [...prev, ...metricRecords];
-        });*/
 
         // add all these records of mood to the database
         try {

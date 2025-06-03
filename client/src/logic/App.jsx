@@ -54,11 +54,11 @@ function App() {
                 ></Route>
                 <Route
                     path="/recordtasks"
-                    element={<RecordTasks tasks={tasks} records={records}/>}
+                    element={<RecordTasks tasks={tasks} />}
                 ></Route>
                 <Route
                     path="/recordmetrics"
-                    element={<RecordMetrics metrics={metrics} records={records}/>}
+                    element={<RecordMetrics metrics={metrics} />}
                 ></Route>
             </Routes>
         </>
