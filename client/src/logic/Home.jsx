@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.css";
+//import "./App.css";
 
 import RecordTasks from "../screens/RecordTasks";
 import Tasks from "../screens/Tasks";
@@ -14,74 +14,65 @@ import { db, initializeDB } from "../data/db.js";
 import { useLiveQuery } from "dexie-react-hooks";
 import { Link, useNavigate } from "react-router-dom";
 
-import HomeIcon from "../assets/home.svg";
-import SetUpIcon from "../assets/setup.svg";
-import TrackIcon from "../assets/track.svg";
-import ReportIcon from "../assets/report.svg";
-import ExploreIcon from "../assets/explore.svg";
 import ActivityIcon from "../assets/activity.svg";
+import AddIcon from "../assets/add.svg";
+import DeleteIcon from "../assets/delete.svg";
+import ExploreIcon from "../assets/explore.svg";
+import GearIcon from "../assets/gear.svg";
+import HomeIcon from "../assets/home.svg";
 import MoodIcon from "../assets/mood.svg";
+import PauseIcon from "../assets/pause.svg";
+import PlayIcon from "../assets/play.svg";
+import StopIcon from "../assets/stop.svg";
+import SubmitIcon from "../assets/submit.svg";
+import TagIcon from "../assets/tag.svg";
 
 function Home() {
     const navigate = useNavigate();
     return (
         <>
-            <header>
-                <h1>
-                    <Link>
-                        <img src={HomeIcon} />
-                    </Link>
+            <main>
+                <header>
+                <h1>                    
                     Tracker
                 </h1>
-                <h3>Self-study exercise</h3>
-            </header>
-            <main>
+                <h3>A Self-Study Exercise</h3>
+            </header>            
                 <section>
-                    <h2>
-                        <img src={SetUpIcon} />
+                    <h2>                      
                         Setup
                     </h2>
                     <ul className="menulist">
-                        <li>
-                            <Link to="/tasks">Activities</Link>
+                        <li id='setActivity' onClick={() => navigate('/tasks')}><span><img src={GearIcon} /></span>
+                            Activities
                         </li>
-                        <li>
-                            <Link to="/taskTags">Activity tags</Link>
+                        <li id='setActivityTag' onClick={() => navigate('/taskTags')}><span><img src={TagIcon} /></span>
+                            Activity tags
                         </li>
-                        <li>
-                            <Link to="/metrics">Metrics</Link>
+                        <li id='setMood' onClick={() => navigate('/metrics')}><span><img src={GearIcon} /></span>
+                            Metrics
                         </li>
-                        <li>
-                            <Link to="/metricTags">Metric tags</Link>
+                        <li id='setMoodTag' onClick={() => navigate('/metricTags')}><span><img src={TagIcon} /></span>
+                            Metric tags
+                        </li>
+                    </ul>
+                </section>               
+                <section>
+                    <h2>                        
+                        Explore
+                    </h2>
+                    <ul className="menulist">
+                        <li id='reports'>
+                           <span></span>Reports
                         </li>
                     </ul>
                 </section>
-                <section>
-                    <h2>
-                        <img src={TrackIcon} />
-                        Track
-                    </h2>
-                    <div className="buttonpanel">
-                        <button onClick={() => navigate("/recordtasks")}>
-                            <img src={ActivityIcon} />
-                        </button>
-                        <button onClick={() => navigate("/recordmetrics")}>
-                            <img src={MoodIcon} />
-                        </button>
-                    </div>
-                </section>
-                <section>
-                    <h2>
-                        <img src={ReportIcon} />
-                        Explore
-                    </h2>
-                    <div className="buttonpanel">
-                        <button>
-                            <img src={ExploreIcon} />
-                        </button>
-                    </div>
-                </section>
             </main>
+            <nav>
+                <Link to="/recordmetrics"><img src={MoodIcon} /></Link>
+                <Link to="/"><img src={HomeIcon} /></Link>
+                <Link to="/recordtasks"><img src={ActivityIcon} /></Link>
+	        </nav>
         </>
     );
 }

@@ -1,35 +1,28 @@
 import React, { useState } from "react";
 
-import Switch from "../components/Switch";
 import InputLine from "../components/InputLine";
-import TimeIntervalLine from "../components/TimeIntervalLine";
 import DetailsLine from "../components/DetailsLine";
-import DateTimeLine from "../components/DateTimeLine";
 import TagList from "../components/TagList";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-import Button from "react-bootstrap/Button";
 
 import { Task } from "../objects/task.js";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db.js";
 
-import EditIcon from "../assets/edit.svg";
 import ActivityIcon from "../assets/activity.svg";
-import MoodIcon from "../assets/mood.svg";
 import AddIcon from "../assets/add.svg";
+import DeleteIcon from "../assets/delete.svg";
+import ExploreIcon from "../assets/explore.svg";
+import GearIcon from "../assets/gear.svg";
+import HomeIcon from "../assets/home.svg";
+import MoodIcon from "../assets/mood.svg";
+import PauseIcon from "../assets/pause.svg";
+import PlayIcon from "../assets/play.svg";
+import StopIcon from "../assets/stop.svg";
+import SubmitIcon from "../assets/submit.svg";
 import TagIcon from "../assets/tag.svg";
-
-/*
-  {
-    title: "",
-    tags: [{}, {}]
-  }
-*/
 
 function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
     const [task, setTask] = useState(currentTask);
-
     const navigate = useNavigate();
 
     const handleSave = async () => {
@@ -46,7 +39,7 @@ function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
 
             try {
                 await db.tasks.add(taskToBeSaved);
-                console.log(`added task in indexed db:`, taskToBeSaved);
+                console.log(`added task to indexed db:`, taskToBeSaved);
             } catch (error) {
                 console.error(error);
             }
@@ -72,41 +65,36 @@ function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
 
     return (
         <>
-            <header>
+            <div>
                 {editMode ? (
-                    <h2>
-                        <img src={EditIcon} />
-                        <img src={ActivityIcon} />
+                    <h2>                      
                         Edit activity
                     </h2>
                 ) : (
-                    <h2>
-                        <img src={AddIcon} />
-                        <img src={ActivityIcon} />
+                    <h2>                       
                         New activity
                     </h2>
-                )}
-            </header>
-            <main>
+                )}            
+           
                 <InputLine
                     task={task}
                     setTask={setTask}
                     taskAttribute="title"
-                    labelText="Title"
+                    labelText="Activity Title"
                 />
 
                 <DetailsLine
                     task={task}
                     setTask={setTask}
                     taskAttribute="description"
-                    labelText="Details"
+                    labelText="Notes"
                 />
                 <TagList task={task} setTask={setTask} taskTags={taskTags} />
-                <div className="buttonpanel">
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={toggleModal}>Cancel</button>
-                </div>
-            </main>
+            </div>    
+            <nav>
+                <a onClick={handleSave}>Save</a>
+                <a onClick={toggleModal}>Cancel</a>
+            </nav>            
         </>
     );
 }

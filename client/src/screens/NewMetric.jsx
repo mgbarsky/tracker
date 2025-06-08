@@ -4,17 +4,26 @@ import InputLine from "../components/InputLine";
 import DetailsLine from "../components/DetailsLine";
 import TagList from "../components/TagList";
 import NumberLine from "../components/NumberLine";
-import "bootstrap/dist/css/bootstrap.min.css";
 
-import Button from "react-bootstrap/Button";
+
+
 
 import { Metric } from "../objects/metric.js";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db";
 
-import EditIcon from "../assets/edit.svg";
-import MoodIcon from "../assets/mood.svg";
+import ActivityIcon from "../assets/activity.svg";
 import AddIcon from "../assets/add.svg";
+import DeleteIcon from "../assets/delete.svg";
+import ExploreIcon from "../assets/explore.svg";
+import GearIcon from "../assets/gear.svg";
+import HomeIcon from "../assets/home.svg";
+import MoodIcon from "../assets/mood.svg";
+import PauseIcon from "../assets/pause.svg";
+import PlayIcon from "../assets/play.svg";
+import StopIcon from "../assets/stop.svg";
+import SubmitIcon from "../assets/submit.svg";
+import TagIcon from "../assets/tag.svg";
 
 /*
   {
@@ -70,9 +79,7 @@ function NewMetric({
         <>
             <header>
                 {editMode ? (
-                    <h2>
-                        <img src={EditIcon} />
-                        <img src={MoodIcon} />
+                    <h2>                        
                         Edit metric
                     </h2>
                 ) : (
@@ -84,6 +91,22 @@ function NewMetric({
                 )}
             </header>
             <main>
+                <section class='editRange'>
+                                    <div>
+                                        <label>min</label>
+                                        <input type='number' />
+                                    </div>
+                                    <div>...</div>
+                                    <div>
+                                        <label>max</label>
+                                        <input type='number' />
+                                    </div>
+                                    <div>:</div>
+                                    <div>
+                                        <label>step</label>
+                                        <input type='number' />
+                                    </div>
+                                </section>                
                 <InputLine
                     task={metric}
                     setTask={setMetric}

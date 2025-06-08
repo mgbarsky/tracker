@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import "./App.css";
 
 import RecordTasks from "../screens/RecordTasks";
@@ -25,7 +26,7 @@ function App() {
     const metricTags = useLiveQuery(() => db.metricTags.toArray(), [], []);
     const records = useLiveQuery(() => db.records.toArray(), [], []);    
     //console.log(records)
-
+    
     useEffect(() => {
         console.log(records)
     }, [records])

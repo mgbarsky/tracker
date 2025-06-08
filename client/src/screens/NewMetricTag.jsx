@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import InputLine from "../components/InputLine";
 import DetailsLine from "../components/DetailsLine";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 
-import Button from "react-bootstrap/Button";
+//import Button from "react-bootstrap/Button";
 
 import { Tag } from "../objects/tag.js";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db.js";
 
-import EditIcon from "../assets/edit.svg";
-import MoodIcon from "../assets/mood.svg";
+import ActivityIcon from "../assets/activity.svg";
 import AddIcon from "../assets/add.svg";
+import DeleteIcon from "../assets/delete.svg";
+import ExploreIcon from "../assets/explore.svg";
+import GearIcon from "../assets/gear.svg";
+import HomeIcon from "../assets/home.svg";
+import MoodIcon from "../assets/mood.svg";
+import PauseIcon from "../assets/pause.svg";
+import PlayIcon from "../assets/play.svg";
+import StopIcon from "../assets/stop.svg";
+import SubmitIcon from "../assets/submit.svg";
 import TagIcon from "../assets/tag.svg";
 
 function NewMetricTag({ currentTag, metricTags, toggleModal, editMode }) {
@@ -59,17 +67,11 @@ function NewMetricTag({ currentTag, metricTags, toggleModal, editMode }) {
         <>
             <header>
                 {editMode ? (
-                    <h2>
-                        <img src={EditIcon} />
-                        <img src={MoodIcon} />
-                        <img src={TagIcon} />
+                    <h2>                       
                         Edit Metric tag
                     </h2>
                 ) : (
-                    <h2>
-                        <img src={AddIcon} />
-                        <img src={MoodIcon} />
-                        <img src={TagIcon} />
+                    <h2>                      
                         New Metric tag
                     </h2>
                 )}

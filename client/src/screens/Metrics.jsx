@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import NewMetric from "../screens/NewMetric";
-import { Modal } from "react-bootstrap";
+
 
 import { Metric } from "../objects/metric";
 
@@ -8,9 +8,18 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { db } from "../data/db";
 
-import HomeIcon from "../assets/home.svg";
+import ActivityIcon from "../assets/activity.svg";
 import AddIcon from "../assets/add.svg";
 import DeleteIcon from "../assets/delete.svg";
+import ExploreIcon from "../assets/explore.svg";
+import GearIcon from "../assets/gear.svg";
+import HomeIcon from "../assets/home.svg";
+import MoodIcon from "../assets/mood.svg";
+import PauseIcon from "../assets/pause.svg";
+import PlayIcon from "../assets/play.svg";
+import StopIcon from "../assets/stop.svg";
+import SubmitIcon from "../assets/submit.svg";
+import TagIcon from "../assets/tag.svg";
 
 export default function Metrics({ metrics, metricTags }) {
     const [metric, setMetric] = useState(new Metric());
@@ -105,17 +114,14 @@ export default function Metrics({ metrics, metricTags }) {
     }
 
     return (
-        <>
-            <header>
-                <h1>
-                    <Link to="/">
-                        <img src={HomeIcon} />
-                    </Link>
-                    Tracker
-                </h1>
-                <h3>Metrics</h3>
-            </header>
+        <>           
             <main>
+                 <header>
+                    <h1>                       
+                        Tracker
+                    </h1>
+                    <h3>Metrics</h3>
+                </header>
                 <ul className="menulist">
                     <li>
                         <span className="col">&nbsp;</span>
@@ -155,6 +161,11 @@ export default function Metrics({ metrics, metricTags }) {
                     ))}
                 </ul>
             </main>
+            <nav>
+                <Link to="/recordmetrics"><img src={MoodIcon} /></Link>
+                <Link to="/"><img src={HomeIcon} /></Link>
+                <Link to="/recordtasks"><img src={ActivityIcon} /></Link>
+            </nav>
 
             {showMetricModal && (
                 <Modal show={showMetricModal} fullscreen={false}>

@@ -5,14 +5,76 @@ import { MetricRecord } from "../objects/record.js";
 import { CurrentTime } from "../components/CurrentTime";
 import { db } from "../data/db.js";
 
-import HomeIcon from "../assets/home.svg";
-import EditIcon from "../assets/edit.svg";
 import ActivityIcon from "../assets/activity.svg";
-import MoodIcon from "../assets/mood.svg";
 import AddIcon from "../assets/add.svg";
+import DeleteIcon from "../assets/delete.svg";
+import ExploreIcon from "../assets/explore.svg";
+import GearIcon from "../assets/gear.svg";
+import HomeIcon from "../assets/home.svg";
+import MoodIcon from "../assets/mood.svg";
+import PauseIcon from "../assets/pause.svg";
+import PlayIcon from "../assets/play.svg";
+import StopIcon from "../assets/stop.svg";
+import SubmitIcon from "../assets/submit.svg";
 import TagIcon from "../assets/tag.svg";
 
 export default function RecordMetrics({ metrics }) {
+    const InputHandler = (() => {
+        let cursorPosX = null,
+            target = null,
+            cursorDelta = 0;
+
+        addEventListener('pointerup', (e) => {
+            if (target === null) {
+                return;
+            } else if (cursorDelta === 0) {
+                console.log('open input');
+            } else {
+                let userWidth = target.querySelector('.user').style.width;
+                target.querySelector('.actual').style.width = `${userWidth}`;
+            }
+
+            cursorDelta = 0;
+            target = null;
+        });
+        addEventListener('touchend', (e) => {
+            if (target === null) {
+                return;
+            } else if (cursorDelta === 0) {
+                console.log('open input');
+            } else {
+                let userWidth = target.querySelector('.user').style.width;
+                target.querySelector('.actual').style.width = `${userWidth}`;
+            }
+
+            cursorDelta = 0;
+            target = null;
+        });
+        addEventListener('pointerrawupdate', (e) => {
+            cursorPosX = e.x;
+            if (target === null) {
+                return;
+            } else {
+                let calcWidth = cursorPosX - target.getBoundingClientRect().left;
+                target.querySelector('.user').style.width = `${calcWidth}px`;
+
+                cursorDelta += e.movementX;
+            }
+        });
+
+        return {
+            get target() {
+                return target;
+            },
+            set target(t) {
+                while (t.nodeName !== 'LI') {
+                    t = t.parentElement;
+                }
+                target = t;
+            },
+        };
+    })();
+
     const navigate = useNavigate();
 
     async function handleInputChange(id, newValue) {
@@ -27,10 +89,8 @@ export default function RecordMetrics({ metrics }) {
 
     function MetricRow({ metric }) {
         return (
-            <div key={metric.id}>
-                <span>
-                    <label>{metric.title}</label>
-                </span>
+            <>
+                <h4>{metric.title}</h4>               
                 <span>
                     <input
                         type="number"
@@ -42,9 +102,11 @@ export default function RecordMetrics({ metrics }) {
                             handleInputChange(metric.id, e.target.value)
                         }
                     />
-                    <label> out of {metric.max}</label>
+                     / {metric.max}
                 </span>
-            </div>
+                <div className='user'></div>
+				<div className='actual'></div>
+            </>
         );
     }
 
@@ -70,37 +132,35 @@ export default function RecordMetrics({ metrics }) {
 
     return (
         <>
-            <header>
-                <h1>
-                    <Link to="/">
-                        <img src={HomeIcon} />
-                    </Link>
+            <main>
+              <header>
+                <h1>                    
                     Tracking
                 </h1>
                 <h3>Record metrics</h3>
-            </header>
-            <section id="metricList">
-                <ul className="metriclist">
-                    {metrics
-                        .filter((obj) => obj.enabled === true)
-                        .map((obj) => (
-                            <li key={obj.id}>
-                                <MetricRow metric={obj} />
-                            </li>
-                        ))}
-                </ul>
-                <button onClick={() => recordAllMetrics()}>SAVE</button>
+              </header>
+              <section>
+                  <ul className="moodlist">
+                      {metrics
+                          .filter((obj) => obj.enabled === true)
+                          .map((obj) => (
+                              <li key={obj.id} onPointerDown={e => InputHandler.target = e.target}>
+                                  <MetricRow metric={obj} />
+                              </li>
+                          ))}
+                  </ul>
+                </section>
+            </main>
+            <section className='ribbon' id='submit'>
+                <nav>
+                    <a onClick={() => recordAllMetrics()}><img src={SubmitIcon} /></a>
+                </nav>
             </section>
-            <section>
-                <div className="buttonpanel">
-                    <button onClick={() => navigate("/recordtasks")}>
-                        <img src={ActivityIcon} />
-                    </button>
-                    <button onClick={() => navigate("/recordmetrics")}>
-                        <img src={MoodIcon} />
-                    </button>
-                </div>
-            </section>
+            <nav>
+                <Link to="/recordmetrics"><img src={MoodIcon} /></Link>
+                <Link to="/"><img src={HomeIcon} /></Link>
+                <Link to="/recordtasks"><img src={ActivityIcon} /></Link>
+            </nav>
         </>
     );
 }

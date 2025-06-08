@@ -36,31 +36,27 @@ export default function TagList({ task, setTask, taskTags }) {
 
     const isSelectedTag = (tagId) => {
         const isSelected = task.tags.includes(tagId);
-
         return isSelected;
     };
 
     return (
         <>
-            <div className="row">
-                <label>Tags:</label>
-                <ul className="menulist">
-                    {taskTags.map((obj) => (
-                        <li
-                            key={obj.id}
-                            className={`cursor-pointer 
-                                ${
-                                    isSelectedTag(obj.id) ? "selected-tag" : ""
-                                } `}
-                            onClick={(event) =>
-                                toggleSelectedTag(event, obj.id)
-                            }
-                        >
-                            {obj.title}
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <ul className="taglist">
+                {taskTags.map((obj) => (
+                    <li
+                        key={obj.id}
+                        className={` 
+                            ${
+                                isSelectedTag(obj.id) ? "on" : ""
+                            } `}
+                        onClick={(event) =>
+                            toggleSelectedTag(event, obj.id)
+                        }
+                    >
+                        {obj.title}
+                    </li>
+                ))}
+            </ul>            
         </>
     );
 }

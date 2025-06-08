@@ -12,15 +12,12 @@ export default function InputLine({ task, setTask , taskAttribute, labelText}) {
    
 
     return (
-        <>          
-            <div className="row">
-                <label>{labelText}:</label>
-                <input
-                    onChange={(e) => updateAttribute(e.target.value)}
-                    type="text"                     
-                    value={currentInput}
-                />                
-            </div>  
+        <> 
+            {currentInput ? (
+                <input className='editTitle' value={currentInput} onChange={(e) => updateAttribute(e.target.value)}/>
+            ) : (
+                <input className='editTitle' placeholder={labelText} onChange={(e) => updateAttribute(e.target.value)}/>
+            )}  
         </>
     )
 }

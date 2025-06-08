@@ -5,14 +5,17 @@ import { TaskRecord } from "../objects/record.js";
 import { CurrentTime } from "../components/CurrentTime";
 import { db } from "../data/db.js";
 
+import ActivityIcon from "../assets/activity.svg";
+import AddIcon from "../assets/add.svg";
+import DeleteIcon from "../assets/delete.svg";
+import ExploreIcon from "../assets/explore.svg";
+import GearIcon from "../assets/gear.svg";
 import HomeIcon from "../assets/home.svg";
+import MoodIcon from "../assets/mood.svg";
 import PauseIcon from "../assets/pause.svg";
 import PlayIcon from "../assets/play.svg";
 import StopIcon from "../assets/stop.svg";
-import EditIcon from "../assets/edit.svg";
-import ActivityIcon from "../assets/activity.svg";
-import MoodIcon from "../assets/mood.svg";
-import AddIcon from "../assets/add.svg";
+import SubmitIcon from "../assets/submit.svg";
 import TagIcon from "../assets/tag.svg";
 
 export default function RecordTasks({ tasks }) {
@@ -82,45 +85,36 @@ t         });*/
 
     function TaskRow({ task }) {
         return (
-            <div key={task.id}>
-                <span className="col">
-                    <label>{task.title.substring(0, 1)}</label>
+            <li key={task.id}  onClick={() => startTask(task.id)}>
+                <span>
+                    <label>{task.title.substring(0, 1).toUpperCase()}</label>
                 </span>
-                <span className="maincol">
-                    <input
-                        value={task.title}
-                        readOnly
-                        onClick={() => startTask(task.id)}
-                    />
-                </span>
-            </div>
+                {task.title}
+            </li>
         );
     }
 
     function PlayPanel() {
         if (currentRecord) {
             return (
-                <section id="player">
-                    <div key={currentRecord.id}>
-                        <h4>Sun, May 3, 3 pm</h4>
-                        <h3>{currentTask.title}</h3>
-                        <h4>Elapsed time: {totalSecs} </h4>
-                    </div>
-
-                    <div className="buttonpanel">
+                <section key={currentRecord.id} className="ribbon" id="player">
+                    <h4>Sun, May 3, 3 pm</h4>
+                    <h3>{currentTask.title}</h3>
+                    <h4>Elapsed time: {totalSecs} </h4>                  
+                    <nav>
                         {playing ? (
-                            <button onClick={() => pauseCurrentTask()}>
+                            <Link onClick={() => pauseCurrentTask()}>
                                 <img src={PauseIcon} />
-                            </button>
+                            </Link>
                         ) : (
-                            <button onClick={() => restartCurrentTask()}>
+                            <Link onClick={() => restartCurrentTask()}>
                                 <img src={PlayIcon} />
-                            </button>
+                            </Link>
                         )}
-                        <button onClick={() => recordCurrentTask()}>
+                        <Link onClick={() => recordCurrentTask()}>
                             <img src={StopIcon} />
-                        </button>
-                    </div>
+                        </Link>
+                    </nav>
                 </section>
             );
         }
@@ -128,37 +122,34 @@ t         });*/
 
     return (
         <>
-            <header>
-                <h1>
-                    <Link to="/">
-                        <img src={HomeIcon} />
-                    </Link>
-                    Tracking
-                </h1>
-                <h3>Record activities</h3>
-            </header>
-            <section id="taskList">
-                <ul className="playlist">
-                    {tasks
-                        .filter((obj) => obj.enabled === true)
-                        .map((obj) => (
-                            <li key={obj.id}>
-                                <TaskRow task={obj} />
-                            </li>
-                        ))}
-                </ul>
-                <PlayPanel />
-            </section>
-            <section>
-                <div className="buttonpanel">
-                    <button onClick={() => navigate("/recordtasks")}>
-                        <img src={ActivityIcon} />
-                    </button>
-                    <button onClick={() => navigate("/recordmetrics")}>
-                        <img src={MoodIcon} />
-                    </button>
-                </div>
-            </section>
+            <main>
+                <header>
+                    <h1>
+                        Tracking
+                    </h1>
+                    <h3>Record activities</h3>
+                </header>
+                <section id="taskList">
+                    <ul className="playlist">
+                        {tasks
+                            .filter((obj) => obj.enabled === true)
+                            .map((obj) => (                                
+                                <li key={obj.id}  onClick={() => startTask(obj.id)}>
+                                    <span>
+                                        <label>{obj.title.substring(0, 1).toUpperCase()}</label>
+                                    </span>
+                                    {obj.title}
+                                </li>                            
+                            ))}
+                    </ul>
+                </section>
+            </main>
+            <PlayPanel />
+            <nav>
+                <Link to="/recordmetrics"><img src={MoodIcon} /></Link>
+                <Link to="/"><img src={HomeIcon} /></Link>
+                <Link to="/recordtasks"><img src={ActivityIcon} /></Link>
+            </nav>
         </>
     );
 }

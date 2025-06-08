@@ -14,14 +14,13 @@ export default function DetailsLine({ task, setTask , taskAttribute, labelText})
 
     return (
         <>          
-            <div className="row">
+           <section>
                 <label>{labelText}:</label>
                 <textarea
                     onChange={(e) => updateAttribute(e.target.value)} 
-                    value={currentInput}
-                > 
-                </textarea>               
-            </div>  
+                    value={currentInput}>                        
+                </textarea>
+            </section>            
         </>
     )
 }
