@@ -13,7 +13,6 @@ function jsonToCSV(jsonArray, headers) {
             })
             .join(",")
     );
-    console.log(rows);
 
     return [csvHeader, ...rows].join("\n");
 }
@@ -45,12 +44,12 @@ export async function saveCSVFile(jsonData, headers, filename = "records.csv") {
             if (err.name === "AbortError") {
                 console.log("Save canceled by user.");
                 return;
-            } else {
-                console.warn(
-                    "Saving with the FileSystem API failed so falling back to blob download",
-                    err
-                );
             }
+
+            console.warn(
+                "Saving with the FileSystem API failed so falling back to blob download",
+                err
+            );
         }
     }
 
