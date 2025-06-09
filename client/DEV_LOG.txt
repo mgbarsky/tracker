@@ -39,8 +39,28 @@ Functionality:
 
 GUI:
     show playing now panel 
-Set metric level: bar
+    Set metric level: bar
 
-Database connection of Records 
+    Database connection of Records 
 
-Build does not work again!!!
+    Build does not work again!!! fixed
+
+EXPORT TO FILE
+
+FIXES week June 9:
+icon of page
+metrics
+metrictags
+new metric - special
+new metric tag
+
+tracking tasks (activities) - elapsed time
+tracking mood -- special in-line css, and updating components
+
+
+ASK:
+    dynamic colors of tags
+    handling date object properly
+
+TBD:
+    make possible enable the entire group of tasks by tags (or maybe not)

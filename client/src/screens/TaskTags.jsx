@@ -4,6 +4,7 @@ import NewTaskTag from "../screens/NewTaskTag";
 import { Tag } from "../objects/tag";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db";
+import { ColorArray, ColorGradient, ColorStyle } from "../utils/colors.js";
 
 import ActivityIcon from "../assets/activity.svg";
 import AddIcon from "../assets/add.svg";
@@ -48,30 +49,14 @@ export default function TaskTags({ taskTags }) {
 
     function newTag() {
         setEditMode(false);
-        setTag(new Tag("taskTag"));
+        const colors = ColorArray();
+        const colorID = Math.floor(Math.random() * colors.length);
+        console.log("color index: "+colorID);
+        setTag(new Tag("taskTag", colorID));
         toggleModal();
     }
 
-    async function toogleEnabled(id, docEvent) {
-        docEvent.stopPropagation();
-        const currentTag = taskTags.find((tag) => tag.id === id);
-        const DOMElem = docEvent.target.parentElement;
-
-        if (!currentTag) {
-            console.log("current task tag is not found");
-            return;
-        }
-
-        try {
-            await db.taskTags.update(id, {
-                enabled: !currentTag.enabled,
-            });
-            DOMElem.classList.toggle('disabled');
-            console.log(`toggle enabled: ${id}`);
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    
 
     return (
         <>           
@@ -85,10 +70,9 @@ export default function TaskTags({ taskTags }) {
                 <ul className="editlist">                    
                     {taskTags.map((obj) => (
                         <li key={obj.id} onClick={() => editTag(obj.id)}>
-                            <span onClick={(e) => toogleEnabled(obj.id, e)}>  {obj.title.substring(0,1).toUpperCase()}</span>
-                            <h4>{obj.title}</h4>
-                            <Link className='enable' onClick={(e) => toogleEnabled(obj.id, e)}></Link>
-                            <Link className='delete' onClick={(e) => deleteTag(obj.id,e)}></Link>
+                            <span style={{backgroundColor: ColorGradient(obj.colorID)}}>  {obj.title.substring(0,1).toUpperCase()}</span>
+                            <h4>{obj.title}</h4>                            
+                            <a className='delete' onClick={(e) => deleteTag(obj.id,e)}></a>
                         </li>
                     ))}
                 </ul>

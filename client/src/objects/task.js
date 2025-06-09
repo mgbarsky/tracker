@@ -11,7 +11,7 @@ export class Task {
         this.id = window.crypto.randomUUID();
 
         //reserved for future version
-        this.startDate = new CDate();
+       /* this.startDate = new CDate();
         this.startTime = new CTime();
         this.endDate = new CDate();
         this.endTime = new CTime();
@@ -30,7 +30,7 @@ export class Task {
         }; //which days of week repeat on - by default every day
         this.reminders = []; //array of Reminder objects
         this.monthly = {};
-        this.yearly = {};
+        this.yearly = {};*/
     }
 
     static get defaultTasks() {

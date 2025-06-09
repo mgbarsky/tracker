@@ -62,12 +62,21 @@ export default function Tasks({ tasks, taskTags }) {
             return;
         }
 
+        
         try {
             await db.tasks.update(id, {
                 enabled: !currentTask.enabled,
             });
-            DOMElem.classList.toggle('disabled');
+
+            if (!currentTask.enabled) {
+                DOMElem.className ='';
+            }
+            else {
+                DOMElem.className ='disabled';
+            }
+            
             console.log(`toggle enabled: ${id}`);
+            console.log(currentTask);
         } catch (error) {
             console.error(error);
         }
@@ -84,7 +93,7 @@ export default function Tasks({ tasks, taskTags }) {
                 </header>
                 <ul className="editlist">                    
                     {tasks.map((obj) => (
-                        <li key={obj.id} onClick={() => editTask(obj.id)}>
+                        <li key={obj.id} onClick={() => editTask(obj.id)} className={obj.enabled ? "" : "disabled"}>
                             <span 
                                 onClick={(e) => toogleEnabled(obj.id, e)}>  
                                 {obj.title.substring(0,1).toUpperCase()}
