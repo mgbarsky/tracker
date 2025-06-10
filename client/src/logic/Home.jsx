@@ -6,6 +6,7 @@ import Tasks from "../screens/Tasks";
 import Metrics from "../screens/Metrics";
 import { Metric } from "../objects/metric.js";
 import { Task } from "../objects/task.js";
+import { downloadData } from "../utils/data.js";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -27,8 +28,13 @@ import StopIcon from "../assets/stop.svg";
 import SubmitIcon from "../assets/submit.svg";
 import TagIcon from "../assets/tag.svg";
 
-function Home() {
+function Home({ records }) {
     const navigate = useNavigate();
+
+    const localData = async () => {
+        downloadData(records, db);
+    }
+
     return (
         <>
             <main>
@@ -62,6 +68,9 @@ function Home() {
                         Explore
                     </h2>
                     <ul className="menulist">
+                        <li id='download' onClick={localData}>
+                           <span></span>Download data
+                        </li>
                         <li id='reports'>
                            <span></span>Reports
                         </li>

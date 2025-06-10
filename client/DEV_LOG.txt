@@ -45,13 +45,15 @@ GUI:
 
     Build does not work again!!! fixed
 
-EXPORT TO FILE
+    EXPORT TO FILE
 
 FIXES week June 9:
 icon of page
+colored tags
+
 metrics
 metrictags
-new metric - special
+new metric - special fields
 new metric tag
 
 tracking tasks (activities) - elapsed time

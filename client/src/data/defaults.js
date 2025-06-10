@@ -214,7 +214,6 @@ const taskTags = [
         title: "Physical exercise",
         enabled: true,
         colorID: 2
-
     },
     { 
         id: "2963e30e-bbcd-4f64-86d6-335da29fff61", 

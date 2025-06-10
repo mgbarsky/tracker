@@ -104,7 +104,7 @@ export default function Tasks({ tasks, taskTags }) {
                                 onClick={(e) => toogleEnabled(obj.id, e)}>
                             </Link>
                             <Link className='delete' 
-                                onClick={(e) => deleteTag(obj.id,e)}>                                    
+                                onClick={(e) => deleteTask(obj.id,e)}>                                    
                             </Link>
                         </li>
                     ))}

@@ -34,7 +34,7 @@ function App() {
     return (
         <>
             <Routes basename="/dist7">
-                <Route path="/" element={<Home />}></Route>
+                <Route path="/" element={<Home records={records}/>}></Route>
                 <Route
                     path="/tasks"
                     element={<Tasks tasks={tasks} taskTags={taskTags} />}

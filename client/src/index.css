@@ -181,7 +181,9 @@ input
 #reports
 {	& > span:first-child
 	{	background: url('./assets/explore.svg');}}
-
+#download
+{	& > span:first-child
+	{	background: url('./assets/download.svg');}}
 header
 {	padding-top: 24px;
 	height: 64px;
@@ -378,13 +380,14 @@ header
 
 			padding: 4px 8px;
 			border-radius: 4px;
-
-			background: rgb(90 109 61);
-			filter: saturate(0);}
+			filter: saturate(0);
+			/*background: rgb(90 109 61);
+			*/}
 
 		& > li.on
 		{	order: -1;
-			filter: saturate(1);}}}
+			filter: saturate(1);
+			/*filter: saturate(1);*/}}}
 
 /*																			*/
 h1, h2, h3, h4

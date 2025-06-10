@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { ColorArray, ColorGradient, ColorStyle } from "../utils/colors.js";
 /*
     [
         {id: 1, caption: book},
@@ -45,6 +45,8 @@ export default function TagList({ task, setTask, taskTags }) {
                 {taskTags.map((obj) => (
                     <li
                         key={obj.id}
+                        
+                        style={{background: ColorStyle(obj.colorID)}}
                         className={` 
                             ${
                                 isSelectedTag(obj.id) ? "on" : ""
@@ -60,3 +62,5 @@ export default function TagList({ task, setTask, taskTags }) {
         </>
     );
 }
+
+     /**/
