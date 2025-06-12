@@ -103,7 +103,7 @@ export async function downloadData (records, db) {
             generatedJsonData.push(generatedJsonObj);
         }
 
-        console.log(generatedJsonData);
+        // console.log(generatedJsonData);
 
         const headers = [
             "title",

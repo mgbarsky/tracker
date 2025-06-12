@@ -25,7 +25,7 @@ export function ColorArray() {
 
 export function ColorStyle(i) {
     let result = 'rgb('+ bgcolors[i] +'/ .87)';
-    console.log(result);
+    // console.log(result);
     return result;
 }
 

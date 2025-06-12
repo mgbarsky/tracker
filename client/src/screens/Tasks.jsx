@@ -29,7 +29,8 @@ export default function Tasks({ tasks, taskTags }) {
         setShowModal(!showModal);
     };
 
-    async function deleteTask(taskID) {
+    async function deleteTask(taskID, docEvent) {
+        docEvent.stopPropagation();
         try {
             await db.tasks.delete(taskID);
             console.log(`Deleted task in indexed db: ${taskID}`);
@@ -42,7 +43,7 @@ export default function Tasks({ tasks, taskTags }) {
         const task = tasks.find((taskObj) => taskObj.id === taskID);
         setTask(task);
         setEditMode(true);
-        console.log("edit task", task);
+        // console.log("edit task", task);
         toggleModal();
     }
 
@@ -75,8 +76,8 @@ export default function Tasks({ tasks, taskTags }) {
                 DOMElem.className ='disabled';
             }
             
-            console.log(`toggle enabled: ${id}`);
-            console.log(currentTask);
+            // console.log(`toggle enabled: ${id}`);
+            // console.log(currentTask);
         } catch (error) {
             console.error(error);
         }
@@ -93,7 +94,10 @@ export default function Tasks({ tasks, taskTags }) {
                 </header>
                 <ul className="editlist">                    
                     {tasks.map((obj) => (
-                        <li key={obj.id} onClick={() => editTask(obj.id)} className={obj.enabled ? "" : "disabled"}>
+                        <li key={obj.id} 
+                            onClick={() => editTask(obj.id)} 
+                            className={obj.enabled ? "" : "disabled"}
+                        >
                             <span 
                                 onClick={(e) => toogleEnabled(obj.id, e)}>  
                                 {obj.title.substring(0,1).toUpperCase()}

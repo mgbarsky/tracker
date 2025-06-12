@@ -12,17 +12,15 @@ export default function NumberLine({ task, setTask , taskAttribute, labelText}) 
     }
    
 
-    return (
-        <>          
-            <div className="row">
-                <label>{labelText}:</label>
-                <input
-                    onChange={(e) => updateAttribute(e.target.value)}
-                    type="number"     
-                    value={currentInput}
-                />                
-            </div>  
-        </>
+    return (         
+        <div>
+            <label>{labelText}</label>
+            <input 
+                type='number' 
+                onChange={(e) => updateAttribute(e.target.value)}
+                value={currentInput}
+            />
+        </div>  
     )
 }
 

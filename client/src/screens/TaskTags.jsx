@@ -34,7 +34,7 @@ export default function TaskTags({ taskTags }) {
         docEvent.stopPropagation();
         try {
             await db.taskTags.delete(tagID);
-            console.log(`Deleted task tag in indexed db: ${tagID}`);
+            console.log(`Deleted task tag from indexed db: ${tagID}`);
         } catch (error) {
             console.error(error);
         }
@@ -51,7 +51,7 @@ export default function TaskTags({ taskTags }) {
         setEditMode(false);
         const colors = ColorArray();
         const colorID = Math.floor(Math.random() * colors.length);
-        console.log("color index: "+colorID);
+        // console.log("color index: "+colorID);
         setTag(new Tag("taskTag", colorID));
         toggleModal();
     }

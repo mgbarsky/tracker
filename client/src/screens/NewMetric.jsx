@@ -5,9 +5,6 @@ import DetailsLine from "../components/DetailsLine";
 import TagList from "../components/TagList";
 import NumberLine from "../components/NumberLine";
 
-
-
-
 import { Metric } from "../objects/metric.js";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db";
@@ -25,13 +22,6 @@ import StopIcon from "../assets/stop.svg";
 import SubmitIcon from "../assets/submit.svg";
 import TagIcon from "../assets/tag.svg";
 
-/*
-  {
-    title: "",
-    tags: [{}, {}]
-  }
-*/
-
 function NewMetric({
     currentMetric,
     metrics,
@@ -43,7 +33,7 @@ function NewMetric({
     const navigate = useNavigate();
 
     const handleSave = async () => {
-        console.log(metric);
+        // console.log(metric);
 
         const metricToBeSaved = {
             id: metric.id,
@@ -56,71 +46,84 @@ function NewMetric({
             tags: metric.tags,
         };
 
-        if (!editMode) {
+        if (!editMode) { //new mwtric
             try {
                 await db.metrics.add(metricToBeSaved);
-                console.log(`added metric in indexed db:`, metricToBeSaved);
+                // console.log(`added metric in indexed db:`, metricToBeSaved);
             } catch (error) {
                 console.error(error);
             }
-        } else {
+        } else {    //edit existing metric
             try {
                 await db.metrics.put(metricToBeSaved);
-                console.log(`updated metric in indexed db:`, metricToBeSaved);
+                // console.log(`updated metric in indexed db:`, metricToBeSaved);
             } catch (error) {
                 console.error(error);
             }
         }
-
         toggleModal();
     };
 
     return (
         <>
-            <header>
+            <div>
                 {editMode ? (
-                    <h2>                        
+                    <h2>                      
                         Edit metric
                     </h2>
                 ) : (
-                    <h2>
-                        <img src={AddIcon} />
-                        <img src={MoodIcon} />
+                    <h2>                       
                         New metric
                     </h2>
-                )}
-            </header>
-            <main>
-                <section class='editRange'>
-                                    <div>
-                                        <label>min</label>
-                                        <input type='number' />
-                                    </div>
-                                    <div>...</div>
-                                    <div>
-                                        <label>max</label>
-                                        <input type='number' />
-                                    </div>
-                                    <div>:</div>
-                                    <div>
-                                        <label>step</label>
-                                        <input type='number' />
-                                    </div>
-                                </section>                
+                )}     
                 <InputLine
                     task={metric}
                     setTask={setMetric}
                     taskAttribute="title"
-                    labelText="Title"
+                    labelText="Metric Title"
                 />
-
+                <div className='editRange'>
+                    <NumberLine
+                        task={metric}
+                        setTask={setMetric}
+                        taskAttribute="min"
+                        labelText="min"
+                    />
+                    <div style={{flex: '0 1 32px', alignItems: 'center'}}>...</div>
+                    <NumberLine
+                        task={metric}
+                        setTask={setMetric}
+                        taskAttribute="max"
+                        labelText="max"
+                    />
+                    <div style={{flex: '0 1 16px', alignItems: 'center'}}>:</div>
+                    <NumberLine
+                        task={metric}
+                        setTask={setMetric}
+                        taskAttribute="step"
+                        labelText="step"
+                    />
+                </div> 
                 <DetailsLine
                     task={metric}
                     setTask={setMetric}
                     taskAttribute="description"
-                    labelText="Details"
+                    labelText="Notes"
                 />
-                <NumberLine
+                <TagList task={metric} setTask={setMetric} taskTags={metricTags} />
+            </div>
+           <nav>
+                <a onClick={handleSave}>Save</a>
+                <a onClick={toggleModal}>Cancel</a>
+            </nav>             
+        </>
+    );
+}
+
+export default NewMetric;
+
+/*
+<NumberLine
                     task={metric}
                     setTask={setMetric}
                     taskAttribute="min"
@@ -137,19 +140,22 @@ function NewMetric({
                     setTask={setMetric}
                     taskAttribute="step"
                     labelText="Increments"
-                />
-                <TagList
-                    task={metric}
-                    setTask={setMetric}
-                    taskTags={metricTags}
-                />
-                <div className="buttonpanel">
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={toggleModal}>Cancel</button>
-                </div>
-            </main>
-        </>
-    );
-}
+                />*/
 
-export default NewMetric;
+/*
+<section class='editRange'>
+                                    <div>
+                                        <label>min</label>
+                                        <input type='number' />
+                                    </div>
+                                    <div>...</div>
+                                    <div>
+                                        <label>max</label>
+                                        <input type='number' />
+                                    </div>
+                                    <div>:</div>
+                                    <div>
+                                        <label>step</label>
+                                        <input type='number' />
+                                    </div>
+                                </section>  */

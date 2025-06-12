@@ -33,7 +33,7 @@ function App() {
 
     return (
         <>
-            <Routes basename="/dist7">
+            <Routes basename="/tracker">
                 <Route path="/" element={<Home records={records}/>}></Route>
                 <Route
                     path="/tasks"

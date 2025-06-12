@@ -22,12 +22,6 @@ import PlayIcon from "../assets/play.svg";
 import StopIcon from "../assets/stop.svg";
 import SubmitIcon from "../assets/submit.svg";
 import TagIcon from "../assets/tag.svg";
-/*
-  {
-    title: "",
-    tags: [{}, {}]
-  }
-*/
 
 function NewTaskTag({ currentTag, taskTags, toggleModal, editMode }) {
     const [tag, setTag] = useState(currentTag);
@@ -35,17 +29,15 @@ function NewTaskTag({ currentTag, taskTags, toggleModal, editMode }) {
     const navigate = useNavigate();
 
     const handleSave = async () => {
-        console.log(tag);
-
-        if (!editMode) {
-            const tagToBeSaved = {
+        // console.log(tag);
+        const tagToBeSaved = {
                 description: tag.description,
                 enabled: tag.enabled,
                 id: tag.id,
                 title: tag.title,
                 type: "taskTag",
             };
-
+        if (!editMode) {
             try {
                 await db.taskTags.add(tagToBeSaved);
                 console.log(`added tag in indexed db: ${tagToBeSaved}`);
@@ -53,14 +45,6 @@ function NewTaskTag({ currentTag, taskTags, toggleModal, editMode }) {
                 console.error(error);
             }
         } else {
-            const tagToBeSaved = {
-                description: tag.description,
-                enabled: tag.enabled,
-                id: tag.id,
-                title: tag.title,
-                type: "taskTag",
-            };
-
             try {
                 await db.taskTags.put(tagToBeSaved);
                 console.log(`updated task tag in indexed db:`, tagToBeSaved);

@@ -45,23 +45,22 @@ GUI:
 
     Build does not work again!!! fixed
 
-    EXPORT TO FILE
+ FIXES week June 9:   
+    EXPORT TO FILE: done
+    icon of page
+    colored tags
 
-FIXES week June 9:
-icon of page
-colored tags
+    metrics
+    new metric - special fields
 
-metrics
-metrictags
-new metric - special fields
-new metric tag
+    metrictags
+    new metric tag
 
 tracking tasks (activities) - elapsed time
-tracking mood -- special in-line css, and updating components
+tracking mood -- special in-line css, and updating components (detached mode)?
 
 
-ASK:
-    dynamic colors of tags
+EXPLORE:    
     handling date object properly
 
 TBD:

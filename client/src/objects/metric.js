@@ -3,7 +3,7 @@ export class Metric {
         this.title="";
         this.description = "";
         this.tags=[];
-        this.min = -10;
+        this.min = 0;
         this.max = 10;
         this.step = 1;
 

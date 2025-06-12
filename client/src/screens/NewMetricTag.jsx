@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import InputLine from "../components/InputLine";
 import DetailsLine from "../components/DetailsLine";
-//import "bootstrap/dist/css/bootstrap.min.css";
-
-//import Button from "react-bootstrap/Button";
 
 import { Tag } from "../objects/tag.js";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,35 +23,25 @@ function NewMetricTag({ currentTag, metricTags, toggleModal, editMode }) {
     const [tag, setTag] = useState(currentTag);
     const navigate = useNavigate();
     const handleSave = async () => {
-        console.log(tag);
-
-        if (!editMode) {
-            const tagToBeSaved = {
+        // console.log(tag);
+        const tagToBeSaved = {
                 description: tag.description,
                 enabled: tag.enabled,
                 id: tag.id,
                 title: tag.title,
                 type: "metricTag",
             };
-
+        if (!editMode) {  
             try {
                 await db.metricTags.add(tagToBeSaved);
-                console.log(`added tag in indexed db: ${tagToBeSaved}`);
+                console.log(`added metric tag to indexed db: ${tagToBeSaved}`);
             } catch (error) {
                 console.error(error);
             }
         } else {
-            const tagToBeSaved = {
-                description: tag.description,
-                enabled: tag.enabled,
-                id: tag.id,
-                title: tag.title,
-                type: "taskTag",
-            };
-
             try {
                 await db.metricTags.put(tagToBeSaved);
-                console.log(`updated task in indexed db:`, taskToBeSaved);
+                console.log(`updated metric tag in indexed db: ${tagToBeSaved}`);
             } catch (error) {
                 console.error(error);
             }
@@ -65,7 +52,7 @@ function NewMetricTag({ currentTag, metricTags, toggleModal, editMode }) {
 
     return (
         <>
-            <header>
+            <div>
                 {editMode ? (
                     <h2>                       
                         Edit Metric tag
@@ -75,27 +62,26 @@ function NewMetricTag({ currentTag, metricTags, toggleModal, editMode }) {
                         New Metric tag
                     </h2>
                 )}
-            </header>
-            <main>
+
                 <InputLine
                     task={tag}
                     setTask={setTag}
                     taskAttribute="title"
-                    labelText="Title"
+                    labelText="Tag Title"
                 />
 
                 <DetailsLine
                     task={tag}
                     setTask={setTag}
                     taskAttribute="description"
-                    labelText="Details"
+                    labelText="Notes"
                 />
-                {/* TBD list of all involcved activities */}
-                <div className="buttonpanel">
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={toggleModal}>Cancel</button>
-                </div>
-            </main>
+            </div>
+                {/* TBD list of all involcved metrics */}
+             <nav>
+                <a onClick={handleSave}>Save</a>
+                <a onClick={toggleModal}>Cancel</a>
+            </nav>
         </>
     );
 }

@@ -4,6 +4,7 @@ import NewMetricTag from "../screens/NewMetricTag";
 import { Tag } from "../objects/tag";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../data/db";
+import { ColorArray, ColorGradient, ColorStyle } from "../utils/colors.js";
 
 import ActivityIcon from "../assets/activity.svg";
 import AddIcon from "../assets/add.svg";
@@ -29,10 +30,11 @@ export default function MetricTags({ metricTags }) {
         setShowModal(!showModal);
     };
 
-    async function deleteTag(tagID) {
+    async function deleteTag(tagID, docEvent) {
+        docEvent.stopPropagation();
         try {
             await db.metricTags.delete(tagID);
-            console.log(`Deleted metric tag in indexed db: ${tagID}`);
+            console.log(`Deleted metric tag from indexed db: ${tagID}`);
         } catch (error) {
             console.error(error);
         }
@@ -42,33 +44,17 @@ export default function MetricTags({ metricTags }) {
         const tag = metricTags.find((tagObj) => tagObj.id === tagID);
         setTag(tag);
         setEditMode(true);
-        console.log("edit metric tag", tag);
+        // console.log("edit metric tag", tag);
         toggleModal();
     }
 
     function newTag() {
         setEditMode(false);
-        setTag(new Tag("metricTag"));
+        const colors = ColorArray();
+        const colorID = Math.floor(Math.random() * colors.length);
+        setTag(new Tag("metricTag",colorID));
         toggleModal();
-    }
-
-    async function toogleEnabled(id) {
-        const currentTag = metricTags.find((tag) => tag.id === id);
-
-        if (!currentTag) {
-            console.log("current metric tag is not found");
-            return;
-        }
-
-        try {
-            await db.metricTags.update(id, {
-                enabled: !currentTag.enabled,
-            });
-            console.log(`toggle enabled: ${id}`);
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    }   
 
     return (
         <>           
@@ -79,60 +65,37 @@ export default function MetricTags({ metricTags }) {
                     </h1>
                     <h3>Metric tags</h3>
                 </header>
-                <ul className="menulist">
-                    <li>
-                        <span className="col">&nbsp;</span>
-                        <span className="maincol">&nbsp;</span>
-                        <span className="col">
-                            <a onClick={() => newTag()}>
-                                <img src={AddIcon} />
-                            </a>
-                        </span>
-                    </li>
+                <ul className="editlist">                    
                     {metricTags.map((obj) => (
-                        <li key={obj.id}>
-                            <span className="col">
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max="1"
-                                    value={obj.enabled ? "1" : "0"}
-                                    onChange={() => toogleEnabled(obj.id)}
-                                />
-                                {obj.enabled}
-                            </span>
-                            <span className="maincol">
-                                <input
-                                    value={obj.title}
-                                    readOnly={true}
-                                    onClick={() => editTag(obj.id)}
-                                />
-                            </span>
-                            <span className="col">
-                                <a onClick={() => deleteTag(obj.id)}>
-                                    <img src={DeleteIcon} />
-                                </a>
-                            </span>
+                        <li key={obj.id} onClick={() => editTag(obj.id)}>
+                            <span style={{background: ColorGradient(obj.colorID)}}>  {obj.title.substring(0,1).toUpperCase()}</span>
+                            <h4>{obj.title}</h4>                            
+                            <a className='delete' onClick={(e) => deleteTag(obj.id,e)}></a>
                         </li>
                     ))}
                 </ul>
             </main>
+            <section className='ribbon' id='editor'>
+                <nav>
+                    <Link onClick={() => newTag()}>
+                        <img src={AddIcon} />
+                    </Link>
+                </nav>
+            </section>
             <nav>
                 <Link to="/recordmetrics"><img src={MoodIcon} /></Link>
                 <Link to="/"><img src={HomeIcon} /></Link>
                 <Link to="/recordtasks"><img src={ActivityIcon} /></Link>
             </nav>
             {showModal && (
-                <Modal show={showModal} fullscreen={false}>
-                    <div className="container">
-                        <NewMetricTag
-                            metricTags={metricTags}
-                            toggleModal={toggleModal}
-                            currentTag={tag}
-                            editMode={editMode}
-                        />
-                    </div>
-                </Modal>
+                <div id='backdrop'>
+                    <NewMetricTag
+                        metricTags={metricTags}
+                        toggleModal={toggleModal}
+                        currentTag={tag}
+                        editMode={editMode}
+                    />
+                </div>
             )}
         </>
     );

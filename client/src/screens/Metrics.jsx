@@ -28,50 +28,12 @@ export default function Metrics({ metrics, metricTags }) {
 
     const navigate = useNavigate();
 
-    function MetricRow({ obj }) {
-        if (obj.enabled) {
-            return (
-                <>
-                    <input
-                        type="text"
-                        className="form-control"
-                        value={obj.title}
-                        readOnly={true}
-                    />
-                    <div className="input-group-btn">
-                        <button
-                            className="btn btn-outline-dark"
-                            onClick={() => editMetric(obj.id)}
-                        >
-                            ...
-                        </button>
-                    </div>
-                    <div className="input-group-btn">
-                        <button
-                            className="btn btn-outline-danger"
-                            onClick={() => deleteMetric(obj.id)}
-                        >
-                            x
-                        </button>
-                    </div>
-                </>
-            );
-        }
-        return (
-            <input
-                className="form-control "
-                value={obj.title}
-                readOnly={true}
-                disabled
-            />
-        );
-    }
-
     const toggleMetricModal = () => {
         setShowMetricModal(!showMetricModal);
     };
 
-    async function deleteMetric(id) {
+    async function deleteMetric(id, docEvent) {
+        docEvent.stopPropagation();
         try {
             await db.metrics.delete(id);
             console.log(`Deleted metric in indexed db: ${id}`);
@@ -81,16 +43,24 @@ export default function Metrics({ metrics, metricTags }) {
     }
 
     function editMetric(id) {
-        console.log(metrics);
+        // console.log(metrics);
         const m = metrics.find((obj) => obj.id === id);
         setMetric(m);
         setEditMode(true);
-        console.log("edit metric", m);
+        // console.log("edit metric", m);
         toggleMetricModal();
     }
 
-    async function toogleEnabled(id) {
+    function newMetric() {
+        setEditMode(false);
+        setMetric(new Metric());
+        toggleMetricModal();
+    }
+
+    async function toogleEnabled(id, docEvent) {
+        docEvent.stopPropagation();
         const currentMetric = metrics.find((metric) => metric.id === id);
+        const DOMElem = docEvent.target.parentElement;
 
         if (!currentMetric) {
             console.log("current metric is not found");
@@ -101,17 +71,18 @@ export default function Metrics({ metrics, metricTags }) {
             await db.metrics.update(id, {
                 enabled: !currentMetric.enabled,
             });
-            console.log(`toggle enabled: ${id}`);
+
+            if (!currentMetric.enabled) {
+                DOMElem.className ='';
+            }
+            else {
+                DOMElem.className ='disabled';
+            }
+            // console.log(`toggle enabled: ${id}`);
         } catch (error) {
             console.error(error);
         }
-    }
-
-    function newMetric() {
-        setEditMode(false);
-        setMetric(new Metric());
-        toggleMetricModal();
-    }
+    }    
 
     return (
         <>           
@@ -122,45 +93,35 @@ export default function Metrics({ metrics, metricTags }) {
                     </h1>
                     <h3>Metrics</h3>
                 </header>
-                <ul className="menulist">
-                    <li>
-                        <span className="col">&nbsp;</span>
-                        <span className="maincol">&nbsp;</span>
-                        <span className="col">
-                            <a onClick={() => newMetric()}>
-                                <img src={AddIcon} />
-                            </a>
-                        </span>
-                    </li>
-
+                <ul className="editlist">                
                     {metrics.map((obj) => (
-                        <li key={obj.id}>
-                            <span className="col">
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max="1"
-                                    value={obj.enabled ? "1" : "0"}
-                                    onChange={() => toogleEnabled(obj.id)}
-                                />
-                                {obj.enabled}
+                        <li key={obj.id} 
+                            onClick={() => editMetric(obj.id)} 
+                            className={obj.enabled ? "" : "disabled"}
+                        >
+                            <span 
+                                onClick={(e) => toogleEnabled(obj.id, e)}>  
+                                {obj.title.substring(0,1).toUpperCase()}
                             </span>
-                            <span className="maincol">
-                                <input
-                                    value={obj.title}
-                                    readOnly
-                                    onClick={() => editMetric(obj.id)}
-                                />
-                            </span>
-                            <span className="col">
-                                <a onClick={() => deleteMetric(obj.id)}>
-                                    <img src={DeleteIcon} />
-                                </a>
-                            </span>
+                            <h4>{obj.title}</h4>
+                            <Link 
+                                className='enable' 
+                                onClick={(e) => toogleEnabled(obj.id, e)}>
+                            </Link>
+                            <Link className='delete' 
+                                onClick={(e) => deleteMetric(obj.id,e)}>                                    
+                            </Link>
                         </li>
                     ))}
                 </ul>
             </main>
+            <section className='ribbon' id='editor'>
+                <nav>
+                    <Link onClick={() => newMetric()}>
+                        <img src={AddIcon} />
+                    </Link>
+                </nav>
+	        </section>
             <nav>
                 <Link to="/recordmetrics"><img src={MoodIcon} /></Link>
                 <Link to="/"><img src={HomeIcon} /></Link>
@@ -168,15 +129,15 @@ export default function Metrics({ metrics, metricTags }) {
             </nav>
 
             {showMetricModal && (
-                <Modal show={showMetricModal} fullscreen={false}>
+                 <div id='backdrop'>
                     <NewMetric
                         metrics={metrics}
                         toggleModal={toggleMetricModal}
                         currentMetric={metric}
-                        editMode={editMode}
                         metricTags={metricTags}
+                        editMode={editMode}
                     />
-                </Modal>
+                </div>
             )}
         </>
     );

@@ -44,13 +44,9 @@ export default function TagList({ task, setTask, taskTags }) {
             <ul className="taglist">
                 {taskTags.map((obj) => (
                     <li
-                        key={obj.id}
-                        
-                        style={{background: ColorStyle(obj.colorID)}}
-                        className={` 
-                            ${
-                                isSelectedTag(obj.id) ? "on" : ""
-                            } `}
+                        key={obj.id}                       
+                        style={ isSelectedTag(obj.id) ? {backgroundColor: ColorStyle(obj.colorID)} : {backgroundColor: 'grey'} }  
+                        className={ isSelectedTag(obj.id) ? "on" : "" }                                           
                         onClick={(event) =>
                             toggleSelectedTag(event, obj.id)
                         }

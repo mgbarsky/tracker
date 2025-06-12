@@ -26,32 +26,22 @@ function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
     const navigate = useNavigate();
 
     const handleSave = async () => {
-        console.log(task);
-
-        if (!editMode) {
-            const taskToBeSaved = {
+        // console.log(task);
+        const taskToBeSaved = {
                 description: task.description,
                 enabled: task.enabled,
                 id: task.id,
                 tags: task.tags,
                 title: task.title,
             };
-
+        if (!editMode) { 
             try {
                 await db.tasks.add(taskToBeSaved);
                 console.log(`added task to indexed db:`, taskToBeSaved);
             } catch (error) {
                 console.error(error);
             }
-        } else {
-            const taskToBeSaved = {
-                description: task.description,
-                enabled: task.enabled,
-                id: task.id,
-                tags: task.tags,
-                title: task.title,
-            };
-
+        } else {            
             try {
                 await db.tasks.put(taskToBeSaved);
                 console.log(`updated task in indexed db:`, taskToBeSaved);
