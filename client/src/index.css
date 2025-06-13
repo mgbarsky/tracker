@@ -43,31 +43,34 @@ main
 	@media (min-width: 480px) {
 		max-width: 480px;
 	}
+}
 
-	& > section
-	{	padding: 0 16px;}
-	& > section:last-child
-	{	padding-bottom: 276px;}
+main > section
+{	padding: 0 16px;}
 
-	& ul
-	{	list-style: none;
-		padding: 0;
+main > section:last-child
+{	padding-bottom: 276px;}
 
-		display: flex;
-		flex-direction: column;
+main ul
+{	list-style: none;
+	padding: 0;
 
-		& > li
-		{	display: flex;
-			align-items: center;
-			gap: 8px;
-			user-select: none;
+	display: flex;
+	flex-direction: column;
+}
 
-			backdrop-filter: brightness(110%);
+main ul > li
+{	display: flex;
+	align-items: center;
+	gap: 8px;
+	user-select: none;
 
-			margin: 0 0 6px;
-			height: 64px;
-			padding: 0 16px;
-			border-radius: 6px;}}}
+	backdrop-filter: brightness(110%);
+
+	margin: 0 0 6px;
+	height: 64px;
+	padding: 0 16px;
+	border-radius: 6px;}
 
 .playlist > li, .menulist > li, .editlist > li
 {	& > span:first-child
@@ -379,7 +382,7 @@ header
 		{	box-sizing: border-box;
 
 			padding: 4px 8px;
-			border-radius: 4px;
+			border-radius: 16px 4px 4px 16px;
 			background: grey;
 			}
 

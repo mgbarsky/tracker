@@ -56,6 +56,8 @@ GUI:
     metrictags
     new metric tag
 
+    tag list: added checkbox (for safety) because the colors do not work on Chrome in production
+
 tracking tasks (activities) - elapsed time
 tracking mood -- special in-line css, and updating components (detached mode)?
 
