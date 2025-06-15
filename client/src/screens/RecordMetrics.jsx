@@ -32,6 +32,8 @@ export default function RecordMetrics({ metrics }) {
             } else {
                 let userWidth = target.querySelector('.user').style.width;
                 target.querySelector('.actual').style.width = `${userWidth}`;
+                let w = target.querySelector('.user').getBoundingClientRect().right - target.querySelector('.actual').getBoundingClientRect().left;
+                updateInputVal(w,target);
             }
 
             cursorDelta = 0;
@@ -46,18 +48,20 @@ export default function RecordMetrics({ metrics }) {
             } else {
                 let userWidth = target.querySelector('.user').style.width;
                 target.querySelector('.actual').style.width = `${userWidth}`;
+                let w = target.querySelector('.user').getBoundingClientRect().right - target.querySelector('.actual').getBoundingClientRect().left;
+                updateInputVal(w,target);
             }
 
             cursorDelta = 0;
             target = null;
         });
+
         addEventListener('pointerrawupdate', (e) => {
             cursorPosX = e.x;
             if (target === null) {
                 return;
             } else {
-                let totalWidth = target.getBoundingClientRect().right - target.getBoundingClientRect().left,
-                    calcWidth = cursorPosX - target.getBoundingClientRect().left;
+                let calcWidth = cursorPosX - target.getBoundingClientRect().left;
                 target.querySelector('.user').style.width = `${calcWidth}px`;
 
                 cursorDelta += e.movementX;
@@ -77,46 +81,83 @@ export default function RecordMetrics({ metrics }) {
         };
     })();
 
-    const navigate = useNavigate();
+    function getBarWidthFromInput(metric){
+        const metricID = metric.id;
+       
+        const elemLI = document.getElementById("LI"+metricID);
+        const elemInput = document.getElementById("I"+metricID);
+        
+        if (!elemInput) return;
+        if(!elemLI) return;
 
-    async function handleInputChange(id, newValue) {
-        try {
-            await db.metrics.update(id, {
-                lastValue: newValue,
-            });
-        } catch (error) {
-            console.error(error);
-        }
+        const val = elemInput.value;
+        let min = metric.min, max = metric.max, step=metric.step, totalRange=max-min;
+        let totalW = elemLI.getBoundingClientRect().right - elemLI.getBoundingClientRect().left;
+        //console.log("total range of vals "+totalRange);
+        let percent = (val-min)/totalRange;
+        //console.log("percent of current val of total "+percent);
+        let w = percent*totalW;
+        return Math.round(w);
     }
+
+    function updateInputVal(w, elemLI){
+        let elemInput = elemLI.querySelector('input');
+        if(!elemInput) return;
+        let min = parseInt(elemInput.min);
+        let max = parseInt(elemInput.max);
+        let step = parseInt(elemInput.step);
+        let range = max-min;
+        let totalW = elemLI.getBoundingClientRect().right - elemLI.getBoundingClientRect().left;
+        let percent = Math.round(w/totalW*100);
+        
+        elemInput.value = Math.min(min + Math.round(range*percent/100), max) ;         
+    }
+    
+    function getClosestValidValue(min, max, step, w, totalW){
+
+    }
+
+
+
+    function synchUI(metric){
+        let w = getBarWidthFromInput(metric);
+        const metricID = metric.id;
+       
+        const elemLI = document.getElementById("LI"+metricID);
+        elemLI.querySelector('.user').style.width = `${w}px`;
+        elemLI.querySelector('.actual').style.width = `${w}px`;
+    }
+
+    const navigate = useNavigate();    
 
     function MetricRow({ metric }) {
         return (
             <>
-                <h4>{metric.title}</h4>               
+                <h4>{metric.title}: from {metric.min} to {metric.max}  </h4>               
                 <span>
                     <input 
                         type="number"
-                        id={metric.id}
+                        id={"I" + metric.id}
                         min={metric.min}
                         max={metric.max}
                         step={metric.step}
-                        defaultValue={metric.lastValue}                       
-                    />
-                     / {metric.max}
+                        defaultValue={metric.lastValue}  
+                        onChange={(e) => synchUI(metric,e)}                     
+                    />                  
                 </span>
-                <div className='user'></div>
-				<div className='actual'></div>
+                <div className='user' style={{width:getBarWidthFromInput(metric)+"px"}}></div>
+				<div className='actual' ></div>
             </>
         );
     }
 
     //adds all metric levels to the records (even the ones that did not change)
-    async function recordAllMetrics() {
+    async function recordAllMetrics(domEvent) {
         // build an array of all metric records
         const metricRecords = [];
         for (const metric of metrics) {
             if(metric.enabled){
-                const elem = document.getElementById(metric.id);
+                const elem = document.getElementById("I"+metric.id);
                 let newValue = elem.value;
                 if (newValue !== metric.lastValue) {
                     db.metrics.update(metric.id, {
@@ -135,6 +176,8 @@ export default function RecordMetrics({ metrics }) {
         } catch (error) {
             console.error(error);
         }
+        let btnElem = domEvent.target;
+        btnElem.className = "flip-2-hor-top-1";
     }
 
     return (
@@ -151,7 +194,7 @@ export default function RecordMetrics({ metrics }) {
                       {metrics
                           .filter((obj) => obj.enabled === true)
                           .map((obj) => (
-                              <li key={obj.id} onPointerDown={e => InputHandler.target = e.target}>
+                              <li key={obj.id} id={"LI"+obj.id} onPointerDown={e => InputHandler.target = e.target}>
                                   <MetricRow metric={obj} />
                               </li>
                           ))}
@@ -160,7 +203,7 @@ export default function RecordMetrics({ metrics }) {
             </main>
             <section className='ribbon' id='submit'>
                 <nav>
-                    <a onClick={() => recordAllMetrics()}><img src={SubmitIcon} /></a>
+                    <a onClick={(e) => recordAllMetrics(e)}><img src={SubmitIcon} /></a>
                 </nav>
             </section>
             <nav>

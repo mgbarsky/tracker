@@ -60,12 +60,16 @@ GUI:
 
     tracking tasks (activities) - elapsed time replaced with started so far
 
-tracking mood -- special in-line css, and updating components (detached mode)?
-//https://react.dev/reference/react-dom/components/input  defaultValue for input will detach it from state
+    tracking mood -- special in-line css, and updating components (detached mode)?
+    //https://react.dev/reference/react-dom/components/input  defaultValue for input will detach it from state
+
+FIXES week June 16:   
+    redesign record tasks to not refresh entire button ribbon
+    rewrite all record metrics in a detached mode
+    animate save button 
 
 EXPLORE:    
-    handling date object properly
-    make some elements not redraw
+    handling date object properly   
 
 TBD:
     make possible enable/disable the entire group of tasks by tags (or maybe not)
