@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { TaskRecord } from "../objects/record.js";
+import { CurrentDate } from "../components/CurrentDate";
 import { CurrentTime } from "../components/CurrentTime";
 import { db } from "../data/db.js";
 
@@ -17,6 +18,7 @@ import PlayIcon from "../assets/play.svg";
 import StopIcon from "../assets/stop.svg";
 import SubmitIcon from "../assets/submit.svg";
 import TagIcon from "../assets/tag.svg";
+import Clock from "../assets/test.svg";
 
 export default function RecordTasks({ tasks }) {
     const [currentTask, setCurrentTask] = useState(null);
@@ -46,18 +48,18 @@ export default function RecordTasks({ tasks }) {
         setCurrentRecord(cr);
         setCurrentTime(new Date());
         setTotalSecs(0);
-        setPlaying(true);
+        setPlaying(true);        
     }
 
     function pauseCurrentTask() {
         var nowTime = new Date();
         setTotalSecs((prev) => prev + secondsDiff(nowTime, currentTime));
-        setPlaying(false);
+        setPlaying(false);     
     }
 
     function restartCurrentTask() {
         setCurrentTime(new Date());
-        setPlaying(true);
+        setPlaying(true); 
     }
 
     async function recordCurrentTask() {
@@ -83,34 +85,28 @@ t         });*/
      
     }
 
-    function TaskRow({ task }) {
-        return (
-            <li key={task.id}  onClick={() => startTask(task.id)}>
-                <span>
-                    <label>{task.title.substring(0, 1).toUpperCase()}</label>
-                </span>
-                {task.title}
-            </li>
-        );
-    }
-
     function PlayPanel() {
         if (currentRecord) {
             return (
                 <section key={currentRecord.id} className="ribbon" id="player">
-                    <h4>Sun, May 3, 3 pm</h4>
+                    <CurrentDate/>
                     <h3>{currentTask.title}</h3>
-                    <h4>Elapsed time: {totalSecs} </h4>                  
+                    <h4>started at <CurrentTime/></h4>
                     <nav>
-                        {playing ? (
+                        {playing ? (<>
                             <Link onClick={() => pauseCurrentTask()}>
                                 <img src={PauseIcon} />
                             </Link>
-                        ) : (
+                            
+                            </>
+                        ) : (<>
                             <Link onClick={() => restartCurrentTask()}>
                                 <img src={PlayIcon} />
                             </Link>
+                            
+                            </>
                         )}
+                        <img id='clock' src={Clock} className={`${playing ? "on" : ""}`}/>
                         <Link onClick={() => recordCurrentTask()}>
                             <img src={StopIcon} />
                         </Link>

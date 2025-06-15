@@ -58,12 +58,18 @@ GUI:
 
     tag list: added checkbox (for safety) because the colors do not work on Chrome in production
 
-tracking tasks (activities) - elapsed time
-tracking mood -- special in-line css, and updating components (detached mode)?
+    tracking tasks (activities) - elapsed time replaced with started so far
 
+tracking mood -- special in-line css, and updating components (detached mode)?
+//https://react.dev/reference/react-dom/components/input  defaultValue for input will detach it from state
 
 EXPLORE:    
     handling date object properly
+    make some elements not redraw
 
 TBD:
-    make possible enable the entire group of tasks by tags (or maybe not)
+    make possible enable/disable the entire group of tasks by tags (or maybe not)
+    elapsed time
+
+ANIMATION CSS:
+    https://animista.net/play/basic/flip

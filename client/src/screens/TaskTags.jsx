@@ -70,7 +70,9 @@ export default function TaskTags({ taskTags }) {
                 <ul className="editlist">                    
                     {taskTags.map((obj) => (
                         <li key={obj.id} onClick={() => editTag(obj.id)}>
-                            <span style={{background: ColorGradient(obj.colorID)}}>  {obj.title.substring(0,1).toUpperCase()}</span>
+                            <span style={{background: "radial-gradient(circle at 0 0, rgb(184 135 140 / .6), rgb(99 82 115 / .87)"}}>
+                                {obj.title.substring(0,1).toUpperCase()}
+                            </span>
                             <h4>{obj.title}</h4>                            
                             <a className='delete' onClick={(e) => deleteTag(obj.id,e)}></a>
                         </li>

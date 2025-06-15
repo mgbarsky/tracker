@@ -13,8 +13,7 @@ export  function CurrentTime(){
 
     return (
         <>
-            <h1>{date.toLocaleDateString()}</h1> 
-            <h3>{date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</h3>
+           {date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
        </>
     )
 }

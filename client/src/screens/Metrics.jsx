@@ -99,7 +99,7 @@ export default function Metrics({ metrics, metricTags }) {
                             onClick={() => editMetric(obj.id)} 
                             className={obj.enabled ? "" : "disabled"}
                         >
-                            <span 
+                            <span style={{background: "radial-gradient(circle at 0 0, rgb(105 181 194 / .6), rgb(59 123 138 / .87)"}}
                                 onClick={(e) => toogleEnabled(obj.id, e)}>  
                                 {obj.title.substring(0,1).toUpperCase()}
                             </span>

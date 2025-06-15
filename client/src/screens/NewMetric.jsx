@@ -110,7 +110,7 @@ function NewMetric({
                     taskAttribute="description"
                     labelText="Notes"
                 />
-                <TagList task={metric} setTask={setMetric} taskTags={metricTags} />
+                <TagList task={metric} setTask={setMetric} taskTags={metricTags} listClassName={'metrictaglist'}/>
             </div>
            <nav>
                 <a onClick={handleSave}>Save</a>

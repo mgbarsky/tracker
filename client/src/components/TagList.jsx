@@ -7,7 +7,7 @@ import { ColorArray, ColorGradient, ColorStyle } from "../utils/colors.js";
     ]
 */
 
-export default function TagList({ task, setTask, taskTags }) {
+export default function TagList({ task, setTask, taskTags, listClassName }) {
     const toggleSelectedTag = (event, tagId) => {
         //event.preventDefault();
 
@@ -41,22 +41,15 @@ export default function TagList({ task, setTask, taskTags }) {
 
     return (
         <>
-            <ul className="taglist">
+            <ul className={listClassName}>
                 {taskTags.map((obj) => (
                     <li
-                        key={obj.id}                       
-                        style={ isSelectedTag(obj.id) ? {backgroundColor: ColorStyle(obj.colorID)} : {backgroundColor: 'grey'} }  
-                        className={ isSelectedTag(obj.id) ? "on" : "" }                                           
+                        key={obj.id}
+                        className={ isSelectedTag(obj.id) ? "on" : "" } 
                         onClick={(event) =>
                             toggleSelectedTag(event, obj.id)
                         }
                     > 
-                    <input type="checkbox"
-                        checked={isSelectedTag(obj.id)}
-                        onChange={(event) =>
-                            toggleSelectedTag(event, obj.id)
-                        }
-                    />
                         {obj.title}
                     </li>
                 ))}

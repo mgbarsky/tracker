@@ -37,6 +37,7 @@ export default function RecordMetrics({ metrics }) {
             cursorDelta = 0;
             target = null;
         });
+
         addEventListener('touchend', (e) => {
             if (target === null) {
                 return;
@@ -55,7 +56,8 @@ export default function RecordMetrics({ metrics }) {
             if (target === null) {
                 return;
             } else {
-                let calcWidth = cursorPosX - target.getBoundingClientRect().left;
+                let totalWidth = target.getBoundingClientRect().right - target.getBoundingClientRect().left,
+                    calcWidth = cursorPosX - target.getBoundingClientRect().left;
                 target.querySelector('.user').style.width = `${calcWidth}px`;
 
                 cursorDelta += e.movementX;
@@ -92,15 +94,13 @@ export default function RecordMetrics({ metrics }) {
             <>
                 <h4>{metric.title}</h4>               
                 <span>
-                    <input
+                    <input 
                         type="number"
+                        id={metric.id}
                         min={metric.min}
                         max={metric.max}
                         step={metric.step}
-                        value={metric.lastValue}
-                        onChange={(e) =>
-                            handleInputChange(metric.id, e.target.value)
-                        }
+                        defaultValue={metric.lastValue}                       
                     />
                      / {metric.max}
                 </span>
@@ -116,15 +116,22 @@ export default function RecordMetrics({ metrics }) {
         const metricRecords = [];
         for (const metric of metrics) {
             if(metric.enabled){
-              const metricRecord = new MetricRecord(metric.id, metric.lastValue);
-              metricRecords.push(metricRecord);
+                const elem = document.getElementById(metric.id);
+                let newValue = elem.value;
+                if (newValue !== metric.lastValue) {
+                    db.metrics.update(metric.id, {
+                        lastValue: newValue,
+                    });
+                }
+                const metricRecord = new MetricRecord(metric.id, newValue);
+                metricRecords.push(metricRecord);
             }
         }
 
         // add all these records of mood to the database
         try {
           await db.records.bulkAdd(metricRecords);
-          console.log(`added mood record to indexed db:`, metricRecords);
+          console.log(`added all mood records to indexed db:`, metricRecords);
         } catch (error) {
             console.error(error);
         }

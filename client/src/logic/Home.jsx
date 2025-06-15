@@ -20,6 +20,7 @@ import AddIcon from "../assets/add.svg";
 import DeleteIcon from "../assets/delete.svg";
 import ExploreIcon from "../assets/explore.svg";
 import GearIcon from "../assets/gear.svg";
+import GearIconM from "../assets/gearM.svg";
 import HomeIcon from "../assets/home.svg";
 import MoodIcon from "../assets/mood.svg";
 import PauseIcon from "../assets/pause.svg";
@@ -27,6 +28,7 @@ import PlayIcon from "../assets/play.svg";
 import StopIcon from "../assets/stop.svg";
 import SubmitIcon from "../assets/submit.svg";
 import TagIcon from "../assets/tag.svg";
+import TagIconM from "../assets/tagM.svg";
 
 function Home({ records }) {
     const navigate = useNavigate();
@@ -55,10 +57,10 @@ function Home({ records }) {
                         <li id='setActivityTag' onClick={() => navigate('/taskTags')}><span><img src={TagIcon} /></span>
                             Activity tags
                         </li>
-                        <li id='setMood' onClick={() => navigate('/metrics')}><span><img src={GearIcon} /></span>
+                        <li id='setMood' onClick={() => navigate('/metrics')}><span><img src={GearIconM} /></span>
                             Metrics
                         </li>
-                        <li id='setMoodTag' onClick={() => navigate('/metricTags')}><span><img src={TagIcon} /></span>
+                        <li id='setMoodTag' onClick={() => navigate('/metricTags')}><span><img src={TagIconM} /></span>
                             Metric tags
                         </li>
                     </ul>
@@ -71,7 +73,7 @@ function Home({ records }) {
                         <li id='download' onClick={localData}>
                            <span></span>Download data
                         </li>
-                        <li id='reports'>
+                        <li id='reports' style={{opacity:"0.3"}}>
                            <span></span>Reports
                         </li>
                     </ul>

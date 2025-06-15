@@ -14,6 +14,10 @@
 :root
 {	--txt: 255 235 221;}
 
+input, button, textarea, select
+{   font: inherit;
+	color: inherit;}
+
 /*----------------------------------------------------------------------------
 	
 ----------------------------------------------------------------------------*/
@@ -69,7 +73,7 @@ main ul > li
 
 	margin: 0 0 6px;
 	height: 64px;
-	padding: 0 16px;
+	padding: 0 0 0 16px;
 	border-radius: 6px;}
 
 .playlist > li, .menulist > li, .editlist > li
@@ -111,12 +115,14 @@ main ul > li
 		background-size: 24px !important;}
 	
 	& > a.enable
-	{	background: url(./assets/disable.svg) center no-repeat;}
+	{	padding: 0 16px;
+		background: url(./assets/disable.svg) center no-repeat;}
 	&.disabled > a.enable
 	{	background: url(./assets/enable.svg) center no-repeat;}
 
 	& > a.delete
-	{	background: url(./assets/delete.svg) center no-repeat;
+	{	padding-right: 16px;
+		background: url(./assets/delete.svg) center no-repeat;
 		opacity: .38;}}
 
 .moodlist > li
@@ -156,9 +162,6 @@ main ul > li
 	/* &:hover > div.actual
 	{	width: 20%;} */
 }
-
-input
-{	color: white;}
 
 .menulist > li
 {	& > span:first-child
@@ -247,7 +250,29 @@ header
 
 #player
 {	padding-top: 24px;
-	padding-bottom: 88px;}
+	padding-bottom: 88px;
+
+	h4 {
+		font-size: 16px;
+	}
+
+	h3 {
+		font-size: 32px;
+	}
+}
+
+@keyframes clockRotate {
+	0% 		{ transform: rotate(0);}
+	100%	{ transform: rotate(360deg);}
+}
+
+#clock
+{	width: 48px;	
+	animation: clockRotate 4s linear infinite both;
+	animation-play-state: paused;}
+
+#clock.on
+{	animation-play-state: running;}
 
 #editor
 {	padding-bottom: 64px;
@@ -368,7 +393,7 @@ header
 			flex-direction: column;
 			justify-content: flex-end;}}
 
-	.taglist
+	.tasktaglist 
 	{	list-style: none;
 
 		display: flex;
@@ -382,14 +407,41 @@ header
 		{	box-sizing: border-box;
 
 			padding: 4px 8px;
-			border-radius: 16px 4px 4px 16px;
-			background: grey;
-			}
+			border-radius: 4px;
+			background: rgb(99 82 115 / .38);
+			filter: saturate(0);}
 
 		& > li.on
-		{	order: -1;			
-			}		
+		{	order: -1;
+			filter: saturate(1);
+			background: rgb(99 82 115);
+			opacity: 1;}
 	}
+
+	.metrictaglist 
+	{	list-style: none;
+
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+
+		margin: 0;
+		padding: 0;
+
+		& > li
+		{	box-sizing: border-box;
+
+			padding: 4px 8px;
+			border-radius: 4px;
+			background: rgb(90 109 61 / .38);
+			filter: saturate(0);}
+
+		& > li.on
+		{	order: -1;
+			filter: saturate(1);
+			background: rgb(90 109 61);}
+	}
+	
 }
 
 /*																			*/

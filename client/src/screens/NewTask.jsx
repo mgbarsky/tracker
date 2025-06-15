@@ -79,7 +79,7 @@ function NewTask({ currentTask, tasks, toggleModal, editMode, taskTags }) {
                     taskAttribute="description"
                     labelText="Notes"
                 />
-                <TagList task={task} setTask={setTask} taskTags={taskTags} />
+                <TagList task={task} setTask={setTask} taskTags={taskTags} listClassName={'tasktaglist'}/>
             </div>    
             <nav>
                 <a onClick={handleSave}>Save</a>
