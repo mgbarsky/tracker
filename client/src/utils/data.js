@@ -73,31 +73,32 @@ export async function downloadData (records, db) {
         for (const record of records) {
             const generatedJsonObj = {};
             if ("metricID" in record) {
-                // query metric
-                const metric = await db.metrics.get(record.metricID);
-
-                generatedJsonObj["title"] = metric.title;
-                generatedJsonObj["type"] = "metric";
-                generatedJsonObj["level"] = record.metricLevel;
+                const tag = await db.metricTags.get(record.metricTag);
+                generatedJsonObj["title"] = record.metricTitle;
+                generatedJsonObj["category"] = tag? tag.title : "";
+                generatedJsonObj["type"] = "metric"; 
+                generatedJsonObj["level"] = record.metricLevel;                 
                 generatedJsonObj["dateKey"] = record.dateKey;
-                generatedJsonObj["start"] = record.start;
+                generatedJsonObj["timeKey"] = record.timeKey;
+                generatedJsonObj["date"] = record.start;
                 generatedJsonObj["year"] = record.year;
                 generatedJsonObj["month"] = record.month;
                 generatedJsonObj["day"] = record.day;
                 generatedJsonObj["weekDay"] = record.weekDay;
-            } else if ("taskID" in record) {
-                // query task
-                const task = await db.tasks.get(record.taskID);
-
-                generatedJsonObj["title"] = task.title;
+                
+            } else if ("taskID" in record) {                
+                const tag = await db.taskTags.get(record.taskTag);
+                generatedJsonObj["title"] = record.taskTitle;
+                generatedJsonObj["category"] = tag? tag.title : "";
                 generatedJsonObj["type"] = "task";
                 generatedJsonObj["totalSecs"] = record.totalSecs;
                 generatedJsonObj["dateKey"] = record.dateKey;
-                generatedJsonObj["start"] = record.start;
+                generatedJsonObj["timeKey"] = record.timeKey;
+                generatedJsonObj["date"] = record.start;
                 generatedJsonObj["year"] = record.year;
                 generatedJsonObj["month"] = record.month;
                 generatedJsonObj["day"] = record.day;
-                generatedJsonObj["weekDay"] = record.weekDay;
+                generatedJsonObj["weekDay"] = record.weekDay;                
             }
 
             generatedJsonData.push(generatedJsonObj);
@@ -107,11 +108,12 @@ export async function downloadData (records, db) {
 
         const headers = [
             "title",
-            "type",
-            "totalSecs",
-            "level",
+            "category",
             "dateKey",
-            "start",
+            "timeKey",
+            "totalSecs",
+            "level",  
+            "date",
             "year",
             "month",
             "day",

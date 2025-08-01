@@ -142,26 +142,25 @@ main ul > li
 		align-self: flex-start;
 
 		font-size: 14px;
-		color: rgb(var(--txt) / .6);}
-
-	& > div
-	{	position: absolute;
-		left: 0; top: 0; z-index: -10;
-		height: 100%;
-
-		background: rgb(90 109 61 / .4);}
-
-	/* & > div.user
-	{	width: 75%;} */
-	& > div.actual
-	{	transition: width .3s;
-		width: 0;}
-
-	/* &:hover > div.user
-	{	width: 16%;} */
-	/* &:hover > div.actual
-	{	width: 20%;} */
+		color: rgb(var(--txt) / .6);}	
 }
+
+.userLine
+{	
+	display: flex;
+	z-index: -10;
+	height: 40px;
+
+	background: rgb(59 123 138 / 0.87);}
+
+.actualLine
+{	position: absolute;
+	left: 0; top: 0; z-index: -10;
+	height: 100%;
+
+	background: rgb(59 123 138 / 0.87);
+	transition: width .3s;
+	width: 0;}	
 
 .menulist > li
 {	& > span:first-child
@@ -190,6 +189,9 @@ main ul > li
 #download
 {	& > span:first-child
 	{	background: url('./assets/download.svg');}}
+#deleterecords
+{	& > span:first-child
+	{	background: url('./assets/delete.svg');}}
 header
 {	padding-top: 24px;
 	height: 64px;
@@ -463,4 +465,3 @@ h1, h2, h3, h4
 .flip-2-hor-top-1 {
 	animation: flip-2-hor-top-1 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
-

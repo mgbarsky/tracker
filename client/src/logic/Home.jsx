@@ -37,6 +37,15 @@ function Home({ records }) {
         downloadData(records, db);
     }
 
+    const clearLocalRecords = async () => {
+        // Alternatively, to clear a specific table
+        db.table('records').clear().then(() => {
+            alert('Records cleared successfully');
+        }).catch((error) => {
+            console.error('Error clearing records:', error);
+        });
+    }
+
     return (
         <>
             <main>
@@ -70,6 +79,9 @@ function Home({ records }) {
                         Explore
                     </h2>
                     <ul className="menulist">
+                        <li id='deleterecords' onClick={clearLocalRecords}>
+                           <span></span>Clear records
+                        </li>
                         <li id='download' onClick={localData}>
                            <span></span>Download data
                         </li>

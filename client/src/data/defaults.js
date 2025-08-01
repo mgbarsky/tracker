@@ -31,7 +31,7 @@ const metrics = [
         enabled: true,
         max: 200,
         min: 40,
-        lastValue: 5,
+        lastValue: 120,
         step: 1,
         tags: ["a4576238-4ac5-45d6-a10f-5ec915df10e7"],
     },

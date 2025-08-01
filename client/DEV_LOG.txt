@@ -65,7 +65,9 @@ GUI:
 
 FIXES week June 16:   
     redesign record tasks to not refresh entire button ribbon
+    
     rewrite all record metrics in a detached mode
+    MASSIVE BUGS in gui synch - in the build version
     animate save button 
 
 EXPLORE:    
@@ -77,3 +79,16 @@ TBD:
 
 ANIMATION CSS:
     https://animista.net/play/basic/flip
+Explore:
+https://tailwindcss.com/
+https://web.dev/explore/progressive-web-apps
+
+Work week July 28
+Disabled temporarily the drag and drop functionality in metric recordings 
+made each metric be recorded separately
+
+Data recording: 
+    Record time
+    Title of task/metric record
+    Tags of each task/metric (one tag for now)
+    added possibility to clear all records

@@ -44,7 +44,7 @@ export default function RecordTasks({ tasks }) {
             return;
         var ct = tasks.find((element) => element.id === taskID);
         setCurrentTask(ct);
-        var cr = new TaskRecord(taskID);
+        var cr = new TaskRecord(ct);
         setCurrentRecord(cr);
         setCurrentTime(new Date());
         setTotalSecs(0);
@@ -89,9 +89,9 @@ t         });*/
         if (currentRecord) {
             return (
                 <section key={currentRecord.id} className="ribbon" id="player">
-                    <CurrentDate/>
+                    <CurrentDate/> <CurrentTime/>
                     <h3>{currentTask.title}</h3>
-                    <h4>started at <CurrentTime/></h4>
+                    <h4>started at {new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</h4>
                     <nav>
                         {playing ? (<>
                             <Link onClick={() => pauseCurrentTask()}>
