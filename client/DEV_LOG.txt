@@ -92,3 +92,6 @@ Data recording:
     Title of task/metric record
     Tags of each task/metric (one tag for now)
     added possibility to clear all records
+
+TBD: the database is one per origin.
+To ccreate separate databases for each purpose need manually prefix them

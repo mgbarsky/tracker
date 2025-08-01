@@ -1,6 +1,6 @@
 import Dexie from "dexie";
 import { tasks, metrics, taskTags, metricTags } from "./defaults.js";
-const db = new Dexie("trackerDB");
+const db = new Dexie("ontrackDB");
 
 // https://dexie.org/docs/Dexie/Dexie.on.populate
 

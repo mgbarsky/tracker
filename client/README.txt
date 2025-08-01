@@ -17,6 +17,11 @@ npm run dev
 
 
 to build:
+in main.jsx change 
+const PRODUCTION_SUB_DIRECTORY = "/ontrack";
+in App.jsx change  <Routes basename="/ontrack">
+in db.js 
+const db = new Dexie("ontrackDB");
 npm run build
 
 Explore:
